@@ -1,0 +1,489 @@
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.25,1140,18,1.25,9,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+  --color-brand-primary: #dba226; /* was #dba226 */
+  --color-brand-primary-light: #fff3da;
+  --color-brand-primary-dark: #c08c00;
+  --color-brand-secondary: #4c1e4c;
+  --color-neutral-dark: #231f20;
+  --color-neutral-light: #fff;
+  --color-neutral-gray: #e5e5e5;
+  --step--2: clamp(0.64rem, calc(0.61rem + 0.16vw), 0.72rem);
+  --step--1: clamp(0.8rem, calc(0.76rem + 0.2vw), 0.9rem);
+  --step-0: clamp(1rem, calc(0.95rem + 0.24vw), 1.13rem);
+  --step-1: clamp(1.25rem, calc(1.19rem + 0.3vw), 1.41rem);
+  --step-2: clamp(1.56rem, calc(1.49rem + 0.38vw), 1.76rem);
+  --step-3: clamp(1.95rem, calc(1.86rem + 0.48vw), 2.2rem);
+  --step-4: clamp(2.44rem, calc(2.32rem + 0.6vw), 2.75rem);
+  --step-5: clamp(3.05rem, calc(2.9rem + 0.74vw), 3.43rem);
+  --step-6: clamp(3.82rem, calc(3.63rem + 0.93vw), 4.29rem);
+  --step-7: clamp(4.77rem, calc(4.54rem + 1.16vw), 5.36rem);
+  --step-8: clamp(5.96rem, calc(5.67rem + 1.45vw), 6.71rem);
+  --step-9: clamp(7.45rem, calc(7.09rem + 1.82vw), 8.38rem);
+  --step-10: clamp(9rem, calc(8.5rem + 2vw), 10rem);
+  --space-3xs: clamp(0.25rem, calc(0.23rem + 0.12vw), 0.31rem);
+  --space-2xs: clamp(0.5rem, calc(0.48rem + 0.12vw), 0.56rem);
+  --space-xs: clamp(0.75rem, calc(0.7rem + 0.24vw), 0.88rem);
+  --space-s: clamp(1rem, calc(0.95rem + 0.24vw), 1.13rem);
+  --space-m: clamp(1.5rem, calc(1.43rem + 0.37vw), 1.69rem);
+  --space-l: clamp(2rem, calc(1.9rem + 0.49vw), 2.25rem);
+  --space-xl: clamp(3rem, calc(2.85rem + 0.73vw), 3.38rem);
+  --space-2xl: clamp(4rem, calc(3.8rem + 0.98vw), 4.5rem);
+  --space-3xl: clamp(6rem, calc(5.71rem + 1.46vw), 6.75rem);
+  --space-s-l: clamp(1rem, calc(0.51rem + 2.44vw), 2.25rem);
+  --gutter: var(--space-s-l);
+  --font-primary: "Bodoni Moda Small";
+  --font-secondary: "Gobold";
+  --font-emphasis: var(--font-fancy-1);
+  --font-sans: Helvetica, system-ui, "Segoe UI", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-fancy-1: "Svang", sans-serif;
+  --font-fancy-2: "Para Supreme", sans-serif;
+  --font-fancy-3: "Marle", sans-serif;
+  --angled-clip-path: polygon(0 0, 97% 0, 84% 100%, 0% 100%);
+}
+
+/*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+
+/*
+Document
+========
+*/
+
+/**
+Use a better box model (opinionated).
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+1. Correct the line height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size (opinionated).
+*/
+
+html {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+}
+
+/*
+Sections
+========
+*/
+
+/**
+1. Remove the margin in all browsers.
+2. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+*/
+
+body {
+  margin: 0; /* 1 */
+  font-family: var(--font-sans); /* 2 */
+}
+
+/*
+Grouping content
+================
+*/
+
+/**
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+}
+
+/*
+Text-level semantics
+====================
+*/
+
+/**
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr[title] {
+  text-decoration: underline dotted;
+}
+
+/**
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+    monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+Tabular data
+============
+*/
+
+/**
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+}
+
+/*
+Forms
+=====
+*/
+
+/**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+Remove the inner border and padding in Firefox.
+*/
+
+::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+Restore the focus styles unset by the previous rule.
+*/
+
+:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+Remove the additional ':invalid' styles in Firefox.
+See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+
+legend {
+  padding: 0;
+}
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Interactive
+===========
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Other Reset:
+Picallili and Tailwind
+===========
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+}
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+img,
+picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Misc utilities */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+}
+
+.icon-small {
+  width: 0.75em;
+  height: 0.75em;
+}
+
+/* Typography utilities */
+.text-step--2 {
+  font-size: var(--step--2);
+}
+
+.text-step--1 {
+  font-size: var(--step--1);
+}
+
+.text-step-0 {
+  font-size: var(--step-0);
+}
+
+.text-step-1 {
+  font-size: var(--step-1);
+}
+
+.text-step-2 {
+  font-size: var(--step-2);
+}
+
+.text-step-3 {
+  font-size: var(--step-3);
+}
+
+.text-step-4 {
+  font-size: var(--step-4);
+}
+
+.text-step-5 {
+  font-size: var(--step-5);
+}
+
+.text-step-6 {
+  font-size: var(--step-6);
+}
+
+.text-step-7 {
+  font-size: var(--step-7);
+}
+
+.text-step-8 {
+  font-size: var(--step-8);
+}
+
+.text-step-9 {
+  font-size: var(--step-9);
+}
+
+/* Site header/Menu */
+
+.menu-toggle {
+  position: relative;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  z-index: 20;
+}

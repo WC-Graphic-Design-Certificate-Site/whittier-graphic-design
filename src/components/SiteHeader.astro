@@ -1,0 +1,167 @@
+---
+import Logo from "../components/Logo.astro";
+import Button from "../components/Button.astro";
+import NavMenu from "../components/Svelte/NavMenu.svelte";
+
+const layouts = {
+  home: "home",
+  inner: "inner",
+};
+
+const navigation = [
+  {
+    name: "Classes",
+    href: "/classes",
+  },
+  {
+    name: "Calendar",
+    href: "/calendar",
+  },
+  {
+    name: "Gallery",
+    href: "/gallery",
+  },
+  {
+    name: "Faculty",
+    href: "/faculty",
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+  },
+];
+
+const { layout = "inner" } = Astro.props;
+---
+
+<header class={layouts[layout]}>
+  {
+    layout == "inner" ? (
+      <a href="/" class="header-text">
+        <Logo width="12rem" fill="var(--color-brand-primary)" />
+        <div>Graphic Design Certificate</div>
+      </a>
+    ) : (
+      <Logo width="12rem" />
+    )
+  }
+  <div class="cluster">
+    <div class="cluster actions">
+      <a href="#" class="nav-link">Apply Now</a>
+      <a href="/contact" class="nav-link">Request Info</a>
+    </div>
+    <NavMenu theme={layout == "inner" ? "brand-reverse" : "brand"} client:load>
+      <ul class="flow">
+        {
+          navigation.map((item) => (
+            <li class="nav-item">
+              <a href={item.href}>{item.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </NavMenu>
+  </div>
+</header>
+
+<style>
+  header.home,
+  header.inner {
+    padding-block-start: 2rem;
+    padding-inline: 3rem;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header.home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  header.inner {
+    position: relative;
+    padding-block-end: 2.5rem; /* was 6 */
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-secondary);
+    font-size: var(--step--1);
+    color: var(--color-brand-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+  }
+
+  .header-text > :first-child {
+    font-weight: 700;
+  }
+
+  .header-text > :last-child {
+    font-weight: 400;
+  }
+
+  .header-text:hover {
+    opacity: 0.8;
+  }
+
+  .nav-item {
+    position: relative;
+    font-family: var(--font-primary);
+    font-size: var(--step-3);
+    text-transform: lowercase;
+  }
+
+  .nav-item:hover a {
+    text-decoration: underline;
+  }
+
+  .nav-item::before {
+    content: "";
+    position: absolute;
+    width: 0.5rem;
+    opacity: 0;
+    height: 0%;
+    background: var(--color-brand-primary);
+    left: -3rem;
+    transition: all 0.2s ease;
+  }
+
+  .nav-item:hover::before {
+    height: 100%;
+    opacity: 1;
+  }
+
+  .nav-link {
+    font-family: var(--font-secondary);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link:hover {
+    opacity: 0.7;
+  }
+
+  .home .nav-link {
+    color: var(--color-neutral-light);
+  }
+
+  .inner .nav-link {
+    color: var(--color-brand-primary);
+  }
+
+  .cluster.actions {
+    --cluster-space: 2rem;
+    position: relative;
+    top: -6px;
+    padding-right: 1rem;
+  }
+</style>

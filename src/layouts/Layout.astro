@@ -1,0 +1,260 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style>
+      @font-face {
+        font-family: "Gobold";
+        src: url("/fonts/Gobold-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Gobold";
+        src: url("/fonts/Gobold-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Libre Bodoni";
+        src: url("/fonts/LibreBodoni-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Libre Bodoni";
+        src: url("/fonts/LibreBodoni-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Libre Bodoni";
+        src: url("/fonts/LibreBodoni-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bodoni Moda Small";
+        src: url("/fonts/BodoniModa_9pt-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bodoni Moda Small";
+        src: url("/fonts/BodoniModa_9pt-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bodoni Moda";
+        src: url("/fonts/BodoniModa_18pt-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bodoni Moda";
+        src: url("/fonts/BodoniModa_18pt-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bodoni Moda";
+        src: url("/fonts/BodoniModa_18pt-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Svang";
+        src: url("/fonts/SvangBold.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Para Supreme";
+        src: url("/fonts/ParaSupremeBlackNormal.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Marle";
+        src: url("/fonts/MarleRegular.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body>
+    <slot name="header" />
+    <slot name="main" />
+    <slot name="footer" />
+  </body>
+</html>
+
+<style is:global>
+  body {
+    font-size: var(--step-0);
+    color: var(--color-neutral-dark);
+    font-family: var(--font-sans);
+  }
+
+  .content-wrapper {
+    position: relative;
+    max-width: clamp(16rem, var(--wrapper-max-width, 100vw), 80rem);
+    padding-inline: var(--gutter);
+    margin-inline: auto;
+  }
+
+  /* Composition utilities */
+  .flow {
+    --flow-space: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .flow > * {
+    margin-block: 0;
+  }
+
+  .flow > * + * {
+    margin-block-start: var(--flow-space);
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .cluster {
+    --cluster-space: 1rem;
+    --justify: flex-start;
+    --align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-space);
+    justify-content: var(--justify);
+    align-items: var(--align);
+  }
+
+  .frame {
+    --width: 4;
+    --height: 3;
+    aspect-ratio: var(--width) / var(--height);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .frame.video {
+    --width: 16;
+    --height: 9;
+  }
+
+  .frame.square {
+    --width: 1;
+    --height: 1;
+  }
+
+  .frame.avatar {
+    --width: 1;
+    --height: 1;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+  }
+
+  .frame > img,
+  .frame > video {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .center-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cluster {
+  }
+
+  /* Home page fancy letters */
+
+  .fancy-letters {
+    display: flex;
+    font-family: var(--font-emphasis);
+    flex-direction: column;
+    width: clamp(70%, 55rem, 100%);
+    gap: var(--space-xl);
+    font-size: var(--step-9);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .fancy-letters p {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .fancy-letters .letter {
+    position: relative;
+    display: inline-block;
+    cursor: crosshair;
+    transform: scale(var(--scale, 1));
+    transition: all 0.25s ease-in-out;
+  }
+
+  .fancy-letters .letter[data-font="font-1"] {
+    font-family: var(--font-fancy-1);
+    top: 8px;
+    --scale: 1.1;
+  }
+
+  .fancy-letters .letter[data-font="font-2"] {
+    font-family: var(--font-fancy-2);
+    top: -9px;
+  }
+
+  .fancy-letters .letter[data-font="font-3"] {
+    font-family: var(--font-fancy-3);
+    top: -2px;
+    --scale: 1;
+  }
+
+  .fancy-letters .letter.leaving {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .fancy-letters .letter.entering {
+    opacity: 1;
+    transform: scale(var(--scale, 1));
+  }
+</style>

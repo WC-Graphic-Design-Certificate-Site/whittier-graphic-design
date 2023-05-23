@@ -1,0 +1,171 @@
+---
+import Accordion from "./Svelte/Accordion.svelte";
+import { slugify } from "../utils/format";
+
+const { courses } = Astro.props;
+---
+
+<div class="courses flow">
+  {
+    courses.map((course) => (
+      <div id={slugify(course.title)}>
+        <Accordion client:load>
+          <Fragment slot="title">
+            <span>
+              {course.title}
+              <span class="course-subtitle" style="">
+                {course.subtitle}
+              </span>
+            </span>
+          </Fragment>
+          <Fragment slot="panel">
+            <div class="course-intro">{course.description}</div>
+            <div class="topics-wrapper">
+              <div class="topics-header">
+                <p style="font-weight: 700;">Weekly Topics</p>
+                <p style="font-weight: 400;">{course.title}</p>
+              </div>
+              <div class="topics flow">
+                {course.topics &&
+                  course.topics.map((topic, index) => (
+                    <article class="topic-grid">
+                      <div class="number">{index + 1}</div>
+                      <div class="topic">
+                        <h3>{topic.title}</h3>
+                        <ul class="topic-description flow">
+                          <li>
+                            <strong>Tools:</strong> {topic.tools}
+                          </li>
+                          <li>
+                            <strong>Projects:</strong> {topic.projects}
+                          </li>
+                          <li>
+                            <strong>In-Class:</strong>{" "}
+                            {topic["in-class"].join(", ")}
+                          </li>
+                          <li>
+                            <strong>Resources:</strong>{" "}
+                            {topic.resources.join(", ")}
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  ))}
+              </div>
+            </div>
+          </Fragment>
+        </Accordion>
+      </div>
+    ))
+  }
+</div>
+
+<style is:global>
+  .courses.flow {
+    gap: 0;
+  }
+
+  .courses .topics.flow {
+    --flow-space: var(--space-2xl);
+  }
+
+  .accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    margin: 0;
+    padding: 1.5rem 3rem 1.5rem 1.5rem;
+    width: 100%;
+    appearance: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: var(--step-0);
+    color: var(--color-neutral-light);
+    background: var(--color-brand-primary);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    clip-path: polygon(0 0, 100% 0, 97% 100%, 0% 100%);
+  }
+
+  .accordion-button:hover {
+    background: var(--color-brand-primary-dark);
+  }
+
+  .accordion-panel {
+    padding-block: var(--space-l);
+    padding-inline: 1rem;
+  }
+
+  .courses .course-intro {
+    font-size: var(--step-2);
+    font-family: var(--font-primary);
+    color: var(--color-brand-primary-dark);
+    max-width: 64ch;
+    margin-block-end: var(--space-2xl);
+  }
+
+  .courses .topics-wrapper {
+    display: flex;
+  }
+
+  .courses .topics-header {
+    position: relative;
+    font-family: var(--font-secondary);
+    font-size: var(--step-1);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    text-align: right;
+    align-self: start;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-right: var(--space-2xl);
+    color: var(--color-brand-primary);
+    top: 1rem;
+  }
+
+  .courses .course-subtitle {
+    position: relative;
+    top: -1px;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--step--1);
+  }
+
+  .courses .topic-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 2rem;
+    container-type: normal;
+  }
+
+  .courses .number {
+    color: var(--color-brand-primary);
+    font-family: var(--font-emphasis);
+    font-size: clamp(180px, 25cqh, 230px);
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .courses .topic h3 {
+    color: var(--color-brand-primary);
+    font-size: var(--step-1);
+    font-weight: 700;
+    margin-block-end: var(--space-xs);
+  }
+
+  .courses .topic-description {
+    font-family: var(--font-sans);
+  }
+
+  .courses .topic-description.flow {
+    --flow-space: 0.5rem;
+  }
+</style>

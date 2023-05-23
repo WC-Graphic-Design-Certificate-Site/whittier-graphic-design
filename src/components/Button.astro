@@ -1,0 +1,116 @@
+---
+const baseStyles = {
+  solid: "solid",
+  outline: "outline",
+  nav: "nav",
+};
+
+const themes = {
+  solid: {
+    primary: "primary",
+    "neutral-light": "neutral-light",
+    "neutral-dark": "neutral-dark",
+    secondary: "secondary",
+  },
+  outline: {
+    primary: "primary",
+    neutral: "neutral",
+    secondary: "secondary",
+  },
+  nav: {
+    primary: "primary",
+  },
+};
+
+const sizes = {
+  base: "base",
+  large: "large",
+};
+
+const widths = {
+  fit: "w-fit",
+};
+
+const {
+  style = "solid",
+  theme = "primary",
+  size = "base",
+  width,
+  href,
+  className,
+  ...props
+} = Astro.props;
+
+const classList = [
+  baseStyles[style],
+  themes[style][theme],
+  sizes[size],
+  widths[width],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classList} {...props}>
+      <slot>Link</slot>
+    </a>
+  ) : (
+    <button class:list={classList} {...props}>
+      <slot>Button</slot>
+    </button>
+  )
+}
+
+<style>
+  button {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    appearance: none;
+    background-color: transparent;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  button,
+  a {
+    color: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .solid.primary {
+    font-family: var(--font-secondary);
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    background-color: var(--color-brand-primary);
+    color: var(--color-neutral-light);
+  }
+
+  .solid.primary:hover {
+    background-color: var(--color-neutral-dark);
+  }
+
+  .base {
+    font-size: var(--step-0);
+    line-height: 1.15;
+    padding: 1em 1.25em;
+  }
+
+  .large {
+    font-size: var(--step-1);
+    line-height: 1.15;
+    padding: 1em 1.5em;
+  }
+
+  .w-fit {
+    width: fit-content;
+  }
+</style>

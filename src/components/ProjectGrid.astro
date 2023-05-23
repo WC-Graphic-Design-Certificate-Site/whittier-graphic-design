@@ -1,0 +1,131 @@
+---
+import { urlFor } from "../utils/sanity";
+
+const placeholder = [
+  {
+    name: "Project 1",
+    image:
+      "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ipsum ducimus odit architecto aperiam. Facere.",
+  },
+  {
+    name: "Project 2",
+    image:
+      "https://images.unsplash.com/photo-1482160549825-59d1b23cb208?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ipsum ducimus odit architecto aperiam. Facere.",
+  },
+  {
+    name: "Project 3",
+    image:
+      "https://images.unsplash.com/photo-1516383740770-fbcc5ccbece0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ipsum ducimus odit architecto aperiam. Facere.",
+  },
+];
+
+const { projects = placeholder } = Astro.props;
+---
+
+<div class="grid">
+  {
+    projects.map((item) => (
+      <article class="relative grid-item">
+        <div class="grid-text flow">
+          <h3>{item.name}</h3>
+          <div class="spacer" />
+          <p>{item.description}</p>
+        </div>
+        <div class="overlay" />
+        <img
+          src={urlFor(item.image)
+            .width(900)
+            .height(900)
+            .fit("crop")
+            .crop("center")
+            .format("webp")
+            .url()}
+          alt={item.name}
+          width={900}
+          height={900}
+        />
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-item {
+    overflow: hidden;
+  }
+
+  .grid-item img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+
+  .grid-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    opacity: 0;
+    transform: translateY(1rem);
+    text-align: center;
+    color: var(--color-neutral-light);
+    z-index: 2;
+    transition: all 0.4s ease;
+    transition-delay: 0.1s;
+  }
+
+  .grid-text h3 {
+    font-family: var(--font-secondary);
+    font-size: var(--step-1);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+  }
+
+  .overlay {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: var(--color-brand-primary);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  img {
+    transition: all 0.5s ease;
+  }
+
+  .spacer {
+    height: 3px;
+    width: 3rem;
+    background: var(--color-brand-primary-light);
+    margin-inline: auto;
+  }
+
+  .grid-item:hover .grid-text {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  .grid-item:hover .overlay {
+    opacity: 1;
+  }
+
+  .grid-item:hover img {
+    transform: scale(1.05);
+    filter: saturate(0);
+    opacity: 0.4;
+  }
+</style>

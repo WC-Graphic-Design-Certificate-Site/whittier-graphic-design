@@ -1,0 +1,77 @@
+---
+import InnerPage from "../layouts/InnerPage.astro";
+import InnerHero from "../components/InnerHero.astro";
+import Button from "../components/Button.astro";
+import Courses from "../components/Courses.astro";
+import Accordion from "../components/Svelte/Accordion.svelte";
+import { getCourses } from "../utils/sanity.js";
+import { slugify } from "../utils/format";
+
+import bgImage from "../assets/Daniel_Page4_03.jpg";
+
+const courses = await getCourses();
+---
+
+<InnerPage>
+  <InnerHero slot="hero" title="Classes" imageSrc={bgImage} />
+  <div slot="content" id="courses">
+    <ul class="cluster course-links">
+      {
+        courses.map((item, index) => (
+          <li>
+            {index != 0 && <span>•</span>}
+            <a href={`#${slugify(item.title)}`} class="nav-link">
+              {item.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Courses courses={courses} />
+    <div id="scroll-to-top">
+      <Button href="#content">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
+          ></path></svg
+        >
+        <span class="sr-only">Scroll to top</span>
+      </Button>
+    </div>
+  </div>
+</InnerPage>
+
+<style>
+  .course-links.cluster {
+    --cluster-space: 1.25rem;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .course-links .nav-link {
+    color: var(--color-brand-primary-dark);
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    transition: all 0.2s ease;
+  }
+
+  .course-links span {
+    margin-right: 1.25rem;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  #scroll-to-top {
+    position: fixed;
+    z-index: 50;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  #scroll-to-top svg {
+    fill: var(--color-neutral-light);
+    width: 2rem;
+    transform: rotate(180deg);
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+const {
+  title,
+  imageSrc = "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+  imageAlt = "",
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="content-wrapper">
+    <h1 class="title">{title}</h1>
+  </div>
+  <div class="background"></div>
+  <img class="img" src={imageSrc} alt={imageAlt} />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    height: clamp(var(--space-3xl), 45vh, 60rem);
+  }
+
+  .hero .content-wrapper {
+    position: relative;
+    font-size: var(--step-9);
+    color: var(--color-brand-primary-light);
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  .title {
+    font-family: var(--font-emphasis);
+    font-size: var(--step-10);
+    line-height: 1;
+    position: relative;
+    top: -12px;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    width: clamp(var(--space-3xl), 70%, 90vw);
+    background-color: var(--color-brand-primary);
+    clip-path: var(--angled-clip-path);
+    z-index: 2;
+  }
+
+  .img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(var(--space-3xl), 50%, 50vw);
+    object-fit: cover;
+    height: 100%;
+  }
+</style>

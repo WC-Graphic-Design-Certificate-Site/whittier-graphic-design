@@ -1,0 +1,67 @@
+---
+import Layout from "./Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<Layout>
+  <SiteHeader slot="header" />
+  <main slot="main">
+    <slot name="hero" />
+    <!-- <section class="hero">
+      <div class="content-wrapper">
+        <slot name="title" />
+      </div>
+      <div class="background"></div>
+      <img
+        class="img"
+        src="https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+        alt=""
+      />
+    </section> -->
+    <div class="content content-wrapper" id="content">
+      <slot name="content" />
+    </div>
+  </main>
+  <SiteFooter slot="footer" />
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    height: clamp(var(--space-3xl), 50vh, 60rem);
+  }
+
+  .hero .content-wrapper {
+    position: relative;
+    font-size: var(--step-9);
+    color: var(--color-brand-primary-light);
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    width: clamp(var(--space-3xl), 70%, 90vw);
+    background-color: var(--color-brand-primary);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    z-index: 2;
+  }
+
+  .img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(var(--space-3xl), 50%, 50vw);
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .content.content-wrapper {
+    margin-block: var(--space-3xl);
+  }
+</style>

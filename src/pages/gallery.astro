@@ -1,0 +1,23 @@
+---
+import InnerPage from "../layouts/InnerPage.astro";
+import InnerHero from "../components/InnerHero.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
+// import { getCourses } from "../utils/sanity.js";
+
+import { getSanityData } from "../utils/sanity";
+
+const projects = await getSanityData(`*[_type == "studentProject"] {
+  name,
+  description,
+  "image": image.asset->,
+}`);
+---
+
+<InnerPage>
+  <InnerHero slot="hero" title="Gallery" />
+  <div slot="content" class="">
+    <ProjectGrid projects={projects} />
+  </div>
+</InnerPage>
+
+<style></style>

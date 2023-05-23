@@ -1,0 +1,208 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Button from "../components/Button.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
+
+import { getSanityData } from "../utils/sanity";
+
+const projects = await getSanityData(`*[_type == "studentProject"] {
+  name,
+  description,
+  "image": image.asset->,
+}`);
+---
+
+<Layout title="">
+  <SiteHeader layout="home" slot="header" />
+  <main slot="main">
+    <section class="hero">
+      <div class="content-wrapper">
+        <h1>
+          <span>Whittier College</span>
+          <br />
+          <span>Graphic Design Certificate</span>
+        </h1>
+        <div class="fancy-letters">
+          <p id="fancyWord1">Create</p>
+          <p id="fancyWord2">Invent</p>
+          <p id="fancyWord3">Design</p>
+        </div>
+      </div>
+      <div class="scroll">
+        <a href="#student-work">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
+            ></path></svg
+          >
+          <span class="sr-only">Scroll Down</span>
+        </a>
+      </div>
+    </section>
+    <section id="student-work">
+      <ProjectGrid projects={projects} />
+    </section>
+    <article id="about" class="content-wrapper flow">
+      <p>
+        Whittier College’s Graphic Design Certificate program is a virtual
+        eight-course series that teaches the fundementals of graphic design
+        through the use of Adobe InDesign, Illustrator, Photoshop and After
+        Effects.
+      </p>
+      <p>
+        While honing your skills in typography, image creation, brand-idendtity
+        development and motion graphics you will have multiple opportunities to
+        share your art with working design professionals. And in your final
+        class, you will work as a team to rebrand an actual organization. The
+        program will culminate with the creation of a professional-quality
+        design portfolio.
+      </p>
+      <Button href="/classes" width="fit" size="large">
+        <span>See the classes</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon-small"
+          fill="var(--color-neutral-light)"
+          viewBox="0 0 448 512"
+          ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+          ></path></svg
+        >
+      </Button>
+    </article>
+  </main>
+  <SiteFooter slot="footer" />
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--color-brand-primary);
+    color: var(--color-neutral-light);
+    padding-block: 10rem;
+  }
+
+  .hero h1 {
+    position: relative;
+    font-family: var(--font-secondary);
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    text-align: right;
+    align-self: start;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-right: var(--space-2xl);
+    top: 1rem;
+  }
+
+  .hero h1 > :first-child {
+    font-weight: 700;
+  }
+
+  .hero h1 > :last-child {
+    font-weight: 400;
+  }
+
+  .hero .content-wrapper {
+    display: flex;
+    margin-block-end: var(--space-l);
+  }
+
+  .scroll {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+  }
+
+  .scroll svg {
+    width: 4rem;
+    opacity: 0.4;
+    fill: var(--color-neutral-light);
+    transition: all 0.2s ease;
+  }
+
+  .scroll a:hover svg {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+
+  #about {
+    margin-block: var(--space-3xl);
+  }
+
+  #about.flow {
+    --flow-space: var(--space-xl);
+  }
+
+  #about p {
+    font-size: var(--step-3);
+    font-family: var(--font-primary);
+    color: var(--color-brand-primary-dark);
+    max-width: 48ch;
+  }
+</style>
+
+<script>
+  const makeFancy = (id) => {
+    const element = document.getElementById(id),
+      text = element.innerText.split("");
+
+    element.innerText = "";
+
+    text.forEach((letter) => {
+      const span = document.createElement("span");
+      span.className = "letter";
+      span.setAttribute("data-font", "font-1");
+      span.innerText = letter;
+      element.appendChild(span);
+    });
+  };
+  makeFancy("fancyWord1");
+  makeFancy("fancyWord2");
+  makeFancy("fancyWord3");
+
+  function switchFont(attributeValue) {
+    let font = "";
+    switch (attributeValue) {
+      case "":
+        font = "font-1";
+        break;
+      case "font-1":
+        font = "font-2";
+        break;
+      case "font-2":
+        font = "font-3";
+        break;
+      case "font-3":
+        font = "font-1";
+        break;
+      default:
+        font = "font-1";
+    }
+    return font;
+  }
+
+  const letters = document.querySelectorAll(".letter");
+  letters.forEach((letter) => {
+    console.log(letter);
+    letter.addEventListener("mouseover", (e) => {
+      const target = e.target as Element;
+      console.log(target);
+      target.classList.remove("leaving", "entering");
+      target.classList.add("leaving");
+      let currentTheme = target.getAttribute("data-font");
+      setTimeout(() => {
+        target.setAttribute("data-font", switchFont(currentTheme));
+        target.classList.add("entering");
+      }, 200);
+    });
+  });
+</script>
