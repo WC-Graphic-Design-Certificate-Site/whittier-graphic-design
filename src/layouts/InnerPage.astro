@@ -2,9 +2,11 @@
 import Layout from "./Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+
+const { title, metaDescription } = Astro.props;
 ---
 
-<Layout>
+<Layout title={title} metaDescription={metaDescription}>
   <SiteHeader slot="header" />
   <main slot="main">
     <slot name="hero" />

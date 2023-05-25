@@ -127,4 +127,12 @@
         min-width: 25rem;
         padding: 5rem 5rem 3rem 3rem;
     }
+
+    @media (max-width: 768px) {
+        .nav-panel {
+            min-width: 300px;
+            max-width: 95%;
+            padding: 3rem 3rem 2rem 2rem;
+        }
+    }
 </style>

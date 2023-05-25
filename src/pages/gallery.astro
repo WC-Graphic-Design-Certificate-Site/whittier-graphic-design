@@ -1,23 +1,229 @@
 ---
 import InnerPage from "../layouts/InnerPage.astro";
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import InnerHero from "../components/InnerHero.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
 // import { getCourses } from "../utils/sanity.js";
+import { urlFor } from "../utils/sanity";
 
 import { getSanityData } from "../utils/sanity";
 
-const projects = await getSanityData(`*[_type == "studentProject"] {
-  name,
-  description,
-  "image": image.asset->,
+const getImageHeight = (width, aspectRatio) => {
+  return Math.floor(width / aspectRatio);
+};
+
+const gallery =
+  await getSanityData(`*[_type == "gallery" && name == "Student Project Gallery"][0] {
+  "entries": project[]->{
+    name,
+    description,
+    "image": image.asset->
+  }
 }`);
+
+const metaTitle = "Student Gallery | Whittier Graphic Design Certificate";
+const metaDescription =
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo laboriosam est, minima minus eum dolore.";
 ---
 
-<InnerPage>
+<Layout title={metaTitle} metaDescription={metaDescription}>
+  <SiteHeader slot="header" />
+  <main slot="main" class="content-wrapper">
+    <h1 class="title header">Gallery</h1>
+    <div class="project-grid">
+      {
+        gallery.entries.map((project) => (
+          <article class="relative grid-item">
+            <div class="grid-text flow">
+              <h3>{project.name}</h3>
+              <div class="spacer" />
+              <p>{project.description}</p>
+            </div>
+            <div class="overlay" />
+            <img
+              src={urlFor(project.image).width(1200).format("webp").url()}
+              alt={project.name}
+              width={1200}
+              height={getImageHeight(
+                1200,
+                project.image.metadata.dimensions.aspectRatio
+              )}
+              data-aspectRatio={project.image.metadata.dimensions.aspectRatio}
+            />
+          </article>
+        ))
+      }
+    </div>
+  </main>
+  <SiteFooter slot="footer" />
+</Layout>
+<!-- <InnerPage>
   <InnerHero slot="hero" title="Gallery" />
   <div slot="content" class="">
     <ProjectGrid projects={projects} />
   </div>
-</InnerPage>
+</InnerPage> -->
 
-<style></style>
+<style>
+  .content-wrapper {
+    overflow-y: hidden;
+  }
+
+  .title {
+    position: absolute;
+    top: -12px;
+    z-index: 5;
+    font-family: var(--font-emphasis);
+    font-size: var(--step-10);
+    color: var(--color-neutral-light);
+    line-height: 1;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    padding-inline: 0;
+  }
+
+  .project-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .project-grid > * {
+    overflow: hidden;
+  }
+
+  .project-grid > :nth-child(1) {
+    grid-column: span 5;
+  }
+
+  .project-grid > :nth-child(2n - 4) {
+    grid-column: span 2;
+  }
+
+  /* can't add xn - x until there are 2 of each in the grid */
+  .project-grid > :nth-child(3) {
+    grid-column: span 3;
+  }
+
+  .project-grid > :nth-child(3) img {
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .project-grid > :nth-child(4) {
+    grid-column: span 3;
+  }
+
+  .project-grid > :nth-child(4) img {
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .project-grid > :nth-child(5) {
+    grid-column: span 2;
+  }
+
+  .grid-item {
+  }
+
+  .grid-item img {
+  }
+
+  .grid-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    opacity: 0;
+    transform: translateY(1rem);
+    text-align: center;
+    color: var(--color-neutral-light);
+    z-index: 2;
+    transition: all 0.4s ease;
+    transition-delay: 0.1s;
+  }
+
+  .grid-text h3 {
+    font-family: var(--font-secondary);
+    font-size: var(--step-1);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+  }
+
+  .overlay {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: var(--color-brand-primary);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  img {
+    transition: all 0.5s ease;
+  }
+
+  .spacer {
+    height: 3px;
+    width: 3rem;
+    background: var(--color-brand-primary-light);
+    margin-inline: auto;
+  }
+
+  .grid-item:hover .grid-text {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  .grid-item:hover .overlay {
+    opacity: 1;
+  }
+
+  .grid-item:hover img {
+    transform: scale(1.05);
+    filter: saturate(0);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 1024px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .project-grid > * {
+      grid-column: span 1 !important;
+    }
+
+    .project-grid > :nth-child(1) {
+      grid-column: span 2 !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* .title {
+      font-size: var(--step-8);
+      letter-spacing: 0.75rem;
+    } */
+  }
+
+  @media (max-width: 640px) {
+    /* .title {
+      font-size: var(--step-6);
+      letter-spacing: 0.4rem;
+    } */
+
+    .project-grid {
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    .project-grid > :nth-child(1) {
+      grid-column: span 1 !important;
+    }
+  }
+</style>

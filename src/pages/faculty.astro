@@ -1,12 +1,68 @@
 ---
-import InnerPage from "../layouts/InnerPage.astro";
-import InnerHero from "../components/InnerHero.astro";
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import FacultyMember from "../components/FacultyMember.astro";
+
+import { getSanityData } from "../utils/sanity";
+
+const facultyMembers =
+  await getSanityData(`*[_type == "facultyMember"] | order(order asc) {
+  name,
+  order,
+  bio,
+  "image": image.asset->
+}`);
 // import { getCourses } from "../utils/sanity.js";
+
+const metaTitle = "Faculty Members | Whittier Graphic Design Certificate";
+const metaDescription =
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo laboriosam est, minima minus eum dolore.";
 ---
 
-<InnerPage>
-  <InnerHero slot="hero" title="Faculty" />
-  <div slot="content" class=""></div>
-</InnerPage>
+<Layout title={metaTitle} metaDescription={metaDescription}>
+  <SiteHeader slot="header" />
+  <main slot="main" class="content-wrapper">
+    <h1 class="title header">Faculty</h1>
+    <section class="entries flow">
+      {
+        facultyMembers.map((person, i) => (
+          <FacultyMember facultyMember={person} flipped={i % 2 != 0} />
+        ))
+      }
+    </section>
+  </main>
+</Layout>
 
-<style></style>
+<style>
+  .title {
+    position: relative;
+    z-index: 5;
+    left: -5px;
+    font-family: var(--font-emphasis);
+    font-size: var(--step-10);
+    color: var(--color-brand-primary);
+    line-height: 1;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    padding-inline: 0;
+  }
+
+  .entries {
+    margin-top: -40px;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .entries.flow {
+    --flow-space: var(--space-xl);
+  }
+
+  @media (max-width: 640px) {
+    .entries {
+      margin-top: -16px;
+    }
+
+    .title {
+      left: -3px;
+    }
+  }
+</style>

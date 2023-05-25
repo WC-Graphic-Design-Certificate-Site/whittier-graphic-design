@@ -12,9 +12,13 @@ const projects = await getSanityData(`*[_type == "studentProject"] {
   description,
   "image": image.asset->,
 }`);
+
+const metaTitle = "Whittier Graphic Design Certificate";
+const metaDescription =
+  "Whittier College’s Graphic Design Certificate program is a virtual eight-course series that teaches the fundementals of graphic design through the use of Adobe InDesign, Illustrator, Photoshop and After Effects.";
 ---
 
-<Layout title="">
+<Layout title={metaTitle} metaDescription={metaDescription}>
   <SiteHeader layout="home" slot="header" />
   <main slot="main">
     <section class="hero">
@@ -42,6 +46,7 @@ const projects = await getSanityData(`*[_type == "studentProject"] {
       </div>
     </section>
     <section id="student-work">
+      <h2 class="sr-only">Project List</h2>
       <ProjectGrid projects={projects} />
     </section>
     <article id="about" class="content-wrapper flow">
@@ -148,6 +153,29 @@ const projects = await getSanityData(`*[_type == "studentProject"] {
     color: var(--color-brand-primary-dark);
     max-width: 48ch;
   }
+
+  @media (max-width: 1024px) {
+    .hero .content-wrapper {
+      flex-direction: column;
+    }
+
+    .hero h1 {
+      text-align: left;
+      align-self: start;
+      writing-mode: horizontal-tb;
+      transform: rotate(0deg);
+      margin-right: 0;
+      top: 0;
+      margin-bottom: var(--space-xl);
+    }
+  }
+
+  @media (max-width: 640px) {
+    #about p {
+      font-size: var(--step-2);
+      max-width: none;
+    }
+  }
 </style>
 
 <script>
@@ -192,10 +220,8 @@ const projects = await getSanityData(`*[_type == "studentProject"] {
 
   const letters = document.querySelectorAll(".letter");
   letters.forEach((letter) => {
-    console.log(letter);
     letter.addEventListener("mouseover", (e) => {
       const target = e.target as Element;
-      console.log(target);
       target.classList.remove("leaving", "entering");
       target.classList.add("leaving");
       let currentTheme = target.getAttribute("data-font");

@@ -2,11 +2,17 @@
 import InnerPage from "../layouts/InnerPage.astro";
 import InnerHero from "../components/InnerHero.astro";
 // import { getCourses } from "../utils/sanity.js";
+
+import heroImage from "../assets/menu.png";
 ---
 
 <InnerPage>
-  <InnerHero slot="hero" title="Calendar" />
+  <InnerHero slot="hero" title="Calendar" imageSrc={heroImage} />
   <div slot="content" class=""></div>
 </InnerPage>
 
-<style></style>
+<style>
+  .container {
+    margin-bottom: var(--space-3xl);
+  }
+</style>

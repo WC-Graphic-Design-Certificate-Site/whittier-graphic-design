@@ -10,12 +10,16 @@ import { slugify } from "../utils/format";
 import bgImage from "../assets/Daniel_Page4_03.jpg";
 
 const courses = await getCourses();
+
+const metaTitle = "Classes | Whittier Graphic Design Certificate";
+const metaDescription =
+  "In these courses, students will learn the fundementals of graphic design, typography, motion graphics, portfolio prep, brand design, and web design.";
 ---
 
-<InnerPage>
+<InnerPage title={metaTitle} metaDescription={metaDescription}>
   <InnerHero slot="hero" title="Classes" imageSrc={bgImage} />
   <div slot="content" id="courses">
-    <ul class="cluster course-links">
+    <!-- <ul class="cluster course-links">
       {
         courses.map((item, index) => (
           <li>
@@ -26,7 +30,7 @@ const courses = await getCourses();
           </li>
         ))
       }
-    </ul>
+    </ul> -->
     <Courses courses={courses} />
     <div id="scroll-to-top">
       <Button href="#content">
