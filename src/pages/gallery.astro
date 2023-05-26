@@ -9,6 +9,7 @@ import ProjectGrid from "../components/ProjectGrid.astro";
 import { urlFor } from "../utils/sanity";
 
 import { getSanityData } from "../utils/sanity";
+import Button from "../components/Button.astro";
 
 const getImageHeight = (width, aspectRatio) => {
   return Math.floor(width / aspectRatio);
@@ -55,6 +56,16 @@ const metaDescription =
           </article>
         ))
       }
+    </div>
+    <div id="scroll-to-top">
+      <Button href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
+          ></path></svg
+        >
+        <span class="sr-only">Scroll to top</span>
+      </Button>
     </div>
   </main>
   <SiteFooter slot="footer" />
@@ -189,6 +200,19 @@ const metaDescription =
     transform: scale(1.05);
     filter: saturate(0);
     opacity: 0.4;
+  }
+
+  #scroll-to-top {
+    position: fixed;
+    z-index: 50;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  #scroll-to-top svg {
+    fill: var(--color-neutral-light);
+    width: 2rem;
+    transform: rotate(180deg);
   }
 
   @media (max-width: 1024px) {

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import FacultyMember from "../components/FacultyMember.astro";
 
 import { getSanityData } from "../utils/sanity";
@@ -31,6 +32,7 @@ const metaDescription =
       }
     </section>
   </main>
+  <SiteFooter slot="footer" />
 </Layout>
 
 <style>

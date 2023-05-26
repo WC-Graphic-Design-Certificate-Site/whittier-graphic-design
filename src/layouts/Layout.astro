@@ -15,6 +15,27 @@ const { title, metaDescription } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
+    <link
+      rel="preload"
+      href="/fonts/SvangBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Gobold-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Gobold-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <style>
       @font-face {
         font-family: "Gobold";
@@ -284,3 +305,14 @@ const { title, metaDescription } = Astro.props;
     }
   }
 </style>
+
+<!-- <script>
+  // doesn't work because panel is hidden in DOM until button is clicked -- how to fix?
+  const navLinks = document.querySelectorAll(".nav .nav-item a");
+  const currentURL = window.location.pathname;
+  navLinks.forEach((link) => {
+    if (link.pathname + "/" === currentURL || link.pathname === currentURL) {
+      link.style.color = "var(--color-brand-primary)";
+    }
+  });
+</script> -->

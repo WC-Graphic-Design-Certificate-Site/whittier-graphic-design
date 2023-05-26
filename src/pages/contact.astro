@@ -40,11 +40,11 @@ const metaDescription =
           />
         </div>
       </div>
-      <div class="form-item">
+      <div class="form-item max-w">
         <label for="email">Email</label>
         <input id="email" name="email" type="email" autocomplete="email" />
       </div>
-      <div class="form-item">
+      <div class="form-item max-w">
         <label for="phone">Phone</label>
         <input
           id="phone"
@@ -89,6 +89,10 @@ const metaDescription =
   .form-item {
     display: flex;
     flex-direction: column;
+  }
+
+  .form-item.max-w {
+    max-width: 28rem;
   }
 
   .form-item label {
