@@ -131,6 +131,7 @@ const { courses } = Astro.props;
   .courses .course-subtitle {
     position: relative;
     top: -1px;
+    margin-left: 6px;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: var(--step--1);
@@ -202,7 +203,7 @@ const { courses } = Astro.props;
   @media (max-width: 540px) {
     .courses .topic-grid {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 0rem;
     }
 
     .courses .number {
