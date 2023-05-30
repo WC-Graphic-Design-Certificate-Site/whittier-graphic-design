@@ -34,17 +34,17 @@ const { courses } = Astro.props;
                         <h3>{topic.title}</h3>
                         <ul class="topic-description flow">
                           <li>
-                            <strong>Tools:</strong> {topic.tools}
+                            <strong>Tools:</strong>&nbsp;{topic.tools}
                           </li>
                           <li>
-                            <strong>Projects:</strong> {topic.projects}
+                            <strong>Projects:</strong>&nbsp;{topic.projects}
                           </li>
                           <li>
-                            <strong>In-Class:</strong>{" "}
+                            <strong>In-Class:</strong>&nbsp;
                             {topic["in-class"].join(", ")}
                           </li>
                           <li>
-                            <strong>Resources:</strong>{" "}
+                            <strong>Resources:</strong>&nbsp;
                             {topic.resources.join(", ")}
                           </li>
                         </ul>

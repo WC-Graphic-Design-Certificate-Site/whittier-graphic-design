@@ -1,0 +1,130 @@
+---
+import InnerPage from "../layouts/InnerPage.astro";
+import InnerHero from "../components/InnerHero.astro";
+// import { getCourses } from "../utils/sanity.js";
+
+import heroImage from "../assets/menu.png";
+---
+
+<InnerPage>
+  <InnerHero slot="hero" title="Calendar" imageSrc={heroImage} />
+  <div slot="content" class="">
+    <div class="letter-grid">
+      <p id="fancyWord1">Create</p>
+      <p id="fancyWord2">Invent</p>
+      <p id="fancyWord3">Design</p>
+    </div>
+  </div>
+</InnerPage>
+
+<style>
+  .container {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .letter-grid {
+    display: flex;
+    font-family: var(--font-emphasis);
+    flex-direction: column;
+    width: clamp(70%, 55rem, 100%);
+    gap: var(--space-xl);
+    font-size: var(--step-9);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .letter-grid p {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .letter-grid .letter {
+    position: relative;
+    display: inline-block;
+    cursor: crosshair;
+    transform: scale(var(--scale, 1));
+    transition: all 0.25s ease-in-out;
+  }
+
+  .letter-grid .letter[data-font="font-1"] {
+    font-family: var(--font-fancy-1);
+    top: 8px;
+    --scale: 1.1;
+  }
+
+  .letter-grid .letter[data-font="font-2"] {
+    font-family: var(--font-fancy-2);
+    top: -9px;
+  }
+
+  .letter-grid .letter[data-font="font-3"] {
+    font-family: var(--font-fancy-3);
+    top: -2px;
+    --scale: 1;
+  }
+
+  .letter-grid .letter.leaving {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .letter-grid .letter.entering {
+    opacity: 1;
+    transform: scale(var(--scale, 1));
+  }
+</style>
+
+<script>
+  const makeFancy = (id) => {
+    const element = document.getElementById(id),
+      text = element.innerText.split("");
+
+    element.innerText = "";
+
+    text.forEach((letter) => {
+      const span = document.createElement("span");
+      span.className = "letter";
+      span.setAttribute("data-font", "font-1");
+      span.innerText = letter;
+      element.appendChild(span);
+    });
+  };
+  makeFancy("fancyWord1");
+  makeFancy("fancyWord2");
+  makeFancy("fancyWord3");
+
+  function switchFont(attributeValue) {
+    let font = "";
+    switch (attributeValue) {
+      case "":
+        font = "font-1";
+        break;
+      case "font-1":
+        font = "font-2";
+        break;
+      case "font-2":
+        font = "font-3";
+        break;
+      case "font-3":
+        font = "font-1";
+        break;
+      default:
+        font = "font-1";
+    }
+    return font;
+  }
+
+  const letters = document.querySelectorAll(".letter");
+  letters.forEach((letter) => {
+    letter.addEventListener("mouseover", (e) => {
+      const target = e.target as Element;
+      target.classList.remove("leaving", "entering");
+      target.classList.add("leaving");
+      let currentTheme = target.getAttribute("data-font");
+      setTimeout(() => {
+        target.setAttribute("data-font", switchFont(currentTheme));
+        target.classList.add("entering");
+      }, 200);
+    });
+  });
+</script>

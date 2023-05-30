@@ -13,10 +13,10 @@ const navigation = [
     name: "Classes",
     href: "/classes",
   },
-  {
-    name: "Calendar",
-    href: "/calendar",
-  },
+  // {
+  //   name: "Calendar",
+  //   href: "/calendar",
+  // },
   {
     name: "Gallery",
     href: "/gallery",
@@ -39,7 +39,7 @@ const { layout = "inner" } = Astro.props;
     layout == "inner" ? (
       <a href="/" class="header-text">
         <Logo width="12rem" fill="var(--color-brand-primary)" />
-        <div>Graphic Design Certificate</div>
+        <div style="display: none;">Graphic Design Certificate</div>
       </a>
     ) : (
       <Logo width="12rem" />
@@ -156,7 +156,7 @@ const { layout = "inner" } = Astro.props;
 
   .nav-link {
     font-family: var(--font-secondary);
-    font-size: var(--step--1);
+    font-size: var(--step-0);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     transition: all 0.2s ease;

@@ -28,7 +28,12 @@ const metaDescription =
           <br />
           <span>Graphic Design Certificate</span>
         </h1>
-        <div class="fancy-letters">
+        <!-- <div class="fancy-letters">
+          <p id="fancyWord1">Create</p>
+          <p id="fancyWord2">Invent</p>
+          <p id="fancyWord3">Design</p>
+        </div> -->
+        <div class="letter-grid flow">
           <p id="fancyWord1">Create</p>
           <p id="fancyWord2">Invent</p>
           <p id="fancyWord3">Design</p>
@@ -87,7 +92,8 @@ const metaDescription =
     position: relative;
     background: var(--color-brand-primary);
     color: var(--color-neutral-light);
-    padding-block: 10rem;
+    padding-block-start: 10rem;
+    padding-block-end: 8rem;
   }
 
   .hero h1 {
@@ -100,7 +106,7 @@ const metaDescription =
     align-self: start;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    margin-right: var(--space-2xl);
+    margin-right: 3rem;
     top: 1rem;
   }
 
@@ -113,7 +119,10 @@ const metaDescription =
   }
 
   .hero .content-wrapper {
+    position: relative;
+    left: -3rem;
     display: flex;
+    width: fit-content;
     margin-block-end: var(--space-l);
   }
 

@@ -274,14 +274,58 @@ const { title, metaDescription } = Astro.props;
     --scale: 1;
   }
 
-  .fancy-letters .letter.leaving {
+  .letter.leaving {
     opacity: 0;
     transform: scale(0.9);
   }
 
-  .fancy-letters .letter.entering {
+  .letter.entering {
     opacity: 1;
     transform: scale(var(--scale, 1));
+  }
+
+  .letter-grid {
+    font-family: var(--font-emphasis);
+    width: auto;
+    margin-inline: auto;
+    font-size: 11rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .letter-grid p {
+    display: grid;
+    grid-template-columns: repeat(6, 150px);
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    column-gap: 5px;
+  }
+
+  .letter {
+    position: relative;
+    /* outline: 1px solid red; */
+    cursor: crosshair;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .letter-grid .letter[data-font="font-1"] {
+    font-family: var(--font-fancy-1);
+    font-size: 187px;
+    transform: translateY(18px);
+  }
+
+  .letter-grid .letter[data-font="font-2"] {
+    font-family: var(--font-fancy-2);
+    font-size: 170px;
+    transform: translateY(-5px);
+  }
+
+  .letter-grid .letter[data-font="font-3"] {
+    font-family: var(--font-fancy-3);
+    font-size: 165px;
+    transform: translateY(5px);
   }
 
   @media (max-width: 768px) {
