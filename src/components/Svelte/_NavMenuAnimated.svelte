@@ -25,17 +25,12 @@
                 {:else}
                     <span class="sr-only">Open Panel</span>
                 {/if}
-                {#if open}
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" class="close"><path d="M345 137l17-17L328 86.1l-17 17-119 119L73 103l-17-17L22.1 120l17 17 119 119L39 375l-17 17L56 425.9l17-17 119-119L311 409l17 17L361.9 392l-17-17-119-119L345 137z"/></svg>
-                {:else}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 64" height="1em" class="hamburger"><rect x="6.67" y="8.62" width="82" height="6"/><rect x="6.67" y="26.87" width="82" height="6"/><rect x="6.67" y="45.12" width="82" height="6"/></svg>
-                {/if}
-                <!-- <div class="menu-bars" class:open>
+                <div class="menu-bars" class:open>
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
-                </div> -->
+                </div>
             </div>
         </PopoverButton>
         {#if open}
@@ -54,35 +49,73 @@
     }
 
     .menu-toggle-container {
-        padding: 0.25rem;
+        padding: 1rem;
         background-color: transparent;
+        transition: background-color 0.2s ease;
         width: 6rem;
         height: 4rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
-    /* .menu-toggle-container:hover {
+    .menu-toggle-container:hover {
         background-color: var(--menu-bg);
-    } */
+    }
 
     .menu-toggle-container.open {
         background-color: var(--menu-bg);
     }
 
-    .menu-toggle-container svg {
-        fill: var(--menu-color);
+    .menu-bars {
+        position: relative;
+        height: 100%;
     }
 
-    .hamburger {
-        height: 90%;
-        width: auto;
+    .menu-bars > * {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: var(--menu-color);
+        opacity: 1;
+        transition: top 0.2s ease, left 0.2s ease, opacity 0.2s ease 0.1s,
+            transform 0.2s ease 0.2s, height 0.2s ease 0.2s;
     }
 
-    .close {
-        height: 70%;
-        width: auto;
+    .menu-bars > :nth-child(1) {
+        top: 0rem;
+    }
+
+    .menu-bars > :nth-child(2) {
+        top: calc(3rem / 3 - 2.25px);
+    }
+
+    .menu-bars > :nth-child(3) {
+        top: calc(3rem / 3 - 2.25px);
+    }
+
+    .menu-bars > :nth-child(4) {
+        top: calc(3rem / 3 * 2 - 2.25px);
+    }
+
+    .menu-bars.open > :nth-child(1) {
+        top: calc(3rem / 3 - 2px);
+        opacity: 0;
+    }
+
+    .menu-bars.open > :nth-child(2) {
+        transform: rotate(45deg) scale(0.6);
+        height: 4px;
+        transition-delay: 0.2s;
+    }
+
+    .menu-bars.open > :nth-child(3) {
+        transform: rotate(-45deg) scale(0.6);
+        height: 4px;
+        transition-delay: 0.2s;
+    }
+
+    .menu-bars.open > :nth-child(4) {
+        top: calc(3rem / 3 - 2px);
+        opacity: 0;
     }
 
     .nav-panel {

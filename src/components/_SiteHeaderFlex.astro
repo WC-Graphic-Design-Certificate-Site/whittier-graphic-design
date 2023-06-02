@@ -34,9 +34,7 @@ const navigation = [
 const { layout = "inner" } = Astro.props;
 ---
 
-<header
-  class:list={[layouts[layout], "header", "header-grid", "content-wrapper"]}
->
+<header class={layouts[layout]}>
   <a href="/" class="header-text">
     <Logo
       width="12rem"
@@ -93,8 +91,11 @@ const { layout = "inner" } = Astro.props;
     align-items: center;
   } */
 
-  .header-grid {
-    z-index: 10;
+  header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 3fr 1fr;
+    gap: 1rem;
   }
 
   header.home {
@@ -104,10 +105,10 @@ const { layout = "inner" } = Astro.props;
     right: 0;
   }
 
-  /* header.inner {
+  header.inner {
     position: relative;
-    padding-block-end: 2.5rem;
-  } */
+    padding-block-end: 2.5rem; /* was 6 */
+  }
 
   .header-text {
     display: flex;

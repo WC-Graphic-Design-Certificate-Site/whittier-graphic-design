@@ -152,10 +152,23 @@ const { title, metaDescription } = Astro.props;
   }
 
   .content-wrapper {
+    --wrapper-max-width: 1300px;
     position: relative;
-    max-width: clamp(16rem, var(--wrapper-max-width, 100vw), 80rem);
+    max-width: clamp(16rem, var(--wrapper-max-width, 100vw), 90rem);
     padding-inline: var(--gutter);
     margin-inline: auto;
+  }
+
+  .header-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    padding-block: 2rem;
+  }
+
+  .header.header-grid > :last-child {
+    justify-content: end;
   }
 
   /* Composition utilities */
@@ -233,7 +246,7 @@ const { title, metaDescription } = Astro.props;
 
   /* Home page fancy letters */
 
-  .fancy-letters {
+  /* .fancy-letters {
     display: flex;
     font-family: var(--font-emphasis);
     flex-direction: column;
@@ -305,7 +318,6 @@ const { title, metaDescription } = Astro.props;
 
   .letter {
     position: relative;
-    /* outline: 1px solid red; */
     cursor: crosshair;
     transition: all 0.25s ease-in-out;
   }
@@ -354,7 +366,7 @@ const { title, metaDescription } = Astro.props;
     .fancy-letters {
       font-size: var(--step-5);
     }
-  }
+  } */
 </style>
 
 <!-- <script>

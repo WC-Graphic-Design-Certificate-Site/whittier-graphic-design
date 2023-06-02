@@ -2,16 +2,21 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import Letters from "../components/Letters.astro";
 import Button from "../components/Button.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
+import HomeProjectGrid from "../components/Svelte/HomeProjectGrid.svelte";
 
 import { getSanityData } from "../utils/sanity";
 
 const projects = await getSanityData(`*[_type == "studentProject"] {
+  _id,
   name,
   description,
   "image": image.asset->,
 }`);
+
+// console.log(projects);
 
 const metaTitle = "Whittier Graphic Design Certificate";
 const metaDescription =
@@ -22,10 +27,8 @@ const metaDescription =
   <SiteHeader layout="home" slot="header" />
   <main slot="main">
     <section class="hero">
-      <div class="content-wrapper">
+      <div class="header-grid content-wrapper">
         <h1>
-          <span>Whittier College</span>
-          <br />
           <span>Graphic Design Certificate</span>
         </h1>
         <!-- <div class="fancy-letters">
@@ -33,11 +36,12 @@ const metaDescription =
           <p id="fancyWord2">Invent</p>
           <p id="fancyWord3">Design</p>
         </div> -->
-        <div class="letter-grid flow">
+        <Letters />
+        <!-- <div class="letter-grid flow">
           <p id="fancyWord1">Create</p>
           <p id="fancyWord2">Invent</p>
           <p id="fancyWord3">Design</p>
-        </div>
+        </div> -->
       </div>
       <div class="scroll">
         <a href="#student-work">
@@ -50,9 +54,10 @@ const metaDescription =
         </a>
       </div>
     </section>
-    <section id="student-work">
+    <section id="student-work" class="content-wrapper">
       <h2 class="sr-only">Project List</h2>
-      <ProjectGrid projects={projects} />
+      <HomeProjectGrid client:idle projects={projects} />
+      <!-- <ProjectGrid projects={projects} /> -->
     </section>
     <article id="about" class="content-wrapper flow">
       <p>
@@ -106,23 +111,32 @@ const metaDescription =
     align-self: start;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    margin-right: 3rem;
-    top: 1rem;
+    justify-self: center;
+    /* margin-right: 3rem;
+    top: 1rem; */
+  }
+
+  .hero .header-grid > :last-child {
+    justify-content: start;
+  }
+
+  .hero > :last-child {
+    justify-self: start;
   }
 
   .hero h1 > :first-child {
     font-weight: 700;
   }
 
-  .hero h1 > :last-child {
+  /* .hero h1 > :last-child {
     font-weight: 400;
-  }
+  } */
 
   .hero .content-wrapper {
     position: relative;
-    left: -3rem;
+    /*left: -3rem;
     display: flex;
-    width: fit-content;
+    width: fit-content; */
     margin-block-end: var(--space-l);
   }
 
@@ -164,7 +178,7 @@ const metaDescription =
   }
 
   @media (max-width: 1024px) {
-    .hero .content-wrapper {
+    /* .hero .content-wrapper {
       flex-direction: column;
     }
 
@@ -176,6 +190,12 @@ const metaDescription =
       margin-right: 0;
       top: 0;
       margin-bottom: var(--space-xl);
+    } */
+  }
+
+  @media (max-width: 768px) {
+    .hero .header-grid {
+      grid-template-columns: 40px 1fr;
     }
   }
 
@@ -188,56 +208,56 @@ const metaDescription =
 </style>
 
 <script>
-  const makeFancy = (id) => {
-    const element = document.getElementById(id),
-      text = element.innerText.split("");
+  // const makeFancy = (id) => {
+  //   const element = document.getElementById(id),
+  //     text = element.innerText.split("");
 
-    element.innerText = "";
+  //   element.innerText = "";
 
-    text.forEach((letter) => {
-      const span = document.createElement("span");
-      span.className = "letter";
-      span.setAttribute("data-font", "font-1");
-      span.innerText = letter;
-      element.appendChild(span);
-    });
-  };
-  makeFancy("fancyWord1");
-  makeFancy("fancyWord2");
-  makeFancy("fancyWord3");
+  //   text.forEach((letter) => {
+  //     const span = document.createElement("span");
+  //     span.className = "letter";
+  //     span.setAttribute("data-font", "font-1");
+  //     span.innerText = letter;
+  //     element.appendChild(span);
+  //   });
+  // };
+  // makeFancy("fancyWord1");
+  // makeFancy("fancyWord2");
+  // makeFancy("fancyWord3");
 
-  function switchFont(attributeValue) {
-    let font = "";
-    switch (attributeValue) {
-      case "":
-        font = "font-1";
-        break;
-      case "font-1":
-        font = "font-2";
-        break;
-      case "font-2":
-        font = "font-3";
-        break;
-      case "font-3":
-        font = "font-1";
-        break;
-      default:
-        font = "font-1";
-    }
-    return font;
-  }
+  // function switchFont(attributeValue) {
+  //   let font = "";
+  //   switch (attributeValue) {
+  //     case "":
+  //       font = "font-1";
+  //       break;
+  //     case "font-1":
+  //       font = "font-2";
+  //       break;
+  //     case "font-2":
+  //       font = "font-3";
+  //       break;
+  //     case "font-3":
+  //       font = "font-1";
+  //       break;
+  //     default:
+  //       font = "font-1";
+  //   }
+  //   return font;
+  // }
 
-  const letters = document.querySelectorAll(".letter");
-  letters.forEach((letter) => {
-    letter.addEventListener("mouseover", (e) => {
-      const target = e.target as Element;
-      target.classList.remove("leaving", "entering");
-      target.classList.add("leaving");
-      let currentTheme = target.getAttribute("data-font");
-      setTimeout(() => {
-        target.setAttribute("data-font", switchFont(currentTheme));
-        target.classList.add("entering");
-      }, 200);
-    });
-  });
+  // const letters = document.querySelectorAll(".letter");
+  // letters.forEach((letter) => {
+  //   letter.addEventListener("mouseover", (e) => {
+  //     const target = e.target as Element;
+  //     target.classList.remove("leaving", "entering");
+  //     target.classList.add("leaving");
+  //     let currentTheme = target.getAttribute("data-font");
+  //     setTimeout(() => {
+  //       target.setAttribute("data-font", switchFont(currentTheme));
+  //       target.classList.add("entering");
+  //     }, 200);
+  //   });
+  // });
 </script>

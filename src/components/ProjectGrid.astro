@@ -32,12 +32,6 @@ const { projects = placeholder } = Astro.props;
   {
     projects.map((item) => (
       <article class="relative grid-item">
-        <div class="grid-text flow">
-          <h3>{item.name}</h3>
-          <div class="spacer" />
-          <p>{item.description}</p>
-        </div>
-        <div class="overlay" />
         <img
           src={urlFor(item.image)
             .width(900)
