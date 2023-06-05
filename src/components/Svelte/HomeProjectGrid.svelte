@@ -114,8 +114,8 @@ function getNextItem(item) {
     aspect-ratio: 1/1;
     object-fit: cover;
     opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.4s ease-in-out;
+    /* transform: scale(0.8);
+    transition: all 0.4s ease-in-out; */
   }
 
   .interactive-projects .grid-item img[data-index="0"] {
@@ -124,6 +124,6 @@ function getNextItem(item) {
 
   .interactive-projects .grid-item img[data-visible="true"] {
     opacity: 1;
-    transform: scale(1);
+    /* transform: scale(1); */
   }
 </style>

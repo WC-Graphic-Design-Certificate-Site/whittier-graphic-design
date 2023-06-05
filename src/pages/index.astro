@@ -25,7 +25,7 @@ const metaDescription =
 
 <Layout title={metaTitle} metaDescription={metaDescription}>
   <SiteHeader layout="home" slot="header" />
-  <main slot="main">
+  <main slot="main" class="main">
     <section class="hero">
       <div class="header-grid content-wrapper">
         <h1>
@@ -54,48 +54,59 @@ const metaDescription =
         </a>
       </div>
     </section>
-    <section id="student-work" class="content-wrapper">
-      <h2 class="sr-only">Project List</h2>
-      <HomeProjectGrid client:idle projects={projects} />
-      <!-- <ProjectGrid projects={projects} /> -->
-    </section>
-    <article id="about" class="content-wrapper flow">
-      <p>
-        Whittier College’s Graphic Design Certificate program is a virtual
-        eight-course series that teaches the fundementals of graphic design
-        through the use of Adobe InDesign, Illustrator, Photoshop and After
-        Effects.
-      </p>
-      <p>
-        While honing your skills in typography, image creation, brand-idendtity
-        development and motion graphics you will have multiple opportunities to
-        share your art with working design professionals. And in your final
-        class, you will work as a team to rebrand an actual organization. The
-        program will culminate with the creation of a professional-quality
-        design portfolio.
-      </p>
-      <Button href="/classes" width="fit" size="large">
-        <span>See the classes</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon-small"
-          fill="var(--color-neutral-light)"
-          viewBox="0 0 448 512"
-          ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-          <path
-            d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
-          ></path></svg
-        >
-      </Button>
-    </article>
+    <div class="content content-wrapper">
+      <section id="student-work" class="">
+        <h2 class="sr-only">Project List</h2>
+        <HomeProjectGrid client:idle projects={projects} />
+        <!-- <ProjectGrid projects={projects} /> -->
+      </section>
+      <article id="about" class="flow">
+        <p>
+          Whittier College’s Graphic Design Certificate program is a virtual
+          eight-course series that teaches the fundementals of graphic design
+          through the use of Adobe InDesign, Illustrator, Photoshop and After
+          Effects.
+        </p>
+        <p>
+          While honing your skills in typography, image creation,
+          brand-idendtity development and motion graphics you will have multiple
+          opportunities to share your art with working design professionals. And
+          in your final class, you will work as a team to rebrand an actual
+          organization. The program will culminate with the creation of a
+          professional-quality design portfolio.
+        </p>
+        <Button href="/classes" width="fit" size="large">
+          <span>See the classes</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon-small"
+            fill="var(--color-neutral-light)"
+            viewBox="0 0 448 512"
+            ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+            ></path></svg
+          >
+        </Button>
+      </article>
+    </div>
   </main>
   <SiteFooter slot="footer" />
 </Layout>
 
 <style>
+  .main {
+    background: #fffaf0;
+    overflow-y: hidden;
+  }
+
   .hero {
     position: relative;
-    background: var(--color-brand-primary);
+    /* background: var(--color-brand-primary); */
+    /* background: #4f2660; */
+    background: linear-gradient(to bottom, #dba22680, #4f2660a2),
+      url("https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+        center/cover no-repeat;
     color: var(--color-neutral-light);
     padding-block-start: 10rem;
     padding-block-end: 8rem;
@@ -125,7 +136,7 @@ const metaDescription =
   }
 
   .hero h1 > :first-child {
-    font-weight: 700;
+    font-weight: 400;
   }
 
   /* .hero h1 > :last-child {
@@ -162,8 +173,13 @@ const metaDescription =
     transform: scale(1.05);
   }
 
+  .content.content-wrapper {
+    background: white;
+    box-shadow: var(--shadow-elevation-medium);
+  }
+
   #about {
-    margin-block: var(--space-3xl);
+    padding-block: var(--space-3xl);
   }
 
   #about.flow {
