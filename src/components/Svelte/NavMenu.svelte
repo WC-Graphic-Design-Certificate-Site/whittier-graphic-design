@@ -87,12 +87,14 @@
 
     .nav-panel {
         position: absolute;
-        top: 0;
+        top: 64px;
         right: 0;
-        background: var(--color-neutral-dark);
+        /* background: var(--color-neutral-dark); */
+        background: rgb(74 40 93 / 75%);
+        backdrop-filter: blur(12px);
         color: white;
         min-width: 25rem;
-        padding: 5rem 5rem 3rem 3rem;
+        padding: 3rem;
     }
 
     @media (max-width: 768px) {

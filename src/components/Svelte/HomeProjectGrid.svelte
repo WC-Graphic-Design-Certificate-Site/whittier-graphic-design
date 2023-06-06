@@ -1,25 +1,33 @@
 <script>
     import {urlFor} from "../../utils/sanity"
+    import {shuffleArray} from "../../utils/format"
     export let projects;
 
+    let randomizedProjects = shuffleArray(projects);
+
     const projectSets = [];
-    for (let i = 0; i < 6; i++) {
-        const arr = [];
-        projectSets.push(arr)
+    for (let i = 0; i < randomizedProjects.length; i += 3) {
+      projectSets.push(randomizedProjects.slice(i, i + 3));
     }
+    // for (let i = 0; i < 6; i++) {
+    //     const arr = [];
+    //     projectSets.push(arr)
+    // }
 
-    projectSets.forEach(set => {
-        for (let i = 0; i < 3; i++) {
-            set.push(getRandom(projects));
-        }
-    })
+    // projectSets.forEach(set => {
+    //     for (let i = 0; i < 3; i++) {
+    //         set.push(getRandom(projects));
+    //     }
+    // })
 
-    console.log(projectSets)
 
-    function getRandom(arr) {
-        const randomIndex = Math.floor(Math.random() * arr.length);
-        return arr[randomIndex];
-    }
+    // console.log(projectSets.length);
+    // projectSets.forEach(project => console.log(project.length));
+
+    // function getRandom(arr) {
+    //     const randomIndex = Math.floor(Math.random() * arr.length);
+    //     return arr[randomIndex];
+    // }
 
 function getNextItem(item) {
     const currentIndex = projects.indexOf(item);
@@ -35,7 +43,7 @@ function getNextItem(item) {
 
 
     function prepareImage(image) {
-        const src = urlFor(image).width(900).height(900).fit('crop').crop('center').format('webp').url();
+        const src = urlFor(image).width(900).height(900).fit('crop').crop('center').auto('format').url();
         return src
     }
 
@@ -74,7 +82,7 @@ function getNextItem(item) {
 <div class="interactive-projects grid">
     {#each projectSets as set}
     <div class="relative grid-item" on:mouseenter={handleEnter}>
-        <div class="img-wrapper">
+        <a class="img-wrapper" href="/gallery">
             {#each set as project, i}
                 <img
                     src={prepareImage(project.image)}
@@ -85,8 +93,7 @@ function getNextItem(item) {
                     data-visible={i == 0 ? "true" : ""}
                 />
             {/each}
-        </div>
-        
+        </a>
       </div>
       {/each}
 </div>
@@ -94,8 +101,8 @@ function getNextItem(item) {
 <style>
     .interactive-projects.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
-    margin-inline: calc(var(--gutter) * -1);
+    grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+    /* margin-inline: calc(var(--gutter) * -1); */
   }
 
   .interactive-projects .grid-item {

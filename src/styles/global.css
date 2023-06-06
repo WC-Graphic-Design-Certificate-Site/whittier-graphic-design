@@ -4,6 +4,7 @@
   --color-brand-primary: #dba226; /* was #dba226 */
   --color-brand-primary-light: #fff3da;
   --color-brand-primary-dark: #c08c00;
+  --color-brand-secondary-light: #816193;
   --color-brand-secondary: #4c1e4c;
   --color-neutral-dark: #231f20;
   --color-neutral-light: #fff;
@@ -46,6 +47,14 @@
     0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
     2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
     5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+  --brand-gradient: linear-gradient(
+    47deg,
+    rgba(219, 162, 38, 0.4675251936712185) 0%,
+    rgba(92, 49, 112, 0.8848921404499299) 30%,
+    rgba(74, 40, 93, 1) 50%,
+    rgba(92, 49, 112, 0.8848921404499299) 80%,
+    rgba(219, 162, 38, 0.4675251936712185) 100%
+  );
 }
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */

@@ -56,9 +56,25 @@ const {
     height: 100%;
   }
 
+  @media (max-width: 1024px) {
+    .title {
+      font-size: var(--step-8);
+    }
+  }
+
   @media (max-width: 640px) {
+    .title {
+      font-size: var(--step-7);
+      letter-spacing: 0.5rem;
+    }
     .hero {
       height: clamp(var(--space-3xl), 25vh, 12rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      font-size: var(--step-6);
     }
   }
 </style>

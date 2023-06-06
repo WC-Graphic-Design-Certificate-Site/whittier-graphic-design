@@ -7,6 +7,7 @@ import InnerHero from "../components/InnerHero.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
 // import { getCourses } from "../utils/sanity.js";
 import { urlFor } from "../utils/sanity";
+import { projectsGallery } from "../data/projects";
 
 import { getSanityData } from "../utils/sanity";
 import Button from "../components/Button.astro";
@@ -24,6 +25,8 @@ const gallery =
   }
 }`);
 
+const projects = projectsGallery.entries;
+
 const metaTitle = "Student Gallery | Whittier Graphic Design Certificate";
 const metaDescription =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo laboriosam est, minima minus eum dolore.";
@@ -33,16 +36,16 @@ const metaDescription =
   <SiteHeader slot="header" />
   <main slot="main" class="content-wrapper">
     <h1 class="title header">Gallery</h1>
-    <div class="project-grid">
+    <ProjectGrid projects={projects} />
+    <!-- <div class="project-grid">
       {
-        gallery.entries.map((project) => (
+        projects.map((project) => (
           <article class="relative grid-item">
             <div class="grid-text flow">
               <h3>{project.name}</h3>
               <div class="spacer" />
               <p>{project.description}</p>
             </div>
-            <div class="overlay" />
             <img
               src={urlFor(project.image).width(1200).format("webp").url()}
               alt={project.name}
@@ -56,7 +59,7 @@ const metaDescription =
           </article>
         ))
       }
-    </div>
+    </div> -->
     <div id="scroll-to-top">
       <Button href="#">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -227,6 +230,10 @@ const metaDescription =
     .project-grid > :nth-child(1) {
       grid-column: span 2 !important;
     }
+
+    .title {
+      font-size: var(--step-8);
+    }
   }
 
   @media (max-width: 768px) {
@@ -237,6 +244,11 @@ const metaDescription =
   }
 
   @media (max-width: 640px) {
+    .title {
+      letter-spacing: 0.5rem;
+
+      font-size: var(--step-7);
+    }
     /* .title {
       font-size: var(--step-6);
       letter-spacing: 0.4rem;
@@ -248,6 +260,12 @@ const metaDescription =
 
     .project-grid > :nth-child(1) {
       grid-column: span 1 !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      font-size: var(--step-6);
     }
   }
 </style>

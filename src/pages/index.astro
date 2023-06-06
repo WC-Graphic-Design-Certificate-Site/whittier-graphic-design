@@ -8,17 +8,21 @@ import ProjectGrid from "../components/ProjectGrid.astro";
 import HomeProjectGrid from "../components/Svelte/HomeProjectGrid.svelte";
 
 import { getSanityData } from "../utils/sanity";
-
-const projects = await getSanityData(`*[_type == "studentProject"] {
-  _id,
-  name,
-  description,
-  "image": image.asset->,
-}`);
+import { projectsGallery } from "../data/projects";
+const projects = projectsGallery.entries.slice(0, 18);
 
 // console.log(projects);
 
-const metaTitle = "Whittier Graphic Design Certificate";
+// const projects = await getSanityData(`*[_type == "studentProject"] {
+//   _id,
+//   name,
+//   description,
+//   "image": image.asset->,
+// }`);
+
+// console.log(projects);
+
+const metaTitle = "Whittier Graphic Design Certificate Program";
 const metaDescription =
   "Whittier College’s Graphic Design Certificate program is a virtual eight-course series that teaches the fundementals of graphic design through the use of Adobe InDesign, Illustrator, Photoshop and After Effects.";
 ---
@@ -29,7 +33,7 @@ const metaDescription =
     <section class="hero">
       <div class="header-grid content-wrapper">
         <h1>
-          <span>Graphic Design Certificate</span>
+          <span>Graphic Design Certificate Program</span>
         </h1>
         <!-- <div class="fancy-letters">
           <p id="fancyWord1">Create</p>
@@ -54,13 +58,8 @@ const metaDescription =
         </a>
       </div>
     </section>
-    <div class="content content-wrapper">
-      <section id="student-work" class="">
-        <h2 class="sr-only">Project List</h2>
-        <HomeProjectGrid client:idle projects={projects} />
-        <!-- <ProjectGrid projects={projects} /> -->
-      </section>
-      <article id="about" class="flow">
+    <div class="content">
+      <article id="about" class="flow content-wrapper">
         <p>
           Whittier College’s Graphic Design Certificate program is a virtual
           eight-course series that teaches the fundementals of graphic design
@@ -75,38 +74,42 @@ const metaDescription =
           organization. The program will culminate with the creation of a
           professional-quality design portfolio.
         </p>
-        <Button href="/classes" width="fit" size="large">
-          <span>See the classes</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon-small"
-            fill="var(--color-neutral-light)"
-            viewBox="0 0 448 512"
-            ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-            <path
-              d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
-            ></path></svg
-          >
-        </Button>
+        <p>
+          <Button href="/classes" width="fit" size="large">
+            <span>See the classes</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-small"
+              fill="var(--color-neutral-light)"
+              viewBox="0 0 448 512"
+              ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path
+                d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+              ></path></svg
+            >
+          </Button>
+        </p>
       </article>
+      <section id="student-work" class="">
+        <h2 class="sr-only">Project List</h2>
+        <HomeProjectGrid client:idle projects={projects} />
+        <!-- <ProjectGrid projects={projects} /> -->
+      </section>
     </div>
   </main>
   <SiteFooter slot="footer" />
 </Layout>
 
 <style>
-  .main {
-    background: #fffaf0;
-    overflow-y: hidden;
-  }
-
   .hero {
     position: relative;
     /* background: var(--color-brand-primary); */
     /* background: #4f2660; */
-    background: linear-gradient(to bottom, #dba22680, #4f2660a2),
+    /* background: linear-gradient(to bottom, #dba22680, #4f2660a2),
       url("https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-        center/cover no-repeat;
+        center/cover no-repeat; */
+    background: rgb(74, 40, 93);
+    background: var(--brand-gradient);
     color: var(--color-neutral-light);
     padding-block-start: 10rem;
     padding-block-end: 8rem;
@@ -173,10 +176,10 @@ const metaDescription =
     transform: scale(1.05);
   }
 
-  .content.content-wrapper {
+  /* .content.content-wrapper {
     background: white;
     box-shadow: var(--shadow-elevation-medium);
-  }
+  } */
 
   #about {
     padding-block: var(--space-3xl);
@@ -189,8 +192,10 @@ const metaDescription =
   #about p {
     font-size: var(--step-3);
     font-family: var(--font-primary);
-    color: var(--color-brand-primary-dark);
+    /* color: var(--color-brand-primary-dark); */
+    color: var(--color-brand-secondary-light);
     max-width: 48ch;
+    margin-inline: auto;
   }
 
   @media (max-width: 1024px) {
@@ -211,7 +216,17 @@ const metaDescription =
 
   @media (max-width: 768px) {
     .hero .header-grid {
-      grid-template-columns: 40px 1fr;
+      /* grid-template-columns: 40px 1fr; */
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero h1 {
+      order: 2;
+      writing-mode: horizontal-tb;
+      transform: rotate(0deg);
+      text-align: center;
+      align-self: center;
     }
   }
 

@@ -535,7 +535,7 @@
   .letter-grid {
     justify-self: start;
     position: relative;
-    left: -2.5rem;
+    /* left: -2.5rem; */
   }
 
   .letter-grid.flow {
@@ -599,9 +599,13 @@
 
   @media (max-width: 768px) {
     .letter-grid {
-      justify-self: start;
+      justify-self: center;
       position: relative;
       left: 0;
+    }
+
+    .letter-grid .letters {
+      grid-template-columns: repeat(6, min(13vw, 150px));
     }
   }
 </style>
