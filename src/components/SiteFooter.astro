@@ -1,11 +1,12 @@
 ---
 import Logo from "./Logo.astro";
 import SocialLinks from "./SocialLinks.astro";
+import "../styles/footerBackgroundSvg.css";
 ---
 
-<footer>
+<footer class="footer-gradient">
   <div class="content-wrapper cluster">
-    <a href="#"><Logo width="15rem" /></a>
+    <a href="#"><Logo width="large" /></a>
     <div class="flex flow cluster">
       <SocialLinks />
       <p>
@@ -19,7 +20,7 @@ import SocialLinks from "./SocialLinks.astro";
 
 <style>
   footer {
-    background: var(--brand-gradient);
+    /* background: var(--brand-gradient); */
     color: var(--color-neutral-light);
     padding-block: var(--space-xl);
     font-family: var(--font-sans);

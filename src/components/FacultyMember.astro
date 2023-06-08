@@ -2,11 +2,16 @@
 import { PortableText } from "astro-portabletext";
 import { urlFor } from "../utils/sanity";
 
-const { facultyMember, flipped } = Astro.props;
+const { facultyMember, flipped, marginTop } = Astro.props;
 ---
 
 <article class:list={["container", flipped && "flipped"]}>
-  <div class="relative flow">
+  <div
+    class="relative flow"
+    style={`--margin: ${
+      marginTop ? "var(--large-margin)" : "var(--normal-margin)"
+    }`}
+  >
     <h2 class="title">{facultyMember.name}</h2>
     <PortableText value={facultyMember.bio} />
   </div>
@@ -26,26 +31,29 @@ const { facultyMember, flipped } = Astro.props;
   }
 
   .relative {
+    --large-margin: 12rem;
+    --normal-margin: 6rem;
     position: relative;
     z-index: 3;
     color: var(--color-neutral-light);
     padding: 2rem;
-    margin-top: 6rem;
+    margin-top: var(--margin);
     width: clamp(var(--space-3xl), 60%, 85vw);
   }
 
   .title {
-    font-family: var(--font-emphasis);
+    font-family: var(--font-sans);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.25rem;
-    font-size: var(--step-1);
+    font-size: var(--step-0);
   }
 
   .background {
     position: absolute;
     inset: 0;
     width: clamp(var(--space-3xl), 70%, 90vw);
-    background-color: var(--color-brand-primary);
+    background: var(--purple-gradient);
     clip-path: var(--angled-clip-path);
     z-index: 2;
   }

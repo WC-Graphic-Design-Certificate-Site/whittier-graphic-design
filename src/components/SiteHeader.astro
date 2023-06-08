@@ -39,9 +39,8 @@ const { layout = "inner" } = Astro.props;
 >
   <a href="/" class="header-text">
     <Logo
-      width="12rem"
       fill={layout == "inner"
-        ? "var(--color-brand-primary)"
+        ? "var(--color-brand-secondary-light)"
         : "var(--color-neutral-light)"}
     />
     <div style="display: none;">Graphic Design Certificate</div>
@@ -59,7 +58,7 @@ const { layout = "inner" } = Astro.props;
           fill={`${
             layout == "home"
               ? "var(--color-neutral-light)"
-              : "var(--color-brand-primary)"
+              : "var(--color-brand-secondary-light)"
           }`}
           ><path
             d="M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z"
@@ -69,6 +68,9 @@ const { layout = "inner" } = Astro.props;
       <a href="/contact" class="nav-link">Request Info</a>
     </div>
     <NavMenu theme={layout == "inner" ? "brand-reverse" : "brand"} client:load>
+      <a href="/" class="home-anchor"
+        >Graphic Design<br /> Certificate Program</a
+      >
       <ul class="flow">
         {
           navigation.map((item) => (
@@ -109,11 +111,26 @@ const { layout = "inner" } = Astro.props;
     padding-block-end: 2.5rem;
   } */
 
+  .home-anchor {
+    display: block;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-size: var(--step-0);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .home-anchor:hover {
+    opacity: 0.7;
+  }
+
   .header-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     font-family: var(--font-secondary);
     font-size: var(--step--1);
     color: var(--color-brand-primary);
@@ -150,7 +167,7 @@ const { layout = "inner" } = Astro.props;
     width: 0.5rem;
     opacity: 0;
     height: 0%;
-    background: var(--color-brand-primary);
+    background: #dba226;
     left: -3rem;
     transition: all 0.2s ease;
   }
@@ -176,8 +193,12 @@ const { layout = "inner" } = Astro.props;
     color: var(--color-neutral-light);
   }
 
+  .home .header-text {
+    align-items: center;
+  }
+
   .inner .nav-link {
-    color: var(--color-brand-primary);
+    color: var(--color-brand-secondary-light);
   }
 
   .nav-link.external.cluster {
@@ -204,6 +225,10 @@ const { layout = "inner" } = Astro.props;
     .nav-item::before {
       display: none;
     }
+
+    /* .header-text {
+      align-items: flex-start;
+    } */
 
     header.home,
     header.inner {

@@ -34,7 +34,6 @@ function getNextItem(item) {
     // Use the remainder operator to return to start of array
     const nextIndex = (currentIndex + 1) % projects.length;
     // console.log(themes[nextIndex]);
-    console.log(projects[nextIndex])
     return projects[nextIndex];
   }
 
@@ -52,16 +51,13 @@ function getNextItem(item) {
         const imgList = [];
         const imgs = target.querySelectorAll("img");
         imgs.forEach(img => imgList.push(img));
-        console.log(imgs)
         let currentlyDisplayed = imgList.find(img => img.getAttribute("data-visible") == "true");
         let index = imgList.findIndex(img => img.getAttribute("data-visible") == "true");
-        console.log(index)
         if (index < 2) {
             index = index + 1
         } else {
             index = 0
         }
-        console.log(index)
 
         const nextItem = imgList[index];
 
@@ -86,7 +82,7 @@ function getNextItem(item) {
             {#each set as project, i}
                 <img
                     src={prepareImage(project.image)}
-                    alt={project.name}
+                    alt={project.imageAlt}
                     width={900}
                     height={900}
                     data-index={i}

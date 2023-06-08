@@ -4,10 +4,9 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import Letters from "../components/Letters.astro";
 import Button from "../components/Button.astro";
-import ProjectGrid from "../components/ProjectGrid.astro";
 import HomeProjectGrid from "../components/Svelte/HomeProjectGrid.svelte";
+import "../styles/heroBackgroundSvg.css";
 
-import { getSanityData } from "../utils/sanity";
 import { projectsGallery } from "../data/projects";
 const projects = projectsGallery.entries.slice(0, 18);
 
@@ -30,7 +29,7 @@ const metaDescription =
 <Layout title={metaTitle} metaDescription={metaDescription}>
   <SiteHeader layout="home" slot="header" />
   <main slot="main" class="main">
-    <section class="hero">
+    <section class="hero hero-gradient">
       <div class="header-grid content-wrapper">
         <h1>
           <span>Graphic Design Certificate Program</span>
@@ -108,8 +107,8 @@ const metaDescription =
     /* background: linear-gradient(to bottom, #dba22680, #4f2660a2),
       url("https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
         center/cover no-repeat; */
-    background: rgb(74, 40, 93);
-    background: var(--brand-gradient);
+    /* background: rgb(74, 40, 93);
+    background: var(--brand-gradient); */
     color: var(--color-neutral-light);
     padding-block-start: 10rem;
     padding-block-end: 8rem;

@@ -8,8 +8,8 @@
             menuBg: "var(--color-brand-primary-dark)"
         },
         "brand-reverse": {
-            menuColor: "var(--color-brand-primary)",
-            menuBg: "var(--color-brand-primary-light)"
+            menuColor: "var(--color-brand-secondary-light)",
+            menuBg: "#e4dbdf4f"
         }
     }
 
@@ -90,8 +90,8 @@
         top: 64px;
         right: 0;
         /* background: var(--color-neutral-dark); */
-        background: rgb(74 40 93 / 75%);
-        backdrop-filter: blur(12px);
+        background: #0000004d /* rgb(74 40 93 / 75%) */;
+        backdrop-filter: blur(14px);
         color: white;
         min-width: 25rem;
         padding: 3rem;
@@ -102,6 +102,17 @@
             min-width: 300px;
             max-width: 95%;
             padding: 3rem 3rem 2rem 2rem;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .menu-toggle-container {
+            width: 5rem;
+            height: 3rem;
+        }
+
+        .nav-panel {
+            top: 48px;
         }
     }
 </style>

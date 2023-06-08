@@ -13,7 +13,7 @@ const { projects } = Astro.props;
           <div class="grid-text">{item.name}</div>
           <img
             src={urlFor(item.image).width(900).auto("format").url()}
-            alt={item.name}
+            alt={item.imageAlt}
             width={900}
             height={Math.floor(900 / imgAspectRatio)}
             data-aspectRatio={imgAspectRatio}
@@ -53,20 +53,20 @@ const { projects } = Astro.props;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 2.5rem;
+    padding: 2rem;
     opacity: 0;
     color: var(--color-neutral-light);
     z-index: 2;
     transition: all 0.3s ease;
-    background: rgb(0 0 0 / 35%);
+    background: linear-gradient(to top, rgb(0 0 0 / 85%), rgb(0 0 0 / 0%));
   }
 
-  .grid-text h3 {
+  /* .grid-text h3 {
     font-family: var(--font-secondary);
     font-size: var(--step-1);
     text-transform: uppercase;
     letter-spacing: 0.2rem;
-  }
+  } */
   /* 
   img {
     transition: all 0.5s ease;

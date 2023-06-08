@@ -615,7 +615,6 @@
   const firstLetter = letters[0].querySelectorAll("svg");
   const themes = [];
   firstLetter.forEach((svg) => themes.push(svg.getAttribute("data-font")));
-  console.log(themes);
 
   function switchThemes(theme) {
     const currentIndex = themes.indexOf(theme);

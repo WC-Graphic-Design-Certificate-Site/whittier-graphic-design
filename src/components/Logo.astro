@@ -1,8 +1,13 @@
 ---
-const { fill = "var(--color-neutral-light)", width = "" } = Astro.props;
+const widths = {
+  base: "base",
+  large: "large",
+};
+
+const { fill = "var(--color-neutral-light)", width = "base" } = Astro.props;
 ---
 
-<div class="logo-wrapper" style={`width: ${width}`}>
+<div class:list={["logo-wrapper", widths[width]]}>
   <div class="sr-only">Whittier College logo</div>
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -80,3 +85,12 @@ const { fill = "var(--color-neutral-light)", width = "" } = Astro.props;
     ></path></svg
   >
 </div>
+<style>
+  .base {
+    width: 12em;
+  }
+
+  .large {
+    width: 15em;
+  }
+</style>

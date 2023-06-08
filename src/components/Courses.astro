@@ -84,7 +84,7 @@ const { courses } = Astro.props;
     cursor: pointer;
     font-size: var(--step-0);
     color: var(--color-neutral-light);
-    background: var(--color-brand-primary);
+    background: var(--full-gradient);
     font-family: var(--font-sans);
     font-weight: 700;
     text-align: left;
@@ -94,7 +94,7 @@ const { courses } = Astro.props;
   }
 
   .accordion-button:hover {
-    background: var(--color-brand-primary-dark);
+    background: var(--color-brand-secondary-dark);
   }
 
   .accordion-panel {
@@ -105,7 +105,7 @@ const { courses } = Astro.props;
   .courses .course-intro {
     font-size: var(--step-2);
     font-family: var(--font-primary);
-    color: var(--color-brand-primary-dark);
+    color: var(--color-brand-secondary-light);
     max-width: 64ch;
     margin-block-end: var(--space-2xl);
   }
@@ -125,7 +125,7 @@ const { courses } = Astro.props;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     margin-right: var(--space-2xl);
-    color: var(--color-brand-primary);
+    color: var(--color-brand-secondary-light);
     top: 1rem;
   }
 
@@ -145,7 +145,6 @@ const { courses } = Astro.props;
   }
 
   .courses .number {
-    color: var(--color-brand-primary);
     font-family: var(--font-emphasis);
     font-size: clamp(180px, 25cqh, 230px);
     text-align: center;
@@ -153,10 +152,18 @@ const { courses } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-clip: text;
+    text-fill-color: transparent;
+    background-image: var(--full-gradient);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
   }
 
   .courses .topic h3 {
-    color: var(--color-brand-primary);
+    color: var(--color-brand-secondary-light);
     font-size: var(--step-1);
     font-weight: 700;
     margin-block-end: var(--space-xs);
