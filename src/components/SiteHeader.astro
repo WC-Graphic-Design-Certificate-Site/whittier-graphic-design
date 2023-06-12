@@ -10,6 +10,10 @@ const layouts = {
 
 const navigation = [
   {
+    name: "Home",
+    href: "/",
+  },
+  {
     name: "Classes",
     href: "/classes",
   },
@@ -34,53 +38,58 @@ const navigation = [
 const { layout = "inner" } = Astro.props;
 ---
 
-<header
-  class:list={[layouts[layout], "header", "header-grid", "content-wrapper"]}
->
-  <a href="/" class="header-text">
-    <Logo
-      fill={layout == "inner"
-        ? "var(--color-brand-secondary-light)"
-        : "var(--color-neutral-light)"}
-    />
-    <div style="display: none;">Graphic Design Certificate</div>
-  </a>
+<header class:list={[layouts[layout]]}>
+  <div class="header-grid content-wrapper">
+    <a href="/" class="header-text">
+      <Logo
+        fill={layout == "inner"
+          ? "var(--color-brand-secondary-light)"
+          : "var(--color-neutral-light)"}
+      />
+      <div style="display: none;">Graphic Design Certificate</div>
+    </a>
+  </div>
 
-  <div class="cluster">
-    <div class="cluster actions">
-      <a href="#" class="nav-link external cluster">
-        <span>Apply Now</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 512"
-          width="14"
-          height="14"
-          fill={`${
-            layout == "home"
-              ? "var(--color-neutral-light)"
-              : "var(--color-brand-secondary-light)"
-          }`}
-          ><path
-            d="M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z"
-          ></path></svg
-        >
-      </a>
-      <a href="/contact" class="nav-link">Request Info</a>
-    </div>
-    <NavMenu theme={layout == "inner" ? "brand-reverse" : "brand"} client:load>
-      <a href="/" class="home-anchor"
-        >Graphic Design<br /> Certificate Program</a
+  <div class="header">
+    <div class="cluster">
+      <div class="cluster actions">
+        <a href="/contact" class="nav-link">Request Info</a>
+        <a href="#" class="nav-link external cluster">
+          <span>Apply Now</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            width="14"
+            height="14"
+            fill={`${
+              layout == "home"
+                ? "var(--color-neutral-light)"
+                : "var(--color-brand-secondary-light)"
+            }`}
+            ><path
+              d="M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z"
+            ></path></svg
+          >
+        </a>
+      </div>
+      <NavMenu
+        theme={layout == "inner" ? "brand-reverse" : "brand"}
+        client:load
       >
-      <ul class="flow">
-        {
-          navigation.map((item) => (
-            <li class="nav-item">
-              <a href={item.href}>{item.name}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </NavMenu>
+        <!-- <a href="/" class="home-anchor"
+          >Graphic Design<br /> Certificate Program</a
+        > -->
+        <ul class="flow">
+          {
+            navigation.map((item) => (
+              <li class="nav-item">
+                <a href={item.href}>{item.name}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </NavMenu>
+    </div>
   </div>
 </header>
 
@@ -96,7 +105,8 @@ const { layout = "inner" } = Astro.props;
   } */
 
   .header-grid {
-    z-index: 10;
+    z-index: 1;
+    margin-top: 3rem;
   }
 
   header.home {
@@ -110,6 +120,13 @@ const { layout = "inner" } = Astro.props;
     position: relative;
     padding-block-end: 2.5rem;
   } */
+
+  .header {
+    position: absolute;
+    top: 1.5rem;
+    right: 2.5rem;
+    z-index: 20;
+  }
 
   .home-anchor {
     display: block;
@@ -155,10 +172,6 @@ const { layout = "inner" } = Astro.props;
     font-family: var(--font-primary);
     font-size: var(--step-3);
     text-transform: lowercase;
-  }
-
-  .nav-item:hover a {
-    text-decoration: underline;
   }
 
   .nav-item::before {
@@ -224,6 +237,11 @@ const { layout = "inner" } = Astro.props;
 
     .nav-item::before {
       display: none;
+    }
+
+    .header {
+      top: 1rem;
+      right: 1rem;
     }
 
     /* .header-text {

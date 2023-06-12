@@ -5,10 +5,16 @@ import SiteFooter from "../components/SiteFooter.astro";
 import Letters from "../components/Letters.astro";
 import Button from "../components/Button.astro";
 import HomeProjectGrid from "../components/Svelte/HomeProjectGrid.svelte";
-import "../styles/heroBackgroundSvg.css";
+import { getCurrentPage } from "../data/pages";
+import { urlFor } from "../utils/sanity";
+// import "../styles/heroBackgroundSvg.css";
 
-import { projectsGallery } from "../data/projects";
-const projects = projectsGallery.entries.slice(0, 18);
+import { projectGalleries } from "../data/projects";
+// const projects = projectsGallery.entries.slice(0, 18);
+
+const homeProjects = projectGalleries.find(
+  (item) => item._id === "28de98e6-9ac9-451b-9239-6b071b5fc247"
+);
 
 // console.log(projects);
 
@@ -21,15 +27,18 @@ const projects = projectsGallery.entries.slice(0, 18);
 
 // console.log(projects);
 
-const metaTitle = "Whittier Graphic Design Certificate Program";
-const metaDescription =
-  "Whittier College’s Graphic Design Certificate program is a virtual eight-course series that teaches the fundementals of graphic design through the use of Adobe InDesign, Illustrator, Photoshop and After Effects.";
+const currentPage = getCurrentPage("c507649d-5e4d-4ce9-9d3b-3066bac1636c");
+
+const { image, slug, seo } = currentPage;
+const bgImage = urlFor(image).width(1600).auto("format").url();
+const heroGradient = `background: url(${bgImage}) center / cover no-repeat, var(--full-gradient);`;
 ---
 
-<Layout title={metaTitle} metaDescription={metaDescription}>
+<Layout title={seo.title} metaDescription={seo.description}>
+  <link slot="pageHead" rel="preload" href={bgImage} as="image" />
   <SiteHeader layout="home" slot="header" />
   <main slot="main" class="main">
-    <section class="hero hero-gradient">
+    <section class="hero" style={heroGradient}>
       <div class="header-grid content-wrapper">
         <h1>
           <span>Graphic Design Certificate Program</span>
@@ -47,7 +56,7 @@ const metaDescription =
         </div> -->
       </div>
       <div class="scroll">
-        <a href="#student-work">
+        <a href="#about">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
               d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
@@ -58,7 +67,7 @@ const metaDescription =
       </div>
     </section>
     <div class="content">
-      <article id="about" class="flow content-wrapper">
+      <article id="about" class="flow full-width-text">
         <p>
           Whittier College’s Graphic Design Certificate program is a virtual
           eight-course series that teaches the fundementals of graphic design
@@ -73,25 +82,25 @@ const metaDescription =
           organization. The program will culminate with the creation of a
           professional-quality design portfolio.
         </p>
-        <p>
-          <Button href="/classes" width="fit" size="large">
-            <span>See the classes</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon-small"
-              fill="var(--color-neutral-light)"
-              viewBox="0 0 448 512"
-              ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-              <path
-                d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
-              ></path></svg
-            >
-          </Button>
-        </p>
+        <a href="/classes" class="link mx-auto">
+          <span>See the classes</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            style="position: relative; top: -1px;"
+            fill="var(--color-brand-secondary-light)"
+            viewBox="0 0 448 512"
+            ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+            ></path></svg
+          >
+        </a>
       </article>
       <section id="student-work" class="">
         <h2 class="sr-only">Project List</h2>
-        <HomeProjectGrid client:idle projects={projects} />
+        <HomeProjectGrid client:idle projects={homeProjects} />
         <!-- <ProjectGrid projects={projects} /> -->
       </section>
     </div>
@@ -110,8 +119,8 @@ const metaDescription =
     /* background: rgb(74, 40, 93);
     background: var(--brand-gradient); */
     color: var(--color-neutral-light);
-    padding-block-start: 10rem;
-    padding-block-end: 8rem;
+    padding-block-start: 9rem;
+    padding-block-end: 6rem;
   }
 
   .hero h1 {
@@ -127,6 +136,10 @@ const metaDescription =
     justify-self: center;
     /* margin-right: 3rem;
     top: 1rem; */
+  }
+
+  .hero .header-grid {
+    margin-top: 3rem;
   }
 
   .hero .header-grid > :last-child {
@@ -188,13 +201,34 @@ const metaDescription =
     --flow-space: var(--space-xl);
   }
 
+  .full-width-text {
+    padding-inline: var(--gutter);
+  }
+
   #about p {
     font-size: var(--step-3);
     font-family: var(--font-primary);
     /* color: var(--color-brand-primary-dark); */
     color: var(--color-brand-secondary-light);
-    max-width: 48ch;
-    margin-inline: auto;
+    /* max-width: 48ch;
+    margin-inline: auto; */
+  }
+
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-brand-secondary-light);
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.2s ease;
+    width: fit-content;
+  }
+
+  .link:hover {
+    opacity: 0.8;
   }
 
   @media (max-width: 1024px) {

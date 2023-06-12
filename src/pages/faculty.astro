@@ -43,7 +43,7 @@ const { title, slug, seo } = currentPage;
     position: absolute;
     z-index: 5;
     left: 28px;
-    top: -12px;
+    top: -16px;
     font-family: var(--font-emphasis);
     font-size: var(--step-10);
     color: var(--color-neutral-light);
@@ -55,7 +55,8 @@ const { title, slug, seo } = currentPage;
 
   .entries {
     /* margin-top: -40px; */
-    margin-bottom: var(--space-3xl);
+    /* margin-bottom: var(--space-3xl); */
+    margin-bottom: 3rem;
   }
 
   .entries.flow {
@@ -83,6 +84,7 @@ const { title, slug, seo } = currentPage;
   @media (max-width: 480px) {
     .title {
       font-size: var(--step-6);
+      top: -12px;
     }
   }
 </style>

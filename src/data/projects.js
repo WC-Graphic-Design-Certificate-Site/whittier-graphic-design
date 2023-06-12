@@ -1,11 +1,26 @@
 import { getSanityData } from "../utils/sanity";
 
-export const projectsGallery =
-  await getSanityData(`*[_type == "gallery" && name == "Student Project Gallery"][0] {
-  "entries": project[]->{
+// export const projectsGallery =
+//   await getSanityData(`*[_type == "gallery" && name == "Student Project Gallery"][0] {
+//   "entries": project[]->{
+//     name,
+//     "image": image.asset->,
+//     "imageAlt": image.alt
+//   }
+// }`);
+
+const projectGalleries = await getSanityData(`*[_type == "gallery"] {
+  _id,
+  name,
+  set[] {
+    _key,
     name,
-    "image": image.asset->,
-    "imageAlt": image.alt
+    "entries": project[]->{
+      _id,
+      name,
+      "image": image.asset->,
+      "imageAlt": image.alt
+    }
   }
 }`);
 
@@ -15,3 +30,5 @@ export const projectsGallery =
 //   description,
 //   "image": image.asset->,
 // }`);
+
+export { projectGalleries };

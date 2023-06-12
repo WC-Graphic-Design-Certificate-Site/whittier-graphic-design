@@ -3,12 +3,13 @@
     import {shuffleArray} from "../../utils/format"
     export let projects;
 
-    let randomizedProjects = shuffleArray(projects);
+    // let randomizedProjects = shuffleArray(projects);
 
-    const projectSets = [];
-    for (let i = 0; i < randomizedProjects.length; i += 3) {
-      projectSets.push(randomizedProjects.slice(i, i + 3));
-    }
+    // const projectSets = [];
+    // for (let i = 0; i < randomizedProjects.length; i += 3) {
+    //   projectSets.push(randomizedProjects.slice(i, i + 3));
+    // }
+
     // for (let i = 0; i < 6; i++) {
     //     const arr = [];
     //     projectSets.push(arr)
@@ -29,13 +30,13 @@
     //     return arr[randomIndex];
     // }
 
-function getNextItem(item) {
-    const currentIndex = projects.indexOf(item);
-    // Use the remainder operator to return to start of array
-    const nextIndex = (currentIndex + 1) % projects.length;
-    // console.log(themes[nextIndex]);
-    return projects[nextIndex];
-  }
+// function getNextItem(item) {
+//     const currentIndex = projects.indexOf(item);
+//     // Use the remainder operator to return to start of array
+//     const nextIndex = (currentIndex + 1) % projects.length;
+//     // console.log(themes[nextIndex]);
+//     return projects[nextIndex];
+//   }
 
 //   getNextImg(projects[0])
 // console.log(projects[0])
@@ -76,10 +77,10 @@ function getNextItem(item) {
 </script>
 
 <div class="interactive-projects grid">
-    {#each projectSets as set}
+    {#each projects.set as set}
     <div class="relative grid-item" on:mouseenter={handleEnter}>
         <a class="img-wrapper" href="/gallery">
-            {#each set as project, i}
+            {#each set.entries as project, i}
                 <img
                     src={prepareImage(project.image)}
                     alt={project.imageAlt}

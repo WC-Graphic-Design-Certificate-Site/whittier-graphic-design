@@ -3,12 +3,13 @@ import Layout from "./Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
-const { title, metaDescription } = Astro.props;
+const { title, metaDescription, preloadImg } = Astro.props;
 ---
 
 <Layout title={title} metaDescription={metaDescription}>
+  <link slot="pageHead" rel="preload" href={preloadImg} as="image" />
   <SiteHeader slot="header" />
-  <main slot="main">
+  <main slot="main" class="content-wrapper">
     <slot name="hero" />
     <!-- <section class="hero">
       <div class="content-wrapper">
@@ -21,7 +22,7 @@ const { title, metaDescription } = Astro.props;
         alt=""
       />
     </section> -->
-    <div class="content content-wrapper" id="content">
+    <div class="content" id="content">
       <slot name="content" />
     </div>
   </main>
@@ -63,8 +64,8 @@ const { title, metaDescription } = Astro.props;
     height: 100%;
   }
 
-  .content.content-wrapper {
-    margin-block-start: 3rem;
-    margin-block-end: var(--space-3xl);
+  .content {
+    margin-block: 3rem;
+    /* margin-block-end: var(--space-3xl); */
   }
 </style>

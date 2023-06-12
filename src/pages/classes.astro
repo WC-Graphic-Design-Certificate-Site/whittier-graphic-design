@@ -1,44 +1,27 @@
 ---
 import InnerPage from "../layouts/InnerPage.astro";
 import InnerHero from "../components/InnerHero.astro";
-import Button from "../components/Button.astro";
 import Courses from "../components/Courses.astro";
-import Accordion from "../components/Svelte/Accordion.svelte";
-import { getCourses } from "../utils/sanity.js";
-import { slugify } from "../utils/format";
+import BackToTop from "../components/BackToTop.astro";
+import { courses } from "../data/courses";
 import { getCurrentPage } from "../data/pages";
+import { urlFor } from "../utils/sanity";
 
-const courses = await getCourses();
 const currentPage = getCurrentPage("53402f72-0252-400f-bc89-d7a2c3b8e0a0");
 const { title, image, imageAlt, slug, seo } = currentPage;
+
+const bgImage = urlFor(image).width(1000).auto("format").url();
 ---
 
-<InnerPage title={seo.title} metaDescription={seo.description}>
-  <InnerHero slot="hero" title={title} imageSrc={image} imageAlt={imageAlt} />
+<InnerPage
+  title={seo.title}
+  metaDescription={seo.description}
+  preloadImg={bgImage}
+>
+  <InnerHero slot="hero" title={title} imageSrc={bgImage} imageAlt={imageAlt} />
   <div slot="content" id="courses">
-    <!-- <ul class="cluster course-links">
-      {
-        courses.map((item, index) => (
-          <li>
-            {index != 0 && <span>•</span>}
-            <a href={`#${slugify(item.title)}`} class="nav-link">
-              {item.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul> -->
     <Courses courses={courses} />
-    <div id="scroll-to-top" class="hide">
-      <Button href="#content">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
-          ></path></svg
-        >
-        <span class="sr-only">Scroll to top</span>
-      </Button>
-    </div>
+    <BackToTop />
   </div>
 </InnerPage>
 
@@ -62,40 +45,28 @@ const { title, image, imageAlt, slug, seo } = currentPage;
   .nav-link:hover {
     text-decoration: underline;
   }
-
-  #scroll-to-top {
-    position: fixed;
-    z-index: 50;
-    bottom: 2rem;
-    right: 2rem;
-    transition: all 0.3s ease;
-  }
-
-  .hide {
-    opacity: 0;
-  }
-
-  #scroll-to-top svg {
-    fill: var(--color-neutral-light);
-    width: 2rem;
-    transform: rotate(180deg);
-  }
 </style>
 
 <script>
-  const scrollBtn = document.getElementById("scroll-to-top");
-  const watch = document.getElementById("content");
-  function intersectionHandler(entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        scrollBtn.classList.remove("hide");
-      } else {
-        scrollBtn.classList.add("hide");
-      }
-    });
-  }
-  const observer = new window.IntersectionObserver(intersectionHandler, {
-    rootMargin: "0px 0px -70% 0px",
-  });
-  observer.observe(watch);
+  // import fitty from "fitty";
+  // fitty(".fit-content p");
+  // fitty(".number");
+  // const numberContainer = document.querySelectorAll(".number");
+  // console.log(numberContainer);
+
+  // const scrollBtn = document.getElementById("scroll-to-top");
+  // const watch = document.getElementById("content");
+  // function intersectionHandler(entries) {
+  //   entries.forEach((entry) => {
+  //     if (entry.isIntersecting) {
+  //       scrollBtn.classList.remove("hide");
+  //     } else {
+  //       scrollBtn.classList.add("hide");
+  //     }
+  //   });
+  // }
+  // const observer = new window.IntersectionObserver(intersectionHandler, {
+  //   rootMargin: "0px 0px -70% 0px",
+  // });
+  // observer.observe(watch);
 </script>

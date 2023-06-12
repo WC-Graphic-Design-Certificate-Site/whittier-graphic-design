@@ -6,6 +6,9 @@ const { courses } = Astro.props;
 ---
 
 <div class="courses flow">
+  <!-- <div class="number">
+    <span>1</span>
+  </div> -->
   {
     courses.map((course) => (
       <div id={slugify(course.title)}>
@@ -13,9 +16,11 @@ const { courses } = Astro.props;
           <Fragment slot="title">
             <span>
               {course.title}
-              <span class="course-subtitle" style="">
-                {course.subtitle}
-              </span>
+              {course.subtitle && (
+                <span class="course-subtitle" style="">
+                  {`(${course.subtitle})`}
+                </span>
+              )}
             </span>
           </Fragment>
           <Fragment slot="panel">
@@ -29,25 +34,12 @@ const { courses } = Astro.props;
                 {course.topics &&
                   course.topics.map((topic, index) => (
                     <article class="topic-grid">
-                      <div class="number">{index + 1}</div>
+                      <div class="number">
+                        <span>{index + 1}</span>
+                      </div>
                       <div class="topic">
-                        <h3>{topic.title}</h3>
-                        <ul class="topic-description flow">
-                          <li>
-                            <strong>Tools:</strong>&nbsp;{topic.tools}
-                          </li>
-                          <li>
-                            <strong>Projects:</strong>&nbsp;{topic.projects}
-                          </li>
-                          <li>
-                            <strong>In-Class:</strong>&nbsp;
-                            {topic["in-class"].join(", ")}
-                          </li>
-                          <li>
-                            <strong>Resources:</strong>&nbsp;
-                            {topic.resources.join(", ")}
-                          </li>
-                        </ul>
+                        <h3>{`${topic.title}:`}</h3>
+                        <p>{topic.text}</p>
                       </div>
                     </article>
                   ))}
@@ -77,16 +69,16 @@ const { courses } = Astro.props;
     justify-content: space-between;
     border: 0;
     margin: 0;
-    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    padding: 1rem 2rem 1rem 1rem;
     width: 100%;
     appearance: none;
     color: inherit;
     cursor: pointer;
-    font-size: var(--step-0);
+    font-size: var(--step-1);
     color: var(--color-neutral-light);
     background: var(--full-gradient);
-    font-family: var(--font-sans);
-    font-weight: 700;
+    font-family: var(--font-secondary);
+    font-weight: 400;
     text-align: left;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -99,14 +91,14 @@ const { courses } = Astro.props;
 
   .accordion-panel {
     padding-block: var(--space-l);
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
   }
 
   .courses .course-intro {
     font-size: var(--step-2);
     font-family: var(--font-primary);
     color: var(--color-brand-secondary-light);
-    max-width: 64ch;
+    /* max-width: 64ch; */
     margin-block-end: var(--space-2xl);
   }
 
@@ -132,8 +124,8 @@ const { courses } = Astro.props;
   .courses .course-subtitle {
     position: relative;
     margin-left: 6px;
-    font-family: var(--font-sans);
-    font-weight: 400;
+    /* font-family: var(--font-sans);
+    font-weight: 400; */
   }
 
   .courses .topic-grid {
@@ -146,12 +138,20 @@ const { courses } = Astro.props;
 
   .courses .number {
     font-family: var(--font-emphasis);
-    font-size: clamp(180px, 25cqh, 230px);
+    /* font-size: clamp(180px, 25cqh, 230px); */
+    font-size: 12ch;
     text-align: center;
     line-height: 1;
+    width: 100%;
+    height: 100%;
+    padding-top: 5px;
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .courses .number span {
     background-clip: text;
     text-fill-color: transparent;
     background-image: var(--full-gradient);
@@ -162,11 +162,21 @@ const { courses } = Astro.props;
     -moz-text-fill-color: transparent;
   }
 
+  .courses .topic > * {
+    display: inline;
+  }
+
   .courses .topic h3 {
     color: var(--color-brand-secondary-light);
     font-size: var(--step-1);
     font-weight: 700;
+    margin-right: 9px;
     margin-block-end: var(--space-xs);
+  }
+
+  .courses .topic p {
+    font-size: var(--step-1);
+    font-weight: 300;
   }
 
   .courses .topic-description {
@@ -203,6 +213,13 @@ const { courses } = Astro.props;
 
     .accordion-button {
       gap: 1rem;
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      padding: 1rem;
+    }
+
+    .accordion-button > :last-child {
+      justify-self: center;
     }
   }
 
@@ -213,12 +230,25 @@ const { courses } = Astro.props;
     }
 
     .courses .number {
-      font-size: var(--step-8);
+      /* font-size: var(--step-8); */
       justify-content: flex-start;
     }
 
     .courses .course-intro {
       font-size: var(--step-0);
     }
+
+    .courses .topic h3,
+    .courses .topic p {
+      font-size: var(--step-0);
+    }
   }
 </style>
+
+<script>
+  // import fitty from "fitty";
+  // fitty(".number span");
+
+  // const numberContainer = document.querySelector(".number");
+  // console.log(numberContainer);
+</script>

@@ -26,9 +26,9 @@
                     <span class="sr-only">Open Panel</span>
                 {/if}
                 {#if open}
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" class="close"><path d="M345 137l17-17L328 86.1l-17 17-119 119L73 103l-17-17L22.1 120l17 17 119 119L39 375l-17 17L56 425.9l17-17 119-119L311 409l17 17L361.9 392l-17-17-119-119L345 137z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="close"><path d="M345 137l17-17L328 86.1l-17 17-119 119L73 103l-17-17L22.1 120l17 17 119 119L39 375l-17 17L56 425.9l17-17 119-119L311 409l17 17L361.9 392l-17-17-119-119L345 137z"/></svg>
                 {:else}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 64" height="1em" class="hamburger"><rect x="6.67" y="8.62" width="82" height="6"/><rect x="6.67" y="26.87" width="82" height="6"/><rect x="6.67" y="45.12" width="82" height="6"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 64" class="hamburger"><rect x="6.67" y="4" width="90" height="6"/><rect x="6.67" y="25" width="90" height="6"/><rect x="6.67" y="46" width="90" height="6"/></svg>
                 {/if}
                 <!-- <div class="menu-bars" class:open>
                     <span></span>
@@ -54,10 +54,11 @@
     }
 
     .menu-toggle-container {
+        position: relative;
         padding: 0.25rem;
         background-color: transparent;
-        width: 6rem;
-        height: 4rem;
+        width: 3rem;
+        height: 2.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -76,22 +77,22 @@
     }
 
     .hamburger {
-        height: 90%;
+        height: 1.25em;
         width: auto;
     }
 
     .close {
-        height: 70%;
+        height: 1.25em;
         width: auto;
     }
 
     .nav-panel {
         position: absolute;
-        top: 64px;
+        top: 41px;
         right: 0;
         /* background: var(--color-neutral-dark); */
-        background: #0000004d /* rgb(74 40 93 / 75%) */;
-        backdrop-filter: blur(14px);
+        background: rgb(26 13 34 / 70%) /* #0000004d rgb(74 40 93 / 75%) */;
+        backdrop-filter: blur(20px);
         color: white;
         min-width: 25rem;
         padding: 3rem;

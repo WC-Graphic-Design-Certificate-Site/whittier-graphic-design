@@ -5,9 +5,9 @@ import SiteFooter from "../components/SiteFooter.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
 // import { getCourses } from "../utils/sanity.js";
 import { urlFor } from "../utils/sanity";
-import BackToTop from "../components/Svelte/BackToTop.svelte";
+import BackToTop from "../components/BackToTop.astro";
 import { getCurrentPage } from "../data/pages";
-import { projectsGallery } from "../data/projects";
+import { projectGalleries } from "../data/projects";
 
 import Button from "../components/Button.astro";
 
@@ -15,7 +15,11 @@ const getImageHeight = (width, aspectRatio) => {
   return Math.floor(width / aspectRatio);
 };
 
-const projects = projectsGallery.entries;
+// const projects = projectsGallery.entries;
+
+const studentProjects = projectGalleries.find(
+  (item) => item._id === "d4144ba3-ef1b-4cd5-be2d-f0a87a7a168f"
+);
 
 const currentPage = getCurrentPage("ad6f6c22-027d-479a-9747-48f42028feb8");
 const { title, slug, seo } = currentPage;
@@ -25,7 +29,7 @@ const { title, slug, seo } = currentPage;
   <SiteHeader slot="header" />
   <main slot="main" class="content-wrapper">
     <h1 class="title header">{title}</h1>
-    <div id="content"><ProjectGrid projects={projects} /></div>
+    <div id="content"><ProjectGrid projects={studentProjects} /></div>
 
     <!-- <div class="project-grid">
       {
@@ -50,17 +54,7 @@ const { title, slug, seo } = currentPage;
         ))
       }
     </div> -->
-    <div id="scroll-to-top" class="hide">
-      <Button href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            d="M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z"
-          ></path></svg
-        >
-        <span class="sr-only">Scroll to top</span>
-      </Button>
-    </div>
-    <!-- <BackToTop client:only track={"content"} /> -->
+    <BackToTop />
   </main>
   <SiteFooter slot="footer" />
 </Layout>
@@ -78,7 +72,7 @@ const { title, slug, seo } = currentPage;
 
   .title {
     position: absolute;
-    top: -12px;
+    top: -16px;
     z-index: 5;
     font-family: var(--font-emphasis);
     font-size: var(--step-10);
@@ -196,23 +190,6 @@ const { title, slug, seo } = currentPage;
     opacity: 0.4;
   }
 
-  #scroll-to-top {
-    position: fixed;
-    z-index: 50;
-    bottom: 2rem;
-    right: 2rem;
-  }
-
-  .hide {
-    opacity: 0;
-  }
-
-  #scroll-to-top svg {
-    fill: var(--color-neutral-light);
-    width: 2rem;
-    transform: rotate(180deg);
-  }
-
   @media (max-width: 1024px) {
     .project-grid {
       grid-template-columns: repeat(2, 1fr) !important;
@@ -261,28 +238,7 @@ const { title, slug, seo } = currentPage;
   @media (max-width: 480px) {
     .title {
       font-size: var(--step-6);
+      top: -12px;
     }
   }
 </style>
-
-<script>
-  const scrollBtn = document.getElementById("scroll-to-top");
-  const watch = document.getElementById("content");
-
-  function intersectionHandler(entries) {
-    entries[0].intersectionRatio > 0.3
-      ? console.log("intersecting")
-      : // scrollBtn.classList.remove("hide")
-        console.log("not intersecting");
-    // scrollBtn.classList.add("hide");
-    // entries.forEach((entry) => {
-    //   if (entry.isIntersecting) {
-    //     scrollBtn.classList.remove("hide");
-    //   } else {
-    //     scrollBtn.classList.add("hide");
-    //   }
-    // });
-  }
-  const observer = new IntersectionObserver(intersectionHandler);
-  observer.observe(watch);
-</script>

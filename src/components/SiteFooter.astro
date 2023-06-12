@@ -1,30 +1,73 @@
 ---
 import Logo from "./Logo.astro";
+import Button from "./Button.astro";
 import SocialLinks from "./SocialLinks.astro";
-import "../styles/footerBackgroundSvg.css";
+// import "../styles/footerBackgroundSvg.css";
 ---
 
 <footer class="footer-gradient">
-  <div class="content-wrapper cluster">
-    <a href="#"><Logo width="large" /></a>
-    <div class="flex flow cluster">
-      <SocialLinks />
-      <p>
-        <span>13406 E. Philadelphia St. Whittier, CA 90602</span>
-        <span>|</span>
-        <span>562.907.4200</span>
-      </p>
+  <div class="content-wrapper grid">
+    <div class="flex">
+      <a href="#" class="logo-wrapper"><Logo width="large" /></a>
+      <div class="flex flow cluster">
+        <SocialLinks />
+        <p>
+          <span>13406 E. Philadelphia St. Whittier, CA 90602</span>
+          <span style="margin-inline: 9px;">|</span>
+          <span>562.907.4200</span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <form class="form" action="">
+        <div class="form-title">Want to know more?</div>
+        <div class="flow">
+          <div class="form-item">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" />
+          </div>
+          <div class="form-item">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" />
+          </div>
+          <div class="form-item">
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              autocomplete="tel"
+            />
+          </div>
+          <div>
+            <input type="submit" />
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </footer>
 
 <style>
   footer {
-    /* background: var(--brand-gradient); */
+    background: var(--footer-gradient);
     color: var(--color-neutral-light);
-    padding-block: var(--space-xl);
+    padding-block: var(--space-2xl);
     font-family: var(--font-sans);
     font-size: var(--step--1);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .grid > .flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   /* .content-wrapper {
@@ -33,17 +76,20 @@ import "../styles/footerBackgroundSvg.css";
     align-items: center;
   } */
 
-  .content-wrapper.cluster {
+  /* .content-wrapper.cluster {
     --justify: space-between;
-  }
-
-  .flex {
-    flex-direction: column;
-    align-items: flex-end;
-  }
+  } */
 
   .flex.flow.cluster {
     --flow-space: 0.5rem;
+    margin-top: 3rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-wrapper {
+    width: fit-content;
+    display: block;
   }
 
   a {
@@ -54,11 +100,89 @@ import "../styles/footerBackgroundSvg.css";
     opacity: 0.8;
   }
 
+  .form .flow {
+    --flow-space: 1.5rem;
+  }
+
+  .form-title {
+    font-family: var(--font-primary);
+    font-size: var(--step-4);
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+
+  .form-item {
+    position: relative;
+    background: white;
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+  }
+
+  .form-item label {
+    position: absolute;
+    bottom: 4px;
+    align-self: flex-end;
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--color-brand-secondary-light);
+  }
+
+  .form input {
+    font-size: 15px;
+    display: block;
+    padding: 2px;
+    margin: 0;
+    border: none;
+    color: var(--color-brand-secondary-light);
+  }
+
+  .form input:focus-within {
+    outline: none;
+  }
+
+  .form input[type="submit"] {
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.2s ease;
+    background: #dba226;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 9px;
+    color: var(--color-brand-secondary-dark);
+  }
+
+  .form input[type="submit"]:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grid > :last-child {
+      order: 1;
+    }
+
+    .grid > :first-child {
+      order: 2;
+      margin-top: 2rem;
+    }
+  }
+
   @media (max-width: 640px) {
-    .flex.flow.cluster {
+    /* .flex.flow.cluster {
       display: block;
       --flow-space: 1rem;
       margin-top: var(--space-l);
-    }
+    } */
   }
 </style>

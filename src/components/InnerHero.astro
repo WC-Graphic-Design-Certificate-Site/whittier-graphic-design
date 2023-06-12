@@ -1,20 +1,13 @@
 ---
-import { urlFor } from "../utils/sanity";
-
 const { title, imageSrc, imageAlt = "" } = Astro.props;
 ---
 
 <section class="hero">
-  <div class="content-wrapper">
+  <div class="content">
     <h1 class="title header">{title}</h1>
   </div>
   <div class="background"></div>
-  <img
-    class="img"
-    src={urlFor(imageSrc).width(1000).auto("format").url()}
-    alt={imageAlt}
-    loading="eager"
-  />
+  <img class="img" src={imageSrc} alt={imageAlt} loading="eager" />
 </section>
 
 <style>
@@ -24,7 +17,7 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
     height: clamp(var(--space-3xl), 45vh, 60rem);
   }
 
-  .hero .content-wrapper {
+  .hero .content {
     position: relative;
     z-index: 3;
   }
@@ -37,7 +30,7 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
     position: relative;
     letter-spacing: 1rem;
     text-transform: uppercase;
-    top: -12px;
+    top: -16px;
   }
 
   .background {
@@ -79,6 +72,7 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
   @media (max-width: 480px) {
     .title {
       font-size: var(--step-6);
+      top: -12px;
     }
   }
 </style>

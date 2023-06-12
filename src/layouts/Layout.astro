@@ -15,6 +15,7 @@ const { title, metaDescription } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
+    <slot name="pageHead" />
     <link
       rel="preload"
       href="/fonts/SvangBold.woff2"
@@ -59,27 +60,6 @@ const { title, metaDescription } = Astro.props;
         font-display: swap;
       }
       @font-face {
-        font-family: "Libre Bodoni";
-        src: url("/fonts/LibreBodoni-Regular.woff2") format("woff2");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Libre Bodoni";
-        src: url("/fonts/LibreBodoni-Italic.woff2") format("woff2");
-        font-weight: 400;
-        font-style: italic;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Libre Bodoni";
-        src: url("/fonts/LibreBodoni-Bold.woff2") format("woff2");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
         font-family: "Bodoni Moda Small";
         src: url("/fonts/BodoniModa_9pt-Regular.woff2") format("woff2");
         font-weight: 400;
@@ -91,27 +71,6 @@ const { title, metaDescription } = Astro.props;
         src: url("/fonts/BodoniModa_9pt-Italic.woff2") format("woff2");
         font-weight: 400;
         font-style: italic;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Bodoni Moda";
-        src: url("/fonts/BodoniModa_18pt-Regular.woff2") format("woff2");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Bodoni Moda";
-        src: url("/fonts/BodoniModa_18pt-Italic.woff2") format("woff2");
-        font-weight: 400;
-        font-style: italic;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Bodoni Moda";
-        src: url("/fonts/BodoniModa_18pt-Bold.woff2") format("woff2");
-        font-weight: 700;
-        font-style: normal;
         font-display: swap;
       }
       @font-face {
@@ -162,12 +121,12 @@ const { title, metaDescription } = Astro.props;
   .header-grid {
     position: relative;
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: min(40vw, 200px) 1fr;
     gap: 1rem;
     padding-block: 2rem;
   }
 
-  .header.header-grid > :last-child {
+  .header-grid > :last-child {
     justify-content: end;
   }
 

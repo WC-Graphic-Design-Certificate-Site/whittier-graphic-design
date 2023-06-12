@@ -9,7 +9,7 @@ const { facultyMember, flipped, marginTop } = Astro.props;
   <div
     class="relative flow"
     style={`--margin: ${
-      marginTop ? "var(--large-margin)" : "var(--normal-margin)"
+      marginTop ? "var(--large-margin)" : "var(--large-margin)"
     }`}
   >
     <h2 class="title">{facultyMember.name}</h2>
@@ -42,10 +42,10 @@ const { facultyMember, flipped, marginTop } = Astro.props;
   }
 
   .title {
-    font-family: var(--font-sans);
-    font-weight: 700;
+    font-family: var(--font-secondary);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.1rem;
     font-size: var(--step-0);
   }
 

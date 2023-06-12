@@ -63,6 +63,7 @@
     rgba(121, 49, 66, 1) 65%,
     rgba(138, 82, 58, 1) 100%
   );
+  --footer-gradient: linear-gradient(to bottom, #4c214f, #682a32);
   --purple-gradient: linear-gradient(
     117deg,
     rgba(160, 97, 128, 1) 0%,
@@ -501,6 +502,10 @@ select {
   font-size: var(--step-9);
 }
 
+.mx-auto {
+  margin-inline: auto;
+}
+
 /* Site header/Menu */
 
 .menu-toggle {
@@ -513,4 +518,9 @@ select {
   color: inherit;
   cursor: pointer;
   z-index: 20;
+}
+
+.menu-toggle:focus-visible {
+  outline: var(--color-brand-primary-light) solid 2px;
+  border: none;
 }
