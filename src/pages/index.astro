@@ -30,12 +30,13 @@ const homeProjects = projectGalleries.find(
 const currentPage = getCurrentPage("c507649d-5e4d-4ce9-9d3b-3066bac1636c");
 
 const { image, slug, seo } = currentPage;
-const bgImage = urlFor(image).width(1600).auto("format").url();
-const heroGradient = `background: url(${bgImage}) center / cover no-repeat, var(--full-gradient);`;
+// const bgImage = urlFor(image).width(1600).auto("format").url();
+// const heroGradient = `background: url(${bgImage}) center / cover no-repeat, var(--full-gradient);`;
+const heroGradient = `var(--full-gradient);`;
 ---
 
 <Layout title={seo.title} metaDescription={seo.description}>
-  <link slot="pageHead" rel="preload" href={bgImage} as="image" />
+  <!-- <link slot="pageHead" rel="preload" href={bgImage} as="image" /> -->
   <SiteHeader layout="home" slot="header" />
   <main slot="main" class="main">
     <section class="hero" style={heroGradient}>
