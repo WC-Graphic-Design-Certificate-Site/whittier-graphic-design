@@ -35,7 +35,7 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
       <div class="flow">
         <div class="form-item">
           <label for="contactName">Name</label>
-          <input id="contactName" name="name" type="text" />
+          <input id="contactName" name="name" type="text" required />
         </div>
         <div class="form-item">
           <label for="contactEmail">Email</label>
@@ -43,6 +43,7 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
             id="contactEmail"
             name="email"
             type="email"
+            required
             autocomplete="email"
           />
         </div>
@@ -52,6 +53,7 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
             id="contactPhone"
             name="phone"
             type="tel"
+            required
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             autocomplete="tel"
           />
