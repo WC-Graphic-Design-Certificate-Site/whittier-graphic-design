@@ -30,7 +30,7 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
         </p>
       </div>
     </div>
-    <form class="form" action="">
+    <form class="form" name="contact" method="POST" data-netlify="true">
       <div class="form-title heading">Sign up for updates:</div>
       <div class="flow">
         <div class="form-item">
@@ -134,8 +134,13 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
       flex-direction: column;
       justify-content: center;
       max-width: 500px;
+      border-bottom: 2px solid transparent;
       width: 100%;
       clip-path: polygon(4% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .form-item:focus-within {
+      border-bottom: 2px solid var(--color-brand-secondary);
     }
 
     .form-item label {
@@ -223,3 +228,22 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
     }
   </style>
 </InnerPage>
+
+<script>
+  const phone_input = document.getElementById("contactPhone");
+
+  phone_input.addEventListener("input", () => {
+    phone_input.setCustomValidity("");
+    phone_input.checkValidity();
+  });
+
+  phone_input.addEventListener("invalid", () => {
+    if (phone_input.value === "") {
+      phone_input.setCustomValidity("Enter phone number.");
+    } else {
+      phone_input.setCustomValidity(
+        "Enter phone number in this format: 555-555-5555."
+      );
+    }
+  });
+</script>

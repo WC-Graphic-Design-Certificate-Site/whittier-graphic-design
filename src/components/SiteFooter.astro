@@ -19,7 +19,12 @@ import SocialLinks from "./SocialLinks.astro";
       </div>
     </div>
     <div>
-      <form class="form" action="">
+      <form
+        class="form"
+        name="contact-footer"
+        method="POST"
+        data-netlify="true"
+      >
         <div class="form-title">Want to know more?</div>
         <div class="flow">
           <div class="form-item">
@@ -54,7 +59,7 @@ import SocialLinks from "./SocialLinks.astro";
     background: var(--footer-gradient);
     color: var(--color-neutral-light);
     padding-block-start: var(--space-2xl);
-    padding-block-end: var(--space-l);
+    padding-block-end: var(--space-xl);
     font-family: var(--font-sans);
     font-size: var(--step--1);
   }
@@ -73,6 +78,10 @@ import SocialLinks from "./SocialLinks.astro";
 
   .grid > :last-child {
     place-self: end;
+  }
+
+  .content-wrapper {
+    max-width: none;
   }
 
   /* .content-wrapper {
@@ -95,6 +104,8 @@ import SocialLinks from "./SocialLinks.astro";
   .logo-wrapper {
     width: fit-content;
     display: block;
+    position: relative;
+    left: -8px;
   }
 
   a {
@@ -124,6 +135,11 @@ import SocialLinks from "./SocialLinks.astro";
     flex-direction: column;
     justify-content: center;
     max-width: 500px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .form-item:focus-within {
+    border-bottom: 2px solid #dba226;
   }
 
   .form-item label {
@@ -191,3 +207,22 @@ import SocialLinks from "./SocialLinks.astro";
     } */
   }
 </style>
+
+<script>
+  // const footer_phone_input = document.getElementById("phone");
+
+  // footer_phone_input.addEventListener("input", () => {
+  //   footer_phone_input.setCustomValidity("");
+  //   footer_phone_input.checkValidity();
+  // });
+
+  // footer_phone_input.addEventListener("invalid", () => {
+  //   if (footer_phone_input.value === "") {
+  //     footer_phone_input.setCustomValidity("Enter phone number.");
+  //   } else {
+  //     footer_phone_input.setCustomValidity(
+  //       "Enter phone number in this format: 555-555-5555."
+  //     );
+  //   }
+  // });
+</script>
