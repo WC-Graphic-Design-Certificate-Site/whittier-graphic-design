@@ -56,7 +56,9 @@ const { title, slug, seo } = currentPage;
     </div> -->
     <BackToTop />
   </main>
-  <SiteFooter slot="footer" />
+  <div class="content-wrapper" slot="footer">
+    <SiteFooter />
+  </div>
 </Layout>
 <!-- <InnerPage>
   <InnerHero slot="hero" title="Gallery" />
@@ -125,12 +127,6 @@ const { title, slug, seo } = currentPage;
     grid-column: span 2;
   }
 
-  .grid-item {
-  }
-
-  .grid-item img {
-  }
-
   .grid-text {
     position: absolute;
     inset: 0;
@@ -190,6 +186,10 @@ const { title, slug, seo } = currentPage;
     opacity: 0.4;
   }
 
+  #content {
+    margin-block-end: var(--space-xl);
+  }
+
   @media (max-width: 1024px) {
     .project-grid {
       grid-template-columns: repeat(2, 1fr) !important;
@@ -209,10 +209,9 @@ const { title, slug, seo } = currentPage;
   }
 
   @media (max-width: 768px) {
-    /* .title {
-      font-size: var(--step-8);
-      letter-spacing: 0.75rem;
-    } */
+    .content-wrapper {
+      padding-inline: 0;
+    }
   }
 
   @media (max-width: 640px) {

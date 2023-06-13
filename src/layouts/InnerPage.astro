@@ -26,7 +26,9 @@ const { title, metaDescription, preloadImg } = Astro.props;
       <slot name="content" />
     </div>
   </main>
-  <SiteFooter slot="footer" />
+  <div class="content-wrapper" slot="footer">
+    <SiteFooter />
+  </div>
 </Layout>
 
 <style>
@@ -67,5 +69,11 @@ const { title, metaDescription, preloadImg } = Astro.props;
   .content {
     margin-block: 3rem;
     /* margin-block-end: var(--space-3xl); */
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding-inline: 0;
+    }
   }
 </style>

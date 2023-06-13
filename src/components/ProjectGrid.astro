@@ -105,6 +105,18 @@ const images = projects.set[0].entries;
     }
   }
 
+  @media (max-width: 768px) {
+    .grid-item .grid-text {
+      padding: 0.75rem;
+      opacity: 1;
+      background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 60%),
+        rgb(0 0 0 / 0%) 35%
+      );
+    }
+  }
+
   @media (max-width: 690px) {
     .grid-item {
       min-width: 100%;

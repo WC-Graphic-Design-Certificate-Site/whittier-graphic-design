@@ -44,17 +44,7 @@ const heroGradient = `background: var(--full-gradient);`;
         <h1>
           <span>Graphic Design Certificate Program</span>
         </h1>
-        <!-- <div class="fancy-letters">
-          <p id="fancyWord1">Create</p>
-          <p id="fancyWord2">Invent</p>
-          <p id="fancyWord3">Design</p>
-        </div> -->
         <Letters />
-        <!-- <div class="letter-grid flow">
-          <p id="fancyWord1">Create</p>
-          <p id="fancyWord2">Invent</p>
-          <p id="fancyWord3">Design</p>
-        </div> -->
       </div>
       <div class="scroll">
         <a href="#about">
@@ -70,20 +60,56 @@ const heroGradient = `background: var(--full-gradient);`;
     <div class="content">
       <article id="about" class="flow full-width-text">
         <p>
-          Whittier College’s Graphic Design Certificate program is a virtual
-          eight-course series that teaches the fundementals of graphic design
-          through the use of Adobe InDesign, Illustrator, Photoshop and After
-          Effects.
+          <strong>Harness the power of design:</strong> The Graphic Design Certificate
+          program equips working professionals with the artistic and technical knowhow
+          to amplify brands and convey powerful messages through visual design.
         </p>
         <p>
-          While honing your skills in typography, image creation,
-          brand-idendtity development and motion graphics you will have multiple
-          opportunities to share your art with working design professionals. And
-          in your final class, you will work as a team to rebrand an actual
-          organization. The program will culminate with the creation of a
-          professional-quality design portfolio.
+          Taught by working designers, the program combines industry expertise
+          with Whittier College’s tradition of interdisciplinary thinking and a
+          small learning setting. This supportive environment provides students
+          with the freedom to explore their personal aesthetic and build an
+          online portfolio of resumé-worthy original work.
         </p>
-        <a href="/classes" class="link mx-auto">
+        <table>
+          <tr>
+            <td><strong>Format:</strong></td>
+            <td>100% Online</td>
+          </tr>
+          <tr>
+            <td><strong>Duration:</strong></td>
+            <td>8 courses over 16 months</td>
+          </tr>
+          <tr>
+            <td><strong>Cost:</strong></td>
+            <td>$12,000</td>
+          </tr>
+          <tr>
+            <td><strong>Financial Aid:</strong></td>
+            <td
+              >Limited talent awards are available to students who demonstrate
+              outstanding potential in graphic design.</td
+            >
+          </tr>
+        </table>
+        <div class="center-items">
+          <Button href="/classes" width="fit">
+            <span>See the classes</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              style="position: relative; top: -1px;"
+              fill="#eee"
+              viewBox="0 0 448 512"
+            >
+              <path
+                d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+              ></path></svg
+            >
+          </Button>
+        </div>
+        <!-- <a href="/classes" class="link mx-auto">
           <span>See the classes</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,17 +118,16 @@ const heroGradient = `background: var(--full-gradient);`;
             style="position: relative; top: -1px;"
             fill="var(--color-brand-secondary-light)"
             viewBox="0 0 448 512"
-            ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          >
             <path
               d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
             ></path></svg
           >
-        </a>
+        </a> -->
       </article>
       <section id="student-work" class="">
         <h2 class="sr-only">Project List</h2>
         <HomeProjectGrid client:idle projects={homeProjects} />
-        <!-- <ProjectGrid projects={projects} /> -->
       </section>
     </div>
   </main>
@@ -203,16 +228,19 @@ const heroGradient = `background: var(--full-gradient);`;
   }
 
   .full-width-text {
+    font-size: var(--step-4);
+    font-family: var(--font-primary);
+    color: var(--color-brand-secondary-light);
     padding-inline: var(--gutter);
+    line-height: 1.4;
   }
 
-  #about p {
+  table {
     font-size: var(--step-3);
-    font-family: var(--font-primary);
-    /* color: var(--color-brand-primary-dark); */
-    color: var(--color-brand-secondary-light);
-    /* max-width: 48ch;
-    margin-inline: auto; */
+  }
+
+  tr + tr td {
+    padding-top: 1rem;
   }
 
   .link {
@@ -262,67 +290,34 @@ const heroGradient = `background: var(--full-gradient);`;
       text-align: center;
       align-self: center;
     }
+
+    tr {
+      display: flex;
+      flex-direction: column;
+    }
+
+    td {
+      width: 100%;
+    }
+
+    tr + tr td {
+      padding-top: 0;
+    }
+
+    tr:not(:first-child) td:first-child {
+      padding-top: 2rem;
+    }
   }
 
   @media (max-width: 640px) {
-    #about p {
+    .full-width-text {
       font-size: var(--step-2);
       max-width: none;
+      line-height: 1.5;
+    }
+
+    table {
+      font-size: var(--step-2);
     }
   }
 </style>
-
-<script>
-  // const makeFancy = (id) => {
-  //   const element = document.getElementById(id),
-  //     text = element.innerText.split("");
-
-  //   element.innerText = "";
-
-  //   text.forEach((letter) => {
-  //     const span = document.createElement("span");
-  //     span.className = "letter";
-  //     span.setAttribute("data-font", "font-1");
-  //     span.innerText = letter;
-  //     element.appendChild(span);
-  //   });
-  // };
-  // makeFancy("fancyWord1");
-  // makeFancy("fancyWord2");
-  // makeFancy("fancyWord3");
-
-  // function switchFont(attributeValue) {
-  //   let font = "";
-  //   switch (attributeValue) {
-  //     case "":
-  //       font = "font-1";
-  //       break;
-  //     case "font-1":
-  //       font = "font-2";
-  //       break;
-  //     case "font-2":
-  //       font = "font-3";
-  //       break;
-  //     case "font-3":
-  //       font = "font-1";
-  //       break;
-  //     default:
-  //       font = "font-1";
-  //   }
-  //   return font;
-  // }
-
-  // const letters = document.querySelectorAll(".letter");
-  // letters.forEach((letter) => {
-  //   letter.addEventListener("mouseover", (e) => {
-  //     const target = e.target as Element;
-  //     target.classList.remove("leaving", "entering");
-  //     target.classList.add("leaving");
-  //     let currentTheme = target.getAttribute("data-font");
-  //     setTimeout(() => {
-  //       target.setAttribute("data-font", switchFont(currentTheme));
-  //       target.classList.add("entering");
-  //     }, 200);
-  //   });
-  // });
-</script>

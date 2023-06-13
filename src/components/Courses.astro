@@ -6,13 +6,14 @@ const { courses } = Astro.props;
 ---
 
 <div class="courses flow">
-  <!-- <div class="number">
-    <span>1</span>
-  </div> -->
   {
-    courses.map((course) => (
+    courses.map((course, index) => (
       <div id={slugify(course.title)}>
-        <Accordion client:load>
+        <Accordion
+          client:load
+          startsOpen={index === 0}
+          gradientStyle={`--gradient-fill: var(--gradient-${index + 1});`}
+        >
           <Fragment slot="title">
             <span>
               {course.title}
@@ -23,29 +24,36 @@ const { courses } = Astro.props;
               )}
             </span>
           </Fragment>
-          <Fragment slot="panel">
+          <article slot="panel">
             <div class="course-intro">{course.description}</div>
             <div class="topics-wrapper">
               <div class="topics-header">
                 <p style="font-weight: 700;">Weekly Topics</p>
                 <p style="font-weight: 400;">{course.title}</p>
               </div>
-              <div class="topics flow">
+              <ol class="topics flow">
                 {course.topics &&
-                  course.topics.map((topic, index) => (
-                    <article class="topic-grid">
-                      <div class="number">
-                        <span>{index + 1}</span>
-                      </div>
-                      <div class="topic">
-                        <h3>{`${topic.title}:`}</h3>
-                        <p>{topic.text}</p>
-                      </div>
-                    </article>
-                  ))}
-              </div>
+                  course.topics.map((topic, index) => {
+                    const svgNum = `/svg/num-${index + 1}.svg`;
+
+                    return (
+                      <li class="topic-grid">
+                        <div class="number-wrapper">
+                          <div
+                            class="number"
+                            style={`--number: url('${svgNum}')`}
+                          />
+                        </div>
+                        <div class="topic">
+                          <h3>{`${topic.title}:`}</h3>
+                          <p>{topic.text}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ol>
             </div>
-          </Fragment>
+          </article>
         </Accordion>
       </div>
     ))
@@ -59,10 +67,73 @@ const { courses } = Astro.props;
   }
 
   .courses .topics.flow {
-    --flow-space: var(--space-l);
+    --flow-space: var(--space-xl);
   }
 
   .accordion-button {
+    --gradient-1: linear-gradient(
+      15deg,
+      rgba(79, 32, 81, 1) 0%,
+      rgba(142, 46, 101, 1) 34%,
+      rgba(121, 49, 66, 1) 65%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-2: linear-gradient(
+      30deg,
+      rgba(79, 32, 81, 1) 25%,
+      rgba(142, 46, 101, 1) 50%,
+      rgba(121, 49, 66, 1) 75%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-3: linear-gradient(
+      45deg,
+      rgba(121, 49, 66, 1) 0%,
+      rgba(79, 32, 81, 1) 35%,
+      rgba(142, 46, 101, 1) 60%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-4: linear-gradient(
+      60deg,
+      rgba(121, 49, 66, 1) 25%,
+      rgba(79, 32, 81, 1) 45%,
+      rgba(142, 46, 101, 1) 80%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-5: linear-gradient(
+      270deg,
+      rgba(121, 49, 66, 1) 25%,
+      rgba(79, 32, 81, 1) 45%,
+      rgba(142, 46, 101, 1) 80%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-6: linear-gradient(
+      270deg,
+      rgba(121, 49, 66, 1) 0%,
+      rgba(79, 32, 81, 1) 35%,
+      rgba(142, 46, 101, 1) 60%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-7: linear-gradient(
+      270deg,
+      rgba(79, 32, 81, 1) 25%,
+      rgba(142, 46, 101, 1) 50%,
+      rgba(121, 49, 66, 1) 75%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-8: linear-gradient(
+      270deg,
+      rgba(79, 32, 81, 1) 0%,
+      rgba(142, 46, 101, 1) 34%,
+      rgba(121, 49, 66, 1) 65%,
+      rgba(138, 82, 58, 1) 100%
+    );
+    --gradient-9: linear-gradient(
+      135deg,
+      rgba(79, 32, 81, 1) 0%,
+      rgba(142, 46, 101, 1) 34%,
+      rgba(121, 49, 66, 1) 65%,
+      rgba(138, 82, 58, 1) 100%
+    );
     position: relative;
     display: flex;
     align-items: center;
@@ -76,7 +147,7 @@ const { courses } = Astro.props;
     cursor: pointer;
     font-size: var(--step-1);
     color: var(--color-neutral-light);
-    background: var(--full-gradient);
+    background: var(--gradient-fill);
     font-family: var(--font-secondary);
     font-weight: 400;
     text-align: left;
@@ -130,37 +201,36 @@ const { courses } = Astro.props;
 
   .courses .topic-grid {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    gap: 2rem;
-    container-type: normal;
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  .courses .number-wrapper {
+    min-width: 150px;
+    padding: 11px 0px 8px;
+    height: 100%;
   }
 
   .courses .number {
-    font-family: var(--font-emphasis);
-    /* font-size: clamp(180px, 25cqh, 230px); */
-    font-size: 12ch;
-    text-align: center;
-    line-height: 1;
+    /* align-self: stretch; */
+    position: relative;
+    background-image: var(--number);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     width: 100%;
     height: 100%;
-    padding-top: 5px;
-    /* border: 1px solid red; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  .courses .number span {
-    background-clip: text;
-    text-fill-color: transparent;
-    background-image: var(--full-gradient);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
+  /* .courses .number img {
+    height: 100%;
+    object-fit: fill;
+  } */
+
+  /* .courses .topic {
+    max-width: 90ch;
+  } */
 
   .courses .topic > * {
     display: inline;
@@ -187,9 +257,38 @@ const { courses } = Astro.props;
     --flow-space: 0.5rem;
   }
 
+  @media (max-width: 1024px) {
+    .courses .topic-grid {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .courses .number-wrapper {
+      position: relative;
+      left: -9px;
+      height: 100px;
+      padding: 0;
+    }
+
+    .courses .number {
+      background-position: left;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .accordion-panel {
+      padding-inline: 1rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .courses .topics-wrapper {
       flex-direction: column;
+    }
+
+    .courses .number-wrapper {
+      height: 75px;
     }
 
     .courses .topics-header {
@@ -208,7 +307,7 @@ const { courses } = Astro.props;
     }
 
     .courses.flow {
-      gap: 1rem;
+      gap: 0.25rem;
     }
 
     .accordion-button {
@@ -225,8 +324,6 @@ const { courses } = Astro.props;
 
   @media (max-width: 540px) {
     .courses .topic-grid {
-      grid-template-columns: 1fr;
-      gap: 0rem;
     }
 
     .courses .number {

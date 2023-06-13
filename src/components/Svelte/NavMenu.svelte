@@ -108,7 +108,7 @@
 
     @media (max-width: 640px) {
         .menu-toggle-container {
-            width: 5rem;
+            width: 4rem;
             height: 3rem;
         }
 

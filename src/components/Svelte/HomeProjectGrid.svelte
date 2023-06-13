@@ -98,7 +98,8 @@
 <style>
     .interactive-projects.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); */
     /* margin-inline: calc(var(--gutter) * -1); */
   }
 

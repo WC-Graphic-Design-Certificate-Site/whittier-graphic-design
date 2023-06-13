@@ -8,7 +8,7 @@ import SocialLinks from "./SocialLinks.astro";
 <footer class="footer-gradient">
   <div class="content-wrapper grid">
     <div class="flex">
-      <a href="#" class="logo-wrapper"><Logo width="large" /></a>
+      <a href="/" class="logo-wrapper"><Logo width="large" /></a>
       <div class="flex flow cluster">
         <SocialLinks />
         <p>
@@ -53,7 +53,8 @@ import SocialLinks from "./SocialLinks.astro";
   footer {
     background: var(--footer-gradient);
     color: var(--color-neutral-light);
-    padding-block: var(--space-2xl);
+    padding-block-start: var(--space-2xl);
+    padding-block-end: var(--space-l);
     font-family: var(--font-sans);
     font-size: var(--step--1);
   }
@@ -68,6 +69,10 @@ import SocialLinks from "./SocialLinks.astro";
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .grid > :last-child {
+    place-self: end;
   }
 
   /* .content-wrapper {

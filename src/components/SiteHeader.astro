@@ -109,6 +109,11 @@ const { layout = "inner" } = Astro.props;
     margin-top: 3rem;
   }
 
+  .inner .header-grid {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
   header.home {
     position: absolute;
     top: 0;
@@ -251,7 +256,7 @@ const { layout = "inner" } = Astro.props;
     header.home,
     header.inner {
       padding-block-start: 2rem;
-      padding-inline: 1rem;
+      /* padding-inline: 1rem; */
     }
   }
 </style>
