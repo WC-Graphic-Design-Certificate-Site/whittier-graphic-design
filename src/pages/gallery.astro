@@ -28,7 +28,12 @@ const { title, slug, seo } = currentPage;
 <Layout title={seo.title} metaDescription={seo.description}>
   <SiteHeader slot="header" />
   <main slot="main" class="content-wrapper">
-    <h1 class="title header">{title}</h1>
+    <div class="header">
+      <h1 class="title">{title}</h1>
+      <h2 class="subtitle">
+        Student Work Samples from the Whittier College Undergraduate Program
+      </h2>
+    </div>
     <div id="content"><ProjectGrid projects={studentProjects} /></div>
 
     <!-- <div class="project-grid">
@@ -72,9 +77,13 @@ const { title, slug, seo } = currentPage;
     overflow-y: hidden;
   }
 
-  .title {
+  .header {
     position: absolute;
     top: -22px;
+    z-index: 5;
+  }
+
+  .title {
     z-index: 5;
     font-family: var(--font-emphasis);
     font-size: var(--step-10);
@@ -83,6 +92,16 @@ const { title, slug, seo } = currentPage;
     letter-spacing: 1rem;
     text-transform: uppercase;
     padding-inline: 0;
+  }
+
+  .subtitle {
+    color: var(--color-neutral-light);
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    letter-spacing: 0.13rem;
+    margin-top: -22px;
+    margin-left: 10px;
+    text-transform: uppercase;
   }
 
   .project-grid {
@@ -206,6 +225,11 @@ const { title, slug, seo } = currentPage;
     .title {
       font-size: var(--step-8);
     }
+
+    .subtitle {
+      margin-top: -14px;
+      font-size: 16px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -217,13 +241,12 @@ const { title, slug, seo } = currentPage;
   @media (max-width: 640px) {
     .title {
       letter-spacing: 0.5rem;
-
       font-size: var(--step-7);
     }
-    /* .title {
-      font-size: var(--step-6);
-      letter-spacing: 0.4rem;
-    } */
+
+    .subtitle {
+      margin-top: -6px;
+    }
 
     .project-grid {
       grid-template-columns: repeat(1, 1fr) !important;
@@ -235,9 +258,12 @@ const { title, slug, seo } = currentPage;
   }
 
   @media (max-width: 480px) {
+    .header {
+      top: -12px;
+    }
+
     .title {
       font-size: var(--step-6);
-      top: -12px;
     }
   }
 </style>
