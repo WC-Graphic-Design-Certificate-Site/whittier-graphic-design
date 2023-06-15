@@ -30,12 +30,6 @@
                 {:else}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 64" class="hamburger"><rect x="6.67" y="4" width="90" height="6"/><rect x="6.67" y="25" width="90" height="6"/><rect x="6.67" y="46" width="90" height="6"/></svg>
                 {/if}
-                <!-- <div class="menu-bars" class:open>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div> -->
             </div>
         </PopoverButton>
         {#if open}

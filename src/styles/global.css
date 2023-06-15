@@ -7,7 +7,7 @@
   --color-brand-secondary: #4f2760; /* was 4c1e4c */
   --color-brand-secondary-light: #a06180; /* 816193 */
   --color-brand-secondary-dark: #371b43;
-  --color-neutral-dark: #231f20;
+  --color-neutral-dark: #4f4c4d; /* was 231f20 */
   --color-neutral-light: #fff;
   --color-neutral-gray: #e5e5e5;
   --step--2: clamp(0.64rem, calc(0.61rem + 0.16vw), 0.72rem);
@@ -520,7 +520,9 @@ select {
   z-index: 20;
 }
 
+/*
 .menu-toggle:focus-visible {
   outline: var(--color-brand-primary-light) solid 2px;
   border: none;
 }
+*/

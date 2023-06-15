@@ -28,8 +28,7 @@ const { courses } = Astro.props;
             <div class="course-intro">{course.description}</div>
             <div class="topics-wrapper">
               <div class="topics-header">
-                <p style="font-weight: 700;">Weekly Topics</p>
-                <p style="font-weight: 400;">{course.title}</p>
+                <p style="font-weight: 400;">Weekly Course Topics</p>
               </div>
               <ol class="topics flow">
                 {course.topics &&
@@ -67,7 +66,7 @@ const { courses } = Astro.props;
   }
 
   .courses .topics.flow {
-    --flow-space: var(--space-xl);
+    --flow-space: var(--space-m);
   }
 
   .accordion-button {
@@ -161,7 +160,8 @@ const { courses } = Astro.props;
   }
 
   .accordion-panel {
-    padding-block: var(--space-l);
+    padding-block-start: var(--space-l);
+    padding-block-end: var(--space-2xl);
     /* padding-inline: 1rem; */
   }
 
@@ -170,7 +170,7 @@ const { courses } = Astro.props;
     font-family: var(--font-primary);
     color: var(--color-brand-secondary-light);
     /* max-width: 64ch; */
-    margin-block-end: var(--space-2xl);
+    margin-block-end: var(--space-xl);
   }
 
   .courses .topics-wrapper {
@@ -180,14 +180,14 @@ const { courses } = Astro.props;
   .courses .topics-header {
     position: relative;
     font-family: var(--font-secondary);
-    font-size: var(--step-1);
+    font-size: var(--step-2);
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     text-align: right;
     align-self: start;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    margin-right: var(--space-2xl);
+    margin-right: var(--space-l);
     color: var(--color-brand-secondary-light);
     top: 1rem;
   }
@@ -203,7 +203,7 @@ const { courses } = Astro.props;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 3.5rem;
+    gap: 2rem;
   }
 
   .courses .number-wrapper {
@@ -228,9 +228,9 @@ const { courses } = Astro.props;
     object-fit: fill;
   } */
 
-  /* .courses .topic {
-    max-width: 90ch;
-  } */
+  .courses .topic {
+    width: clamp(980px, 98ch, 95%);
+  }
 
   .courses .topic > * {
     display: inline;

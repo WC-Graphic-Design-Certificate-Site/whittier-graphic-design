@@ -8,6 +8,7 @@ const baseStyles = {
 const themes = {
   solid: {
     primary: "primary",
+    gradient: "gradient",
     "neutral-light": "neutral-light",
     "neutral-dark": "neutral-dark",
     secondary: "secondary",
@@ -85,17 +86,26 @@ const classList = [
     transition: all 0.2s ease-in-out;
   }
 
-  .solid.primary {
+  .solid.primary,
+  .solid.gradient {
     font-family: var(--font-secondary);
     font-size: var(--step-0);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    background: var(--purple-gradient);
     color: var(--color-neutral-light);
   }
 
-  .solid.primary:hover {
+  .solid.primary:hover,
+  .solid.gradient:hover {
     opacity: 0.8;
+  }
+
+  .solid.primary {
+    background: var(--purple-gradient);
+  }
+
+  .solid.gradient {
+    background: var(--full-gradient);
   }
 
   .base {
