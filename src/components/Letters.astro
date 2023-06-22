@@ -608,6 +608,16 @@
       grid-template-columns: repeat(6, min(13vw, 150px));
     }
   }
+
+  @media (max-width: 640px) {
+    .letter-grid {
+      width: 100%;
+    }
+
+    .letter-grid .letters {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
 </style>
 
 <script>
