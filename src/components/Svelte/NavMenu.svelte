@@ -80,18 +80,6 @@
         width: auto;
     }
 
-    .nav-panel {
-        position: absolute;
-        top: 41px;
-        right: 0;
-        /* background: var(--color-neutral-dark); */
-        background: rgb(26 13 34 / 70%) /* #0000004d rgb(74 40 93 / 75%) */;
-        backdrop-filter: blur(20px);
-        color: white;
-        min-width: 25rem;
-        padding: 3rem;
-    }
-
     @media (max-width: 768px) {
         .nav-panel {
             min-width: 300px;

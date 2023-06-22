@@ -520,9 +520,30 @@ select {
   z-index: 20;
 }
 
-/*
 .menu-toggle:focus-visible {
-  outline: var(--color-brand-primary-light) solid 2px;
+  outline: 0;
   border: none;
 }
-*/
+
+.nav-panel {
+  position: absolute;
+  top: 41px;
+  right: 0;
+  background: rgb(26 13 34 / 97%);
+  color: white;
+  min-width: 25rem;
+  padding: 3rem;
+}
+
+@supports (backdrop-filter: blur(20px)) {
+  .nav-panel {
+    position: absolute;
+    top: 41px;
+    right: 0;
+    background: rgb(26 13 34 / 70%);
+    backdrop-filter: blur(20px);
+    color: white;
+    min-width: 25rem;
+    padding: 3rem;
+  }
+}

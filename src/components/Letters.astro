@@ -644,7 +644,7 @@
 
   letters.forEach((letter) => {
     letter.addEventListener("mouseenter", (e) => {
-      const target = e.currentTarget;
+      const target = e.currentTarget as HTMLElement;
       const svgList = [];
       const svgs = target.querySelectorAll("svg");
       svgs.forEach((svg) => svgList.push(svg));
