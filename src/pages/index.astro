@@ -41,9 +41,10 @@ const heroGradient = `background: var(--full-gradient);`;
   <main slot="main" class="main">
     <section class="hero" style={heroGradient}>
       <div class="header-grid content-wrapper">
-        <h1>
-          <span>Graphic Design Certificate Program</span>
+        <h1 class="heading">
+          <span class="desktop">Graphic Design Certificate Program</span>
         </h1>
+        <h1 class="mobile-heading">Graphic Design Certificate</h1>
         <Letters />
       </div>
       <div class="scroll">
@@ -178,6 +179,15 @@ const heroGradient = `background: var(--full-gradient);`;
 
   .hero h1 > :first-child {
     font-weight: 400;
+  }
+
+  .hero .mobile-heading-wrapper {
+    display: none;
+    padding-inline: 1rem;
+  }
+
+  .hero .mobile-heading {
+    display: none;
   }
 
   /* .hero h1 > :last-child {
@@ -319,5 +329,39 @@ const heroGradient = `background: var(--full-gradient);`;
     table {
       font-size: var(--step-2);
     }
+
+    .hero .heading {
+      display: none;
+    }
+
+    .hero .mobile-heading-wrapper {
+      display: block;
+    }
+
+    .hero .mobile-heading {
+      display: inline-block;
+      white-space: nowrap;
+    }
   }
 </style>
+
+<script>
+  import fitty from "fitty";
+  const fitText = fitty(".hero .mobile-heading");
+  const fitTextElement = fitText[0];
+
+  const mediaQuery = window.matchMedia("(max-width: 640px)");
+  if (mediaQuery.matches) {
+    fitTextElement.fit();
+  } else {
+    fitTextElement.unsubscribe();
+  }
+
+  mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+      fitTextElement.fit();
+    } else {
+      fitTextElement.unsubscribe();
+    }
+  });
+</script>

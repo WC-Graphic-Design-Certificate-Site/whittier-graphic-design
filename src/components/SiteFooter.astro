@@ -63,7 +63,7 @@ import SocialLinks from "./SocialLinks.astro";
 
 <style>
   footer {
-    background: var(--footer-gradient);
+    background: var(--full-gradient);
     color: var(--color-neutral-light);
     padding-block-start: var(--space-2xl);
     padding-block-end: var(--space-xl);
@@ -198,11 +198,21 @@ import SocialLinks from "./SocialLinks.astro";
 
     .grid > :last-child {
       order: 1;
+      place-self: start;
     }
 
     .grid > :first-child {
       order: 2;
       margin-top: 2rem;
+    }
+
+    .form-item {
+      padding: 6px;
+    }
+
+    .form input {
+      font-size: 14px;
+      padding: 1px;
     }
   }
 
@@ -216,7 +226,9 @@ import SocialLinks from "./SocialLinks.astro";
 </style>
 
 <script>
-  const footer_phone_input = document.getElementById("phone");
+  const footer_phone_input = document.getElementById(
+    "phone"
+  ) as HTMLInputElement;
 
   footer_phone_input.addEventListener("input", () => {
     footer_phone_input.setCustomValidity("");

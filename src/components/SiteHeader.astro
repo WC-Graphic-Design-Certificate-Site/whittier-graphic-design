@@ -236,6 +236,14 @@ const { layout = "inner" } = Astro.props;
   }
 
   @media (max-width: 640px) {
+    .header-grid {
+      margin-top: 1.5rem;
+    }
+
+    .inner .header-grid {
+      margin-top: 0.65rem;
+    }
+
     .cluster.actions {
       display: none;
     }

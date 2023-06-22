@@ -89,4 +89,14 @@ const { fill = "var(--color-neutral-light)", width = "base" } = Astro.props;
   .large {
     width: 15em;
   }
+
+  @media (max-width: 640px) {
+    .base {
+      width: 10rem;
+    }
+
+    .large {
+      width: 10rem;
+    }
+  }
 </style>

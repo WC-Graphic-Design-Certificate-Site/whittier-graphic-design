@@ -33,6 +33,7 @@ const { title, slug, seo } = currentPage;
       <h2 class="subtitle">
         Student Work Samples from the Whittier College Undergraduate Program
       </h2>
+      <h2 class="subtitle-mobile">Samples from undergraduate program</h2>
     </div>
     <div id="content"><ProjectGrid projects={studentProjects} /></div>
 
@@ -79,7 +80,7 @@ const { title, slug, seo } = currentPage;
 
   .header {
     position: absolute;
-    top: -22px;
+    top: -25px;
     z-index: 5;
   }
 
@@ -94,7 +95,8 @@ const { title, slug, seo } = currentPage;
     padding-inline: 0;
   }
 
-  .subtitle {
+  .subtitle,
+  .subtitle-mobile {
     color: var(--color-neutral-light);
     font-family: var(--font-secondary);
     font-size: 18px;
@@ -104,83 +106,8 @@ const { title, slug, seo } = currentPage;
     text-transform: uppercase;
   }
 
-  .project-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    margin-bottom: var(--space-3xl);
-  }
-
-  .project-grid > * {
-    overflow: hidden;
-  }
-
-  .project-grid > :nth-child(1) {
-    grid-column: span 5;
-  }
-
-  .project-grid > :nth-child(2n - 4) {
-    grid-column: span 2;
-  }
-
-  /* can't add xn - x until there are 2 of each in the grid */
-  .project-grid > :nth-child(3) {
-    grid-column: span 3;
-  }
-
-  .project-grid > :nth-child(3) img {
-    object-fit: cover;
-    height: 100%;
-  }
-
-  .project-grid > :nth-child(4) {
-    grid-column: span 3;
-  }
-
-  .project-grid > :nth-child(4) img {
-    object-fit: cover;
-    height: 100%;
-  }
-
-  .project-grid > :nth-child(5) {
-    grid-column: span 2;
-  }
-
-  .grid-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10%;
-    opacity: 0;
-    transform: translateY(1rem);
-    text-align: center;
-    color: var(--color-neutral-light);
-    z-index: 2;
-    transition: all 0.4s ease;
-    transition-delay: 0.1s;
-  }
-
-  .grid-text h3 {
-    font-family: var(--font-secondary);
-    font-size: var(--step-1);
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-  }
-
-  .overlay {
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    background: var(--color-brand-primary);
-    mix-blend-mode: multiply;
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-
-  img {
-    transition: all 0.5s ease;
+  .subtitle-mobile {
+    display: none;
   }
 
   .spacer {
@@ -190,38 +117,11 @@ const { title, slug, seo } = currentPage;
     margin-inline: auto;
   }
 
-  .grid-item:hover .grid-text {
-    opacity: 1;
-    transform: translate(0);
-  }
-
-  .grid-item:hover .overlay {
-    opacity: 1;
-  }
-
-  .grid-item:hover img {
-    transform: scale(1.05);
-    filter: saturate(0);
-    opacity: 0.4;
-  }
-
   #content {
     margin-block-end: var(--space-xl);
   }
 
   @media (max-width: 1024px) {
-    .project-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-
-    .project-grid > * {
-      grid-column: span 1 !important;
-    }
-
-    .project-grid > :nth-child(1) {
-      grid-column: span 2 !important;
-    }
-
     .title {
       font-size: var(--step-8);
     }
@@ -245,15 +145,12 @@ const { title, slug, seo } = currentPage;
     }
 
     .subtitle {
-      margin-top: -6px;
+      display: none;
     }
 
-    .project-grid {
-      grid-template-columns: repeat(1, 1fr) !important;
-    }
-
-    .project-grid > :nth-child(1) {
-      grid-column: span 1 !important;
+    .subtitle-mobile {
+      display: block;
+      margin-top: 0px;
     }
   }
 

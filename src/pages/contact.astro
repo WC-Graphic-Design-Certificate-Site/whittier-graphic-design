@@ -1,7 +1,6 @@
 ---
 import InnerPage from "../layouts/InnerPage.astro";
 import InnerHero from "../components/InnerHero.astro";
-import Button from "../components/Button.astro";
 import { getCurrentPage } from "../data/pages";
 import { urlFor } from "../utils/sanity";
 
@@ -64,175 +63,187 @@ const bgImage = urlFor(image).width(1000).auto("format").url();
       </div>
     </form>
   </div>
+</InnerPage>
 
-  <style>
+<style>
+  .flex {
+    display: flex;
+    gap: 2rem;
+    padding-block: 3rem;
+  }
+
+  .contact {
+    width: 45%;
+  }
+
+  .form {
+    width: 50%;
+  }
+
+  .contact {
+    text-align: right;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .angle {
+    position: relative;
+    right: -50px;
+    height: 260px;
+    width: 155px;
+    float: right;
+    background: var(--color-brand-secondary-light);
+    clip-path: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
+    shape-outside: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
+  }
+
+  .heading {
+    color: var(--color-brand-secondary-light);
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .text {
+    font-size: var(--step-1);
+    font-family: var(--font-primary);
+    color: var(--color-brand-secondary-light);
+  }
+
+  .form .heading {
+    margin-left: 75px;
+  }
+
+  .form .flow > :nth-child(1) {
+    max-width: 450px;
+    margin-left: 50px;
+  }
+
+  .form .flow > :nth-child(2) {
+    max-width: 475px;
+    margin-left: 25px;
+  }
+
+  .form-item {
+    position: relative;
+    background: #ccbcd3;
+    padding: 9px 9px 9px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    border-bottom: 2px solid transparent;
+    width: 100%;
+    clip-path: polygon(4% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .form-item:focus-within {
+    border-bottom: 2px solid var(--color-brand-secondary);
+  }
+
+  .form-item label {
+    position: absolute;
+    bottom: 4px;
+    align-self: flex-end;
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--color-brand-secondary-dark);
+  }
+
+  .form input {
+    font-size: 15px;
+    display: block;
+    padding: 2px;
+    margin: 0;
+    border: none;
+    background: #ccbcd3;
+    color: var(--color-brand-secondary-dark);
+  }
+
+  .form input:focus-within {
+    outline: none;
+  }
+
+  .form input[type="submit"] {
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.2s ease;
+    background: #dba226;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 9px;
+    color: var(--color-brand-secondary-dark);
+  }
+
+  .form input[type="submit"]:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 1000px) {
+    .contact {
+      width: 35%;
+    }
+  }
+
+  @media (max-width: 768px) {
     .flex {
-      display: flex;
-      gap: 2rem;
-      padding-block: 3rem;
-    }
-
-    .contact {
-      width: 45%;
-    }
-
-    .form {
-      width: 50%;
-    }
-
-    .contact {
-      text-align: right;
-    }
-
-    .relative {
-      position: relative;
+      flex-direction: column;
+      overflow: hidden;
+      gap: 5rem;
     }
 
     .angle {
-      position: relative;
-      right: -50px;
-      height: 260px;
-      width: 155px;
-      float: right;
-      background: var(--color-brand-secondary-light);
-      clip-path: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
-      shape-outside: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
+      height: 160px;
+      clip-path: polygon(60% 0, 100% 0, 40% 100%, 0 100%);
+      width: 100px;
+      right: -25px;
     }
 
-    .heading {
-      color: var(--color-brand-secondary-light);
-      font-family: var(--font-secondary);
-      font-size: 16px;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+    .contact,
+    .form {
+      width: 100%;
+      padding-inline: var(--gutter);
     }
 
-    .text {
-      font-size: var(--step-1);
-      font-family: var(--font-primary);
-      color: var(--color-brand-secondary-light);
+    .contact {
+      padding-right: 25px;
+      max-width: 400px;
     }
 
     .form .heading {
-      margin-left: 75px;
+      margin-left: 0;
     }
 
-    .form .flow > :nth-child(1) {
-      max-width: 450px;
-      margin-left: 50px;
+    .form .flow > * {
+      max-width: none !important;
+      margin-inline: 0px !important;
     }
 
-    .form .flow > :nth-child(2) {
-      max-width: 475px;
-      margin-left: 25px;
+    .angle {
+      display: none;
     }
 
-    .form-item {
-      position: relative;
-      background: #ccbcd3;
-      padding: 9px 9px 9px 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 500px;
-      border-bottom: 2px solid transparent;
-      width: 100%;
-      clip-path: polygon(4% 0, 100% 0, 100% 100%, 0% 100%);
+    .contact {
+      text-align: center;
+      padding-inline: 0;
+      margin-inline: auto;
     }
-
-    .form-item:focus-within {
-      border-bottom: 2px solid var(--color-brand-secondary);
-    }
-
-    .form-item label {
-      position: absolute;
-      bottom: 4px;
-      align-self: flex-end;
-      font-family: var(--font-secondary);
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
-      color: var(--color-brand-secondary-dark);
-    }
-
-    .form input {
-      font-size: 15px;
-      display: block;
-      padding: 2px;
-      margin: 0;
-      border: none;
-      background: #ccbcd3;
-      color: var(--color-brand-secondary-dark);
-    }
-
-    .form input:focus-within {
-      outline: none;
-    }
-
-    .form input[type="submit"] {
-      font-family: var(--font-secondary);
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
-      transition: all 0.2s ease;
-      background: #dba226;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 6px 9px;
-      color: var(--color-brand-secondary-dark);
-    }
-
-    .form input[type="submit"]:hover {
-      opacity: 0.8;
-    }
-
-    @media (max-width: 1000px) {
-      .contact {
-        width: 35%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .flex {
-        flex-direction: column;
-        overflow: hidden;
-        gap: 5rem;
-      }
-
-      .angle {
-        height: 160px;
-        clip-path: polygon(60% 0, 100% 0, 40% 100%, 0 100%);
-        width: 100px;
-        right: -25px;
-      }
-
-      .contact,
-      .form {
-        width: 100%;
-        padding-inline: var(--gutter);
-      }
-
-      .contact {
-        padding-right: 25px;
-        max-width: 400px;
-      }
-
-      .form .heading {
-        margin-left: 0;
-      }
-
-      .form .flow > * {
-        max-width: none !important;
-        margin-inline: 0px !important;
-      }
-    }
-  </style>
-</InnerPage>
+  }
+</style>
 
 <script>
-  const phone_input = document.getElementById("contactPhone");
+  const phone_input = document.getElementById(
+    "contactPhone"
+  ) as HTMLInputElement;
 
   phone_input.addEventListener("input", () => {
     phone_input.setCustomValidity("");

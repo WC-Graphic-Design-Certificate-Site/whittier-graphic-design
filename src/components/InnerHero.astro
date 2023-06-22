@@ -7,7 +7,13 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
     <h1 class="title header">{title}</h1>
   </div>
   <div class="background"></div>
-  <img class="img" src={imageSrc} alt={imageAlt} loading="eager" />
+  <img
+    class="img"
+    src={imageSrc}
+    alt={imageAlt}
+    loading="eager"
+    decoding="async"
+  />
 </section>
 
 <style>
@@ -30,7 +36,7 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
     position: relative;
     letter-spacing: 1rem;
     text-transform: uppercase;
-    top: -22px;
+    top: -25px;
   }
 
   .background {
