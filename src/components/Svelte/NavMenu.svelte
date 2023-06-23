@@ -9,7 +9,7 @@
         },
         "brand-reverse": {
             menuColor: "var(--color-brand-secondary-light)",
-            menuBg: "#e4dbdf4f"
+            menuBg: "#ebe2f3" // #e4dbdf4f
         }
     }
 
@@ -95,7 +95,7 @@
         }
 
         .nav-panel {
-            top: 48px;
+            top: 0px;
         }
     }
 </style>

@@ -527,7 +527,7 @@ select {
 
 .nav-panel {
   position: absolute;
-  top: 41px;
+  top: 0px;
   right: 0;
   background: rgb(26 13 34 / 97%);
   color: white;
@@ -538,7 +538,7 @@ select {
 @supports (backdrop-filter: blur(20px)) {
   .nav-panel {
     position: absolute;
-    top: 41px;
+    top: 0px;
     right: 0;
     background: rgb(26 13 34 / 70%);
     backdrop-filter: blur(20px);
