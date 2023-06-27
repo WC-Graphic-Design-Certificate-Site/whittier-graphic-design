@@ -661,4 +661,50 @@
       nextItem.setAttribute("data-display-font", "true");
     });
   });
+
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+  let intervalId;
+
+  function animateLetters() {
+    letters.forEach((letter) => {
+      const svgList = [];
+      const svgs = letter.querySelectorAll("svg");
+      svgs.forEach((svg) => svgList.push(svg));
+
+      let currentlyDisplayed = svgList.find(
+        (svg) => svg.getAttribute("data-display-font") == "true"
+      );
+
+      // get random item
+      let nextItem = svgList[Math.floor(Math.random() * svgList.length)];
+
+      currentlyDisplayed.setAttribute("data-display-font", "false");
+      nextItem.setAttribute("data-display-font", "true");
+    });
+  }
+
+  function startAnimation() {
+    if (!intervalId) {
+      intervalId = setInterval(animateLetters, 1000);
+    }
+  }
+
+  function stopAnimation() {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+
+  if (mediaQuery.matches) {
+    startAnimation();
+  } else {
+    stopAnimation();
+  }
+
+  mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
+  });
 </script>
