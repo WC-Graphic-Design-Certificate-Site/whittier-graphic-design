@@ -5,9 +5,12 @@ export const courses =
   title,
   subtitle,
   description,
+  week8,
   topics[]-> {
     title,
-    text
+    text,
+    week,
+    duration
   },
   order
 }`);
