@@ -83,7 +83,7 @@
             {#each set.entries as project, i}
                 <img
                     src={prepareImage(project.image)}
-                    alt={project.imageAlt}
+                    alt={project.image.alt || ""}
                     width={900}
                     height={900}
                     data-index={i}

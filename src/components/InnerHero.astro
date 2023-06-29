@@ -1,5 +1,6 @@
 ---
-const { title, imageSrc, imageAlt = "" } = Astro.props;
+import { urlFor } from "../utils/sanity";
+const { title, image } = Astro.props;
 ---
 
 <section class="hero">
@@ -9,8 +10,13 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
   <div class="background"></div>
   <img
     class="img"
-    src={imageSrc}
-    alt={imageAlt}
+    src={urlFor(image)
+      .width(1000)
+      .height(Math.floor(1000 / image.asset.metadata.dimensions.aspectRatio))
+      .auto("format")
+      .url()}
+    alt={image.alt || ""}
+    style={`background-image: url(${image.asset.metadata.lqip})`}
     loading="eager"
     decoding="async"
   />
@@ -57,6 +63,9 @@ const { title, imageSrc, imageAlt = "" } = Astro.props;
     width: clamp(var(--space-3xl), 50%, 50vw);
     object-fit: cover;
     height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   @media (max-width: 1024px) {

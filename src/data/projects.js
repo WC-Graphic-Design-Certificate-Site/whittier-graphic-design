@@ -18,8 +18,10 @@ const projectGalleries = await getSanityData(`*[_type == "gallery"] {
     "entries": project[]->{
       _id,
       name,
-      "image": image.asset->,
-      "imageAlt": image.alt
+      "image": image{
+        ...,
+        asset->
+      },
     }
   }
 }`);

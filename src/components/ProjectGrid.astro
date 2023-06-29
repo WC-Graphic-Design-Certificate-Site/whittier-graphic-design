@@ -9,16 +9,20 @@ const images = projects.set[0].entries;
 <div class="grid">
   {
     images.map((item) => {
-      const imgAspectRatio = item.image.metadata.dimensions.aspectRatio;
+      const imgAspectRatio = item.image.asset.metadata.dimensions.aspectRatio;
       return (
         <div class="relative grid-item" style={`--aspect: ${imgAspectRatio}`}>
           <div class="grid-text">{item.name}</div>
           <img
+            class="img"
             src={urlFor(item.image).width(900).auto("format").url()}
-            alt={item.imageAlt}
+            alt={item.image.alt || ""}
             width={900}
+            style={`background-image: url(${item.image.asset.metadata.lqip})`}
             height={Math.floor(900 / imgAspectRatio)}
             data-aspectRatio={imgAspectRatio}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       );
@@ -45,6 +49,12 @@ const images = projects.set[0].entries;
     height: 100%;
     /* aspect-ratio: 1/1;
     object-fit: cover; */
+  }
+
+  .img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .grid-text {

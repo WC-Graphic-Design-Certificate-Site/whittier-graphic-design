@@ -3,7 +3,10 @@ import { getSanityData } from "../utils/sanity";
 export const pageData = await getSanityData(`*[_type == 'page'] {
     _id,
     title,
-    "image": image.asset->,
+    "image": image{
+      ...,
+      asset->
+    },
     "imageAlt": image.alt,
     "slug": slug.current,
     "seo": {

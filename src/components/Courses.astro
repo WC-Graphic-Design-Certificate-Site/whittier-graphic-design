@@ -247,6 +247,13 @@ const { courses } = Astro.props;
     height: 100%;
   }
 
+  /* @container (min-width: 100px) {
+    #test .bg-test {
+      height: 100px;
+      background: red;
+    }
+  } */
+
   /* .courses .number img {
     height: 100%;
     object-fit: fill;
@@ -310,7 +317,6 @@ const { courses } = Astro.props;
 
     .courses .number-wrapper {
       position: relative;
-      left: -9px;
       height: 100px;
       padding: 0;
     }
@@ -396,6 +402,13 @@ const { courses } = Astro.props;
 </style>
 
 <script>
+  // const text = document.querySelector("#test .text-test") as HTMLElement;
+  // const number = document.querySelector("#test .bg-test") as HTMLElement;
+  // const textHeight = text.offsetHeight;
+  // console.log(textHeight);
+  // number.style.width = `${textHeight}px`;
+  // number.style.height = `${textHeight}px`;
+
   // import fitty from "fitty";
   // fitty(".number span");
 

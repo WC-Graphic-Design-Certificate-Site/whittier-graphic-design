@@ -9,16 +9,16 @@ import { urlFor } from "../utils/sanity";
 
 const currentPage = getCurrentPage("53402f72-0252-400f-bc89-d7a2c3b8e0a0");
 const { title, image, imageAlt, slug, seo } = currentPage;
-
-const bgImage = urlFor(image).width(1000).auto("format").url();
+console.log(image);
+// const bgImage = urlFor(image).width(1000).auto("format").url();
 ---
 
 <InnerPage
   title={seo.title}
   metaDescription={seo.description}
-  preloadImg={bgImage}
+  preloadImg={image}
 >
-  <InnerHero slot="hero" title={title} imageSrc={bgImage} imageAlt={imageAlt} />
+  <InnerHero slot="hero" title={title} image={image} />
   <div slot="content" id="courses">
     <Courses courses={courses} />
     <BackToTop />
