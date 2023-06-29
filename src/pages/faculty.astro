@@ -12,7 +12,10 @@ const facultyMembers =
   name,
   order,
   bio,
-  "image": image.asset->
+  "image": image{
+    ...,
+    asset->
+  }
 }`);
 
 const currentPage = getCurrentPage("08eecbd7-c34f-4c2a-86e5-ab0aead3bb5b");

@@ -3,6 +3,11 @@ import { PortableText } from "astro-portabletext";
 import { urlFor } from "../utils/sanity";
 
 const { facultyMember, flipped, marginTop } = Astro.props;
+const image = facultyMember.image;
+const imageWidth = 800;
+const imageHeight = Math.floor(
+  imageWidth / image.asset.metadata.dimensions.aspectRatio
+);
 ---
 
 <article class:list={["container", flipped && "flipped"]}>
@@ -18,8 +23,17 @@ const { facultyMember, flipped, marginTop } = Astro.props;
   <div class="background"></div>
   <img
     class="img"
-    src={urlFor(facultyMember.image).width(600).url()}
+    src={urlFor(image)
+      .width(imageWidth)
+      .height(imageHeight)
+      .auto("format")
+      .url()}
+    style={`background-image: url(${image.asset.metadata.lqip})`}
     alt={facultyMember.name}
+    width={imageWidth}
+    height={imageHeight}
+    loading="lazy"
+    decoding="async"
   />
 </article>
 
@@ -66,6 +80,9 @@ const { facultyMember, flipped, marginTop } = Astro.props;
     width: clamp(var(--space-3xl), 50%, 50vw);
     object-fit: cover;
     height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .flipped .background {
