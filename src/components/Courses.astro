@@ -39,33 +39,60 @@ const { courses } = Astro.props;
                     }
 
                     const svgNum = `/svg/num-${currentIndex}.svg`;
-
                     return (
-                      <li class="topic-grid">
-                        <div class="number-wrapper">
-                          <div
-                            class="number"
-                            style={`--number: url('${svgNum}')`}
-                          />
-                        </div>
-                        <div class="topic">
-                          <h3>
-                            <span class="week-inline">{`${
-                              topic.duration > 1 ? "Weeks" : "Week"
-                            } ${
-                              topic.duration > 1
-                                ? currentIndex +
-                                  "-" +
-                                  (currentIndex + topic.duration - 1)
-                                : currentIndex
-                            } – `}</span>
-                            {`${topic.title}:`}
-                          </h3>
-                          <p>{topic.text}</p>
-                        </div>
-                      </li>
+                      <>
+                        <li class="topic-grid">
+                          <div class="number-wrapper">
+                            <div class="relative">
+                              <img
+                                class="number"
+                                src={svgNum}
+                                alt={`Week ${currentIndex}`}
+                                width={85}
+                                height={85}
+                              />
+                              {topic.duration > 1 && (
+                                <div class="boxes">
+                                  <span />
+                                  <span />
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div class="topic">
+                            <h3>
+                              <span class="week-inline">{`${
+                                topic.duration > 1 ? "Weeks" : "Week"
+                              } ${
+                                topic.duration > 1
+                                  ? currentIndex +
+                                    "-" +
+                                    (currentIndex + topic.duration - 1)
+                                  : currentIndex
+                              } – `}</span>
+                              {`${topic.title}:`}
+                            </h3>
+                            <p>{topic.text}</p>
+                          </div>
+                        </li>
+                      </>
                     );
                   })}
+                {course.showLastWeek && (
+                  <li class="topic-grid">
+                    <div class="number-wrapper">
+                      <div class="relative">
+                        <img
+                          class="number"
+                          src="/svg/num-8.svg"
+                          alt="Week 8"
+                          width={85}
+                          height={85}
+                        />
+                      </div>
+                    </div>
+                  </li>
+                )}
               </ol>
             </div>
           </article>
@@ -82,7 +109,7 @@ const { courses } = Astro.props;
   }
 
   .courses .topics.flow {
-    --flow-space: var(--space-m);
+    --flow-space: var(--space-l);
   }
 
   .accordion-button {
@@ -191,6 +218,7 @@ const { courses } = Astro.props;
 
   .courses .topics-wrapper {
     display: flex;
+    gap: 2rem;
   }
 
   .courses .topics-header {
@@ -218,29 +246,38 @@ const { courses } = Astro.props;
   .courses .topic-grid {
     position: relative;
     display: grid; /* flex */
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 85px 5fr;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 4rem;
   }
 
   .courses .number-wrapper {
     position: relative;
-    min-width: 110px;
+    /* min-width: 110px; */
     /* min-width: 150px; */
     /* max-height: 102px; */
-    padding: 11px 0px 8px;
+    padding: 9px 0px;
     height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .courses .relative {
+    height: fit-content;
   }
 
   .courses .number {
     /* align-self: stretch; */
     position: relative;
-    background-image: var(--number);
+    /* background-image: var(--number);
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
-    width: 100%;
-    height: 100%;
+    background-position: center; */
+    width: 85px;
+    height: 85px;
+    /* width: 100%;
+    height: 100%; */
   }
 
   /* @container (min-width: 100px) {
@@ -291,7 +328,7 @@ const { courses } = Astro.props;
 
   .boxes {
     position: absolute;
-    bottom: -60px;
+    bottom: -68px;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -308,8 +345,12 @@ const { courses } = Astro.props;
     .courses .topic-grid {
       /* flex-direction: column;
       align-items: flex-start; */
-      gap: 1rem;
+      gap: 2rem;
       /* grid-template-columns: 2fr 5fr; */
+    }
+
+    .courses .topics-wrapper {
+      gap: 0;
     }
 
     .courses .number-wrapper {

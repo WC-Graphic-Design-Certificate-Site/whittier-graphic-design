@@ -5,7 +5,7 @@ export const courses =
   title,
   subtitle,
   description,
-  week8,
+  "showLastWeek": week8,
   topics[]-> {
     title,
     text,
