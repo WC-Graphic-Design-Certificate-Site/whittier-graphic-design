@@ -5,17 +5,13 @@ import { getCurrentPage } from "../data/pages";
 import { urlFor } from "../utils/sanity";
 
 const currentPage = getCurrentPage("6d566278-d441-4734-b1e6-3895519c2a3a");
-const { title, image, imageAlt, slug, seo } = currentPage;
+const { title, image, slug, seo } = currentPage;
 
-const bgImage = urlFor(image).width(1000).auto("format").url();
+// const bgImage = urlFor(image).width(1000).auto("format").url();
 ---
 
-<InnerPage
-  title={seo.title}
-  metaDescription={seo.description}
-  preloadImg={bgImage}
->
-  <InnerHero slot="hero" title={title} imageSrc={bgImage} imageAlt={imageAlt} />
+<InnerPage title={seo.title} metaDescription={seo.description}>
+  <InnerHero slot="hero" title={title} image={image} />
   <div slot="content" class="flex">
     <div class="contact">
       <div class="angle"></div>

@@ -13,11 +13,7 @@ console.log(image);
 // const bgImage = urlFor(image).width(1000).auto("format").url();
 ---
 
-<InnerPage
-  title={seo.title}
-  metaDescription={seo.description}
-  preloadImg={image}
->
+<InnerPage title={seo.title} metaDescription={seo.description}>
   <InnerHero slot="hero" title={title} image={image} />
   <div slot="content" id="courses">
     <Courses courses={courses} />
