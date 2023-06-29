@@ -47,12 +47,6 @@ const { courses } = Astro.props;
                             class="number"
                             style={`--number: url('${svgNum}')`}
                           />
-                          {topic.duration > 1 && (
-                            <div class="boxes">
-                              <span />
-                              <span />
-                            </div>
-                          )}
                         </div>
                         <div class="topic">
                           <h3>
@@ -223,15 +217,17 @@ const { courses } = Astro.props;
 
   .courses .topic-grid {
     position: relative;
-    display: flex;
+    display: grid; /* flex */
+    grid-template-columns: 1fr 5fr;
     align-items: flex-start;
     gap: 2rem;
   }
 
   .courses .number-wrapper {
     position: relative;
-    min-width: 150px;
-    max-height: 102px;
+    min-width: 110px;
+    /* min-width: 150px; */
+    /* max-height: 102px; */
     padding: 11px 0px 8px;
     height: 100%;
   }
@@ -313,17 +309,18 @@ const { courses } = Astro.props;
       /* flex-direction: column;
       align-items: flex-start; */
       gap: 1rem;
+      /* grid-template-columns: 2fr 5fr; */
     }
 
     .courses .number-wrapper {
       position: relative;
-      height: 100px;
-      padding: 0;
+      /* height: 100px; */
+      /* padding: 0; */
     }
 
-    .courses .number {
+    /* .courses .number {
       background-position: left;
-    }
+    } */
 
     .courses .topic {
       width: auto;
@@ -378,6 +375,10 @@ const { courses } = Astro.props;
 
     .accordion-button > :last-child {
       justify-self: center;
+    }
+
+    .courses .topic-grid {
+      grid-template-columns: 1fr;
     }
   }
 
