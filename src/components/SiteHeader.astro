@@ -25,9 +25,13 @@ const navigation = [
     name: "Gallery",
     href: "/gallery",
   },
+  // {
+  //   name: "Faculty",
+  //   href: "/faculty",
+  // },
   {
-    name: "Faculty",
-    href: "/faculty",
+    name: "Learn More",
+    href: "/learn-more",
   },
   {
     name: "Contact",
@@ -41,12 +45,23 @@ const { layout = "inner" } = Astro.props;
 <header class:list={[layouts[layout]]}>
   <div class="header-grid content-wrapper">
     <a href="/" class="header-text">
-      <Logo
-        fill={layout == "inner"
-          ? "var(--color-brand-secondary-light)"
-          : "var(--color-neutral-light)"}
-      />
-      <div style="display: none;">Graphic Design Certificate</div>
+      {
+        layout == "home" ? (
+          <Logo
+            fill={
+              layout == "inner"
+                ? "var(--color-brand-secondary-light)"
+                : "var(--color-neutral-light)"
+            }
+          />
+        ) : (
+          <div class="inner">
+            Whittier College:
+            <br />
+            Graphic Design Certificate
+          </div>
+        )
+      }
     </a>
   </div>
 
@@ -133,6 +148,10 @@ const { layout = "inner" } = Astro.props;
     z-index: 20;
   }
 
+  .inner .header-grid {
+    grid-template-columns: min(40vw, 270px) 1fr;
+  }
+
   .home-anchor {
     display: block;
     font-family: var(--font-secondary);
@@ -155,17 +174,13 @@ const { layout = "inner" } = Astro.props;
     align-items: flex-start;
     font-family: var(--font-secondary);
     font-size: var(--step--1);
-    color: var(--color-brand-primary);
+  }
+
+  .header-text .inner {
+    color: var(--color-brand-secondary-light);
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-  }
-
-  .header-text > :first-child {
+    letter-spacing: 0.1rem;
     font-weight: 700;
-  }
-
-  .header-text > :last-child {
-    font-weight: 400;
   }
 
   .header-text:hover {
@@ -242,6 +257,7 @@ const { layout = "inner" } = Astro.props;
 
     .inner .header-grid {
       margin-top: 0.65rem;
+      grid-template-columns: 1fr;
     }
 
     .cluster.actions {

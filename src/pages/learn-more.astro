@@ -1,0 +1,68 @@
+---
+import InnerPage from "../layouts/InnerPage.astro";
+import InnerHero from "../components/InnerHero.astro";
+import { getCurrentPage } from "../data/pages";
+import { PortableText } from "astro-portabletext";
+
+const currentPage = getCurrentPage("4c6c6578-74a4-4dc2-84ec-129128ada6e0");
+const { title, image, content, slug, seo } = currentPage;
+---
+
+<InnerPage title={seo.title} metaDescription={seo.description}>
+  <InnerHero slot="hero" title={title} image={image} />
+  <div slot="content" class="learn flow">
+    <PortableText value={content} />
+  </div>
+</InnerPage>
+
+<style>
+  .learn {
+    color: var(--color-brand-secondary-light);
+    font-family: var(--font-primary);
+    font-size: var(--step-2);
+    line-height: 1.4;
+    padding-inline: var(--gutter);
+    padding-block: 1rem;
+  }
+
+  .learn :where(h2, h3) {
+    font-size: var(--step-3);
+    font-weight: 700;
+  }
+
+  .learn :where(h2, h3):not(:first-of-type) {
+    margin-top: var(--space-xl) !important;
+  }
+
+  .learn a {
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .learn a:hover {
+    text-decoration: none;
+  }
+
+  .learn ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+  }
+
+  .learn ul > * + * {
+    margin-top: var(--space-2xs);
+  }
+
+  @media (max-width: 640px) {
+    .learn {
+      font-size: var(--step-1);
+    }
+
+    .learn ul {
+      padding-left: 1.5rem;
+    }
+
+    .learn :where(h2, h3) {
+      font-size: var(--step-2);
+    }
+  }
+</style>

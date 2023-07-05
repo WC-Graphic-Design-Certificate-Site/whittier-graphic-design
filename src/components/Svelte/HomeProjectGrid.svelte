@@ -1,46 +1,7 @@
 <script>
-    import {urlFor} from "../../utils/sanity"
-    import {shuffleArray} from "../../utils/format"
+    import { onMount } from 'svelte';
+    import { urlFor } from "../../utils/sanity"
     export let projects;
-
-    // let randomizedProjects = shuffleArray(projects);
-
-    // const projectSets = [];
-    // for (let i = 0; i < randomizedProjects.length; i += 3) {
-    //   projectSets.push(randomizedProjects.slice(i, i + 3));
-    // }
-
-    // for (let i = 0; i < 6; i++) {
-    //     const arr = [];
-    //     projectSets.push(arr)
-    // }
-
-    // projectSets.forEach(set => {
-    //     for (let i = 0; i < 3; i++) {
-    //         set.push(getRandom(projects));
-    //     }
-    // })
-
-
-    // console.log(projectSets.length);
-    // projectSets.forEach(project => console.log(project.length));
-
-    // function getRandom(arr) {
-    //     const randomIndex = Math.floor(Math.random() * arr.length);
-    //     return arr[randomIndex];
-    // }
-
-// function getNextItem(item) {
-//     const currentIndex = projects.indexOf(item);
-//     // Use the remainder operator to return to start of array
-//     const nextIndex = (currentIndex + 1) % projects.length;
-//     // console.log(themes[nextIndex]);
-//     return projects[nextIndex];
-//   }
-
-//   getNextImg(projects[0])
-// console.log(projects[0])
-
 
     function prepareImage(image) {
         const src = urlFor(image).width(900).height(900).fit('crop').crop('center').auto('format').url();
@@ -64,25 +25,71 @@
 
         currentlyDisplayed.setAttribute("data-visible", "false");
         nextItem.setAttribute("data-visible", "true");
-
-        // const currentItem = target.getAttribute('data-id');
-        // const matched = projects.find(item => item._id === currentItem);
-        // const nextItem = getNextItem(matched);
-        // console.log(currentItem + " " + matched._id);
-        // console.log(nextItem._id);
-
-        // img.setAttribute('src', nextImage)
-        // console.log(img.getAttribute('src'))
     }
+
+    onMount(() => {
+        const mediaQuery = window.matchMedia("(max-width: 768px)");
+        let intervalId;
+        const imgWrappers = document.querySelectorAll('.gallery-img-wrapper');
+
+        function animatePhotos() {
+          // const imgList = [];
+          // const imgs = document.querySelectorAll(".gallery-img")
+          imgWrappers.forEach(img => {
+            const imgList = [];
+            const imgs = img.querySelectorAll('img')
+            imgs.forEach(item => imgList.push(item));
+
+          let currentlyDisplayed = imgList.find(img => img.getAttribute("data-visible") == "true");
+          let index = imgList.findIndex(img => img.getAttribute("data-visible") == "true");
+          if (index < 2) {
+              index = index + 1
+          } else {
+              index = 0
+          }
+
+          const nextItem = imgList[index];
+
+          currentlyDisplayed.setAttribute("data-visible", "false");
+          nextItem.setAttribute("data-visible", "true");
+        });
+        }
+
+        function startAnimation() {
+          if (!intervalId) {
+            intervalId = setInterval(animatePhotos, 1500);
+          }
+        }
+
+        function stopAnimation() {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+
+        if (mediaQuery.matches) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+
+        mediaQuery.addEventListener("change", (e) => {
+          if (e.matches) {
+            startAnimation();
+          } else {
+            stopAnimation();
+          }
+        });
+    });
 </script>
 
 <div class="interactive-projects grid">
     {#each projects.set as set}
     <div class="relative grid-item" on:mouseenter={handleEnter}>
-        <a class="img-wrapper" href="/gallery">
+        <a class="gallery-img-wrapper" href="/gallery">
             {#each set.entries as project, i}
                 <img
                     src={prepareImage(project.image)}
+                    class="gallery-img"
                     alt={project.image.alt || ""}
                     width={900}
                     height={900}
@@ -107,7 +114,7 @@
     overflow: hidden;
   }
 
-  .interactive-projects .grid-item .img-wrapper {
+  .interactive-projects .grid-item .gallery-img-wrapper {
     position: relative;
     width: 100%;
     height: 100%;

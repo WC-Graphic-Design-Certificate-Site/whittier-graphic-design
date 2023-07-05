@@ -15,7 +15,7 @@ const { courses } = Astro.props;
           gradientStyle={`--gradient-fill: var(--gradient-${index + 1});`}
         >
           <Fragment slot="title">
-            <span>
+            <span class="desktop-title">
               {course.title}
               {course.subtitle && (
                 <span class="course-subtitle" style="">
@@ -23,6 +23,7 @@ const { courses } = Astro.props;
                 </span>
               )}
             </span>
+            <span class="mobile-title">{course.mobileTitle}</span>
           </Fragment>
           <article slot="panel">
             <div class="course-intro">{course.description}</div>
@@ -196,6 +197,14 @@ const { courses } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     /* clip-path: polygon(0 0, 100% 0, 97% 100%, 0% 100%); */
+  }
+
+  .desktop-title {
+    display: inline;
+  }
+
+  .mobile-title {
+    display: none;
   }
 
   .accordion-button:hover {
@@ -389,6 +398,14 @@ const { courses } = Astro.props;
   }
 
   @media (max-width: 640px) {
+    .desktop-title {
+      display: none;
+    }
+
+    .mobile-title {
+      display: inline;
+    }
+
     .courses .week-inline {
       display: inline;
     }

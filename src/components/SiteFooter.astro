@@ -65,8 +65,8 @@ import SocialLinks from "./SocialLinks.astro";
   footer {
     background: var(--full-gradient);
     color: var(--color-neutral-light);
-    padding-block-start: var(--space-2xl);
-    padding-block-end: var(--space-xl);
+    padding-block-start: var(--space-l);
+    padding-block-end: var(--space-m);
     font-family: var(--font-sans);
     font-size: var(--step--1);
   }
@@ -123,21 +123,25 @@ import SocialLinks from "./SocialLinks.astro";
     opacity: 0.8;
   }
 
+  .form {
+    width: 350px;
+  }
+
   .form .flow {
-    --flow-space: 1.5rem;
+    --flow-space: 1.125rem;
   }
 
   .form-title {
     font-family: var(--font-primary);
-    font-size: var(--step-4);
+    font-size: var(--step-2);
     line-height: 1.15;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
   }
 
   .form-item {
     position: relative;
     background: white;
-    padding: 9px;
+    padding: 4px 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,7 +167,7 @@ import SocialLinks from "./SocialLinks.astro";
   .form input {
     font-size: 15px;
     display: block;
-    padding: 2px;
+    padding: 1px;
     margin: 0;
     border: none;
     color: var(--color-brand-secondary-light);
@@ -206,6 +210,15 @@ import SocialLinks from "./SocialLinks.astro";
       margin-top: 2rem;
     }
 
+    .form {
+      width: auto;
+      max-width: 350px;
+    }
+
+    .grid > :last-child {
+      place-self: stretch;
+    }
+
     .form-item {
       padding: 6px;
     }
@@ -222,6 +235,9 @@ import SocialLinks from "./SocialLinks.astro";
       --flow-space: 1rem;
       margin-top: var(--space-l);
     } */
+    .form-title {
+      margin-bottom: 1rem;
+    }
   }
 </style>
 

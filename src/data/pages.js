@@ -8,6 +8,7 @@ export const pageData = await getSanityData(`*[_type == 'page'] {
       asset->
     },
     "imageAlt": image.alt,
+    content,
     "slug": slug.current,
     "seo": {
         "title": seoTitle,
