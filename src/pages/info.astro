@@ -1,0 +1,140 @@
+---
+import InnerPage from "../layouts/InnerPage.astro";
+import InnerHero from "../components/InnerHero.astro";
+import { getCurrentPage } from "../data/pages";
+import { PortableText } from "astro-portabletext";
+
+const currentPage = getCurrentPage("4c6c6578-74a4-4dc2-84ec-129128ada6e0");
+const { title, image, content, slug, seo } = currentPage;
+---
+
+<InnerPage title={seo.title} metaDescription={seo.description}>
+  <InnerHero slot="hero" title={title} image={image} />
+  <div slot="content" class="wrapper">
+    <div class="side-header">
+      <p>Learn More About the Program</p>
+    </div>
+    <div class="learn flow">
+      <PortableText value={content} />
+    </div>
+  </div>
+</InnerPage>
+
+<style>
+  .wrapper {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 200px 1fr;
+    padding-top: var(--space-l);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .side-header {
+    position: relative;
+    font-weight: 400;
+    font-family: var(--font-secondary);
+    font-size: var(--step-2);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    text-align: right;
+    justify-self: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: var(--color-brand-secondary-light);
+    top: 1rem;
+  }
+
+  .learn {
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 300;
+    padding-block: 1rem;
+  }
+
+  .learn.flow {
+    --flow-space: var(--space-3xs);
+  }
+
+  .learn :where(h2, h3) {
+    color: var(--color-brand-secondary-light);
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .learn :where(h2, h3):not(:first-of-type) {
+    margin-top: var(--space-xl) !important;
+  }
+
+  .learn a {
+    text-decoration: underline;
+    color: var(--color-brand-secondary-light);
+  }
+
+  .learn a:hover {
+    text-decoration: none;
+  }
+
+  .learn ul {
+    list-style-type: none;
+  }
+
+  .learn ul li {
+    position: relative;
+  }
+
+  .learn ul li::before {
+    content: "-";
+    position: absolute;
+    left: -1.5rem;
+    top: -2px;
+  }
+
+  .learn ul > * + * {
+    margin-top: var(--space-3xs);
+  }
+
+  @media (max-width: 1024px) {
+    .wrapper {
+      grid-template-columns: 120px 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wrapper {
+      grid-template-columns: 1fr;
+      padding-inline-start: 2rem;
+      padding-inline-end: var(--gutter);
+    }
+
+    .side-header {
+      text-align: left;
+      writing-mode: horizontal-tb;
+      transform: rotate(0deg);
+      margin-right: 0;
+      top: 0;
+      justify-self: start;
+    }
+
+    .learn ul li::before {
+      left: -1rem;
+    }
+
+    .learn {
+      font-size: var(--step-1);
+    }
+
+    .learn :where(h2, h3) {
+      font-size: var(--step-1);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .learn {
+      font-size: var(--step-1);
+    }
+
+    .learn :where(h2, h3) {
+      font-size: var(--step-1);
+    }
+  }
+</style>

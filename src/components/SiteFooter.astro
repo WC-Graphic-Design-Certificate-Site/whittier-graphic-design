@@ -9,25 +9,27 @@ import SocialLinks from "./SocialLinks.astro";
   <div class="content-wrapper grid">
     <div class="flex">
       <a href="/" class="logo-wrapper"><Logo width="large" /></a>
-      <div class="flex flow cluster">
-        <SocialLinks />
-        <p>
-          <span>13406 E. Philadelphia St. Whittier, CA 90602</span>
-          <span style="margin-inline: 9px;">|</span>
-          <span>562.907.4200</span>
-        </p>
-      </div>
     </div>
-    <div>
+    <div class="form-wrapper">
       <form
         class="form"
         name="contact-footer"
         method="POST"
         data-netlify="true"
+        netlify-honeypot="trap-field"
+        action="/contact-success"
       >
         <div class="form-title">Want to know more?</div>
         <div class="flow">
-          <div class="form-item">
+          <div class="sr-only">
+            <label
+              >Don't fill this out if you're human: <input
+                name="trap-field"
+                tabindex="-1"
+              /></label
+            >
+          </div>
+          <div class="form-item" style="margin-top: 0rem;">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" required />
           </div>
@@ -58,6 +60,30 @@ import SocialLinks from "./SocialLinks.astro";
         </div>
       </form>
     </div>
+    <div class="flex flow cluster">
+      <SocialLinks />
+      <p>
+        <span>13406 E. Philadelphia St. Whittier, CA 90602</span>
+        <span style="margin-inline: 9px;">|</span>
+        <span>562.907.4200</span>
+      </p>
+    </div>
+    <div>
+      <a href="#" class="external-link cluster">
+        <span>Apply Now</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          width="14"
+          height="14"
+          fill="var(--color-neutral-light)"
+          style="position: relative; top: -1px;"
+          ><path
+            d="M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z"
+          ></path></svg
+        >
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -74,7 +100,7 @@ import SocialLinks from "./SocialLinks.astro";
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    row-gap: 1rem;
   }
 
   .grid > .flex {
@@ -83,12 +109,23 @@ import SocialLinks from "./SocialLinks.astro";
     justify-content: space-between;
   }
 
-  .grid > :last-child {
+  .grid > :last-child,
+  .grid > .form-wrapper {
     place-self: end;
   }
 
   .content-wrapper {
     max-width: none;
+  }
+
+  .external-link.cluster {
+    --cluster-space: 8px;
+    --align: center;
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
   }
 
   /* .content-wrapper {
@@ -102,8 +139,7 @@ import SocialLinks from "./SocialLinks.astro";
   } */
 
   .flex.flow.cluster {
-    --flow-space: 0.5rem;
-    margin-top: 3rem;
+    --flow-space: 0rem;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -133,7 +169,7 @@ import SocialLinks from "./SocialLinks.astro";
 
   .form-title {
     font-family: var(--font-primary);
-    font-size: var(--step-2);
+    font-size: 24px;
     line-height: 1.15;
     margin-bottom: 1.25rem;
   }
@@ -155,7 +191,7 @@ import SocialLinks from "./SocialLinks.astro";
 
   .form-item label {
     position: absolute;
-    bottom: 4px;
+    bottom: 2px;
     align-self: flex-end;
     font-family: var(--font-secondary);
     font-size: 16px;
@@ -167,7 +203,7 @@ import SocialLinks from "./SocialLinks.astro";
   .form input {
     font-size: 15px;
     display: block;
-    padding: 1px;
+    padding: 0;
     margin: 0;
     border: none;
     color: var(--color-brand-secondary-light);
@@ -187,7 +223,7 @@ import SocialLinks from "./SocialLinks.astro";
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 6px 9px;
+    padding: 4px 8px;
     color: var(--color-brand-secondary-dark);
   }
 
@@ -198,16 +234,28 @@ import SocialLinks from "./SocialLinks.astro";
   @media (max-width: 768px) {
     .grid {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
-    .grid > :last-child {
-      order: 1;
+    .grid > :last-child,
+    .grid > .form-wrapper {
       place-self: start;
     }
 
     .grid > :first-child {
+      order: 1;
+    }
+
+    .grid > :nth-child(2) {
       order: 2;
-      margin-top: 2rem;
+    }
+
+    .grid > :nth-child(3) {
+      order: 4;
+    }
+
+    .grid > :nth-child(4) {
+      order: 3;
     }
 
     .form {
@@ -215,7 +263,7 @@ import SocialLinks from "./SocialLinks.astro";
       max-width: 350px;
     }
 
-    .grid > :last-child {
+    .grid > .form-wrapper {
       place-self: stretch;
     }
 
@@ -230,13 +278,12 @@ import SocialLinks from "./SocialLinks.astro";
   }
 
   @media (max-width: 640px) {
-    /* .flex.flow.cluster {
-      display: block;
-      --flow-space: 1rem;
-      margin-top: var(--space-l);
-    } */
-    .form-title {
+    .grid > :first-child {
       margin-bottom: 1rem;
+    }
+
+    .flex.flow.cluster {
+      margin-top: 2rem;
     }
   }
 </style>

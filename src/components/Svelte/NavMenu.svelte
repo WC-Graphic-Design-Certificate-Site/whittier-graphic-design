@@ -5,11 +5,13 @@
     const styles = {
         brand: {
             menuColor: "var(--color-neutral-light)",
+            menuColorOpen: "var(--color-neutral-light)",
             menuBg: "var(--color-brand-primary-dark)"
         },
         "brand-reverse": {
             menuColor: "var(--color-brand-secondary-light)",
-            menuBg: "#ebe2f3" // #e4dbdf4f
+            menuColorOpen: "var(--color-neutral-light)",
+            menuBg: "var(--color-brand-primary-dark)" // #ebe2f3 #e4dbdf4f
         }
     }
 
@@ -19,7 +21,7 @@
 <nav class="nav">
     <Popover let:open>
         <PopoverButton class="menu-toggle">
-            <div class="menu-toggle-container" class:open style="--menu-color:{styles[theme].menuColor}; --menu-bg:{styles[theme].menuBg}">
+            <div class="menu-toggle-container" class:open style="--menu-color:{open ? styles[theme].menuColorOpen : styles[theme].menuColor}; --menu-bg:{styles[theme].menuBg}">
                 {#if open}
                     <span class="sr-only">Close Panel</span>
                 {:else}

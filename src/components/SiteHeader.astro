@@ -30,8 +30,8 @@ const navigation = [
   //   href: "/faculty",
   // },
   {
-    name: "Learn More",
-    href: "/learn-more",
+    name: "Info",
+    href: "/info",
   },
   {
     name: "Contact",
@@ -76,6 +76,7 @@ const { layout = "inner" } = Astro.props;
             viewBox="0 0 512 512"
             width="14"
             height="14"
+            style="position: relative; top: -1px;"
             fill={`${
               layout == "home"
                 ? "var(--color-neutral-light)"
@@ -281,6 +282,10 @@ const { layout = "inner" } = Astro.props;
     header.inner {
       padding-block-start: 2rem;
       /* padding-inline: 1rem; */
+    }
+
+    .home .header-text {
+      align-items: flex-start;
     }
   }
 </style>

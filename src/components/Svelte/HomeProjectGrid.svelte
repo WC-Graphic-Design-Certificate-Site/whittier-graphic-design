@@ -139,4 +139,10 @@
     opacity: 1;
     /* transform: scale(1); */
   }
+
+  @media (max-width: 768px) {
+    .interactive-projects.grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>

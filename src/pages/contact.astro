@@ -12,23 +12,38 @@ const { title, image, slug, seo } = currentPage;
 
 <InnerPage title={seo.title} metaDescription={seo.description}>
   <InnerHero slot="hero" title={title} image={image} />
-  <div slot="content" class="flex">
+  <div slot="content" class="grid">
     <div class="contact">
-      <div class="angle"></div>
       <div class="">
-        <h2 class="heading">For more info, contact:</h2>
-        <p class="text">
-          Jane Smith<br />
-          Program Coordinator<br />
-          <a href="">jsmith@whittier.edu</a><br />
-          (562) 234-5678
-        </p>
+        <h2 class="heading">For more information, contact:</h2>
+        <div class="text">
+          <p>Whittier College Admissions Office</p>
+          <p>
+            <a href="mailto:admission@whittier.edu">admission@whittier.edu</a>
+          </p>
+          <p>(562) 907-4238 (Office)</p>
+        </div>
       </div>
     </div>
-    <form class="form" name="contact" method="POST" data-netlify="true">
+    <form
+      class="form"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="trap-field"
+      action="/contact-success"
+    >
       <div class="form-title heading">Sign up for updates:</div>
-      <div class="flow">
-        <div class="form-item">
+      <div class="flow form-items">
+        <div class="sr-only">
+          <label
+            >Don't fill this out if you're human: <input
+              tabindex="-1"
+              name="trap-field"
+            /></label
+          >
+        </div>
+        <div class="form-item" style="margin-top: 0rem;">
           <label for="contactName">Name</label>
           <input id="contactName" name="name" type="text" required />
         </div>
@@ -62,7 +77,14 @@ const { title, image, slug, seo } = currentPage;
 </InnerPage>
 
 <style>
-  .flex {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding-block: var(--space-xl);
+  }
+
+  /* .flex {
     display: flex;
     gap: 2rem;
     padding-block: 3rem;
@@ -74,17 +96,17 @@ const { title, image, slug, seo } = currentPage;
 
   .form {
     width: 50%;
-  }
+  } */
 
-  .contact {
+  /* .contact {
     text-align: right;
-  }
+  } */
 
   .relative {
     position: relative;
   }
 
-  .angle {
+  /* .angle {
     position: relative;
     right: -50px;
     height: 260px;
@@ -93,48 +115,44 @@ const { title, image, slug, seo } = currentPage;
     background: var(--color-brand-secondary-light);
     clip-path: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
     shape-outside: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
-  }
+  } */
 
   .heading {
     color: var(--color-brand-secondary-light);
-    font-family: var(--font-secondary);
-    font-size: 16px;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    font-family: var(--font-primary);
+    font-size: var(--step-2);
+    font-weight: 700;
   }
 
   .text {
-    font-size: var(--step-1);
+    font-size: var(--step-2);
     font-family: var(--font-primary);
     color: var(--color-brand-secondary-light);
   }
 
-  .form .heading {
-    margin-left: 75px;
+  .form {
+    min-width: 450px;
+    justify-self: end;
   }
 
-  .form .flow > :nth-child(1) {
-    max-width: 450px;
-    margin-left: 50px;
+  .form-items {
+    margin-top: 1rem;
   }
 
-  .form .flow > :nth-child(2) {
-    max-width: 475px;
-    margin-left: 25px;
+  .form-items > :last-child {
+    place-self: flex-end;
   }
 
   .form-item {
     position: relative;
     background: #ccbcd3;
-    padding: 9px 9px 9px 32px;
+    padding: 8px 12px 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     max-width: 500px;
     border-bottom: 2px solid transparent;
     width: 100%;
-    clip-path: polygon(4% 0, 100% 0, 100% 100%, 0% 100%);
   }
 
   .form-item:focus-within {
@@ -143,7 +161,7 @@ const { title, image, slug, seo } = currentPage;
 
   .form-item label {
     position: absolute;
-    bottom: 4px;
+    bottom: 6px;
     align-self: flex-end;
     font-family: var(--font-secondary);
     font-size: 16px;
@@ -184,39 +202,26 @@ const { title, image, slug, seo } = currentPage;
     opacity: 0.8;
   }
 
-  @media (max-width: 1000px) {
-    .contact {
-      width: 35%;
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: 1.5fr 1fr;
+    }
+
+    .form {
+      min-width: unset;
+      width: 100%;
     }
   }
 
   @media (max-width: 768px) {
-    .flex {
-      flex-direction: column;
-      overflow: hidden;
-      gap: 5rem;
-    }
-
-    .angle {
-      height: 160px;
-      clip-path: polygon(60% 0, 100% 0, 40% 100%, 0 100%);
-      width: 100px;
-      right: -25px;
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
     }
 
     .contact,
     .form {
-      width: 100%;
       padding-inline: var(--gutter);
-    }
-
-    .contact {
-      padding-right: 25px;
-      max-width: 400px;
-    }
-
-    .form .heading {
-      margin-left: 0;
     }
 
     .form .flow > * {
@@ -224,14 +229,9 @@ const { title, image, slug, seo } = currentPage;
       margin-inline: 0px !important;
     }
 
-    .angle {
-      display: none;
-    }
-
-    .contact {
-      text-align: center;
-      padding-inline: 0;
-      margin-inline: auto;
+    .contact .heading,
+    .contact .text {
+      font-size: var(--step-1);
     }
   }
 </style>

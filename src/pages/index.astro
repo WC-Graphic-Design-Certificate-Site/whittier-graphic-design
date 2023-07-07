@@ -16,17 +16,6 @@ const homeProjects = projectGalleries.find(
   (item) => item._id === "28de98e6-9ac9-451b-9239-6b071b5fc247"
 );
 
-// console.log(projects);
-
-// const projects = await getSanityData(`*[_type == "studentProject"] {
-//   _id,
-//   name,
-//   description,
-//   "image": image.asset->,
-// }`);
-
-// console.log(projects);
-
 const currentPage = getCurrentPage("c507649d-5e4d-4ce9-9d3b-3066bac1636c");
 
 const { image, slug, seo } = currentPage;
@@ -45,11 +34,6 @@ const heroGradient = `background: var(--full-gradient);`;
           <span class="desktop">Graphic Design Certificate Program</span>
         </h1>
         <h1 class="mobile-heading">Graphic Design Certificate</h1>
-        <!-- <div class="mobile-heading-wrapper">
-          <div>
-            <h1 class="mobile-heading">Graphic Design Certificate</h1>
-          </div>
-        </div> -->
         <Letters />
       </div>
       <div class="scroll">
@@ -77,59 +61,40 @@ const heroGradient = `background: var(--full-gradient);`;
           with the freedom to explore their artistic voice while building a
           professional-quality online portfolio.
         </p>
-        <!-- <table>
-          <tr>
-            <td><strong>Format:</strong></td>
-            <td>100% Online</td>
-          </tr>
-          <tr>
-            <td><strong>Duration:</strong></td>
-            <td>8 courses over 16 months</td>
-          </tr>
-          <tr>
-            <td><strong>Cost:</strong></td>
-            <td>$12,000</td>
-          </tr>
-          <tr>
-            <td><strong>Financial Aid:</strong></td>
-            <td
-              >Limited talent awards are available to students who demonstrate
-              outstanding potential in graphic design.</td
-            >
-          </tr>
-        </table> -->
         <div class="center-items">
-          <Button href="/classes" width="fit" theme="gradient">
-            <span>See the classes</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="17"
-              height="17"
-              style="position: relative; top: -1px;"
-              fill="#eee"
-              viewBox="0 0 448 512"
-            >
-              <path
-                d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
-              ></path></svg
-            >
-          </Button>
+          <div class="cluster">
+            <Button href="/classes" width="fit" theme="gradient">
+              <span>See the classes</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                style="position: relative; top: -1px;"
+                fill="#eee"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+                ></path></svg
+              >
+            </Button>
+            <Button href="/info" width="fit" theme="gradient">
+              <span>Learn More</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                style="position: relative; top: -1px;"
+                fill="#eee"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
+                ></path></svg
+              >
+            </Button>
+          </div>
         </div>
-        <!-- <a href="/classes" class="link mx-auto">
-          <span>See the classes</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="17"
-            height="17"
-            style="position: relative; top: -1px;"
-            fill="var(--color-brand-secondary-light)"
-            viewBox="0 0 448 512"
-          >
-            <path
-              d="M443.3 267.3c6.2-6.2 6.2-16.4 0-22.6l-176-176c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L393.4 240 16 240c-8.8 0-16 7.2-16 16s7.2 16 16 16l377.4 0L244.7 420.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l176-176z"
-            ></path></svg
-          >
-        </a> -->
       </article>
       <section id="student-work" class="">
         <h2 class="sr-only">Project List</h2>
@@ -143,13 +108,6 @@ const heroGradient = `background: var(--full-gradient);`;
 <style>
   .hero {
     position: relative;
-    /* background: var(--color-brand-primary); */
-    /* background: #4f2660; */
-    /* background: linear-gradient(to bottom, #dba22680, #4f2660a2),
-      url("https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-        center/cover no-repeat; */
-    /* background: rgb(74, 40, 93);
-    background: var(--brand-gradient); */
     color: var(--color-neutral-light);
     padding-block-start: 9rem;
     padding-block-end: 6rem;
@@ -166,8 +124,6 @@ const heroGradient = `background: var(--full-gradient);`;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     justify-self: center;
-    /* margin-right: 3rem;
-    top: 1rem; */
   }
 
   .hero .header-grid {
@@ -197,15 +153,8 @@ const heroGradient = `background: var(--full-gradient);`;
     display: none;
   }
 
-  /* .hero h1 > :last-child {
-    font-weight: 400;
-  } */
-
   .hero .content-wrapper {
     position: relative;
-    /*left: -3rem;
-    display: flex;
-    width: fit-content; */
     margin-block-end: var(--space-l);
   }
 
@@ -231,10 +180,9 @@ const heroGradient = `background: var(--full-gradient);`;
     transform: scale(1.05);
   }
 
-  /* .content.content-wrapper {
-    background: white;
-    box-shadow: var(--shadow-elevation-medium);
-  } */
+  .center-items {
+    margin-top: var(--space-2xl) !important;
+  }
 
   #about {
     padding-block: var(--space-3xl);
@@ -249,7 +197,7 @@ const heroGradient = `background: var(--full-gradient);`;
     font-family: var(--font-primary);
     color: var(--color-brand-secondary-light);
     padding-inline: var(--gutter);
-    line-height: 1.4;
+    line-height: 1.55;
   }
 
   table {
@@ -275,22 +223,6 @@ const heroGradient = `background: var(--full-gradient);`;
 
   .link:hover {
     opacity: 0.8;
-  }
-
-  @media (max-width: 1024px) {
-    /* .hero .content-wrapper {
-      flex-direction: column;
-    }
-
-    .hero h1 {
-      text-align: left;
-      align-self: start;
-      writing-mode: horizontal-tb;
-      transform: rotate(0deg);
-      margin-right: 0;
-      top: 0;
-      margin-bottom: var(--space-xl);
-    } */
   }
 
   @media (max-width: 768px) {
@@ -352,6 +284,10 @@ const heroGradient = `background: var(--full-gradient);`;
     .hero .mobile-heading {
       display: inline-block;
       white-space: nowrap;
+    }
+
+    .center-items {
+      margin-bottom: var(--space-l);
     }
   }
 </style>

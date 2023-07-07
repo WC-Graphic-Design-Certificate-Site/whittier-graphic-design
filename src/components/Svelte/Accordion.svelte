@@ -1,5 +1,6 @@
 <script>
     import { slide } from "svelte/transition"
+    import { sineInOut } from "svelte/easing"
     import {
         Disclosure,
         DisclosureButton,
@@ -21,7 +22,7 @@
         </DisclosureButton>
     </h2>
     {#if open}
-        <div transition:slide="{{ duration: 500 }}" >
+        <div transition:slide="{{ duration: 500, easing: sineInOut }}" >
             <DisclosurePanel static class="accordion-panel">
                 <slot name="panel">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam commodi adipisci consequatur ducimus repudiandae nam sint, molestias voluptatem exercitationem impedit!</slot>
             </DisclosurePanel>
