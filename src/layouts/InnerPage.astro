@@ -6,22 +6,14 @@ import SiteFooter from "../components/SiteFooter.astro";
 const { title, metaDescription, preloadImg } = Astro.props;
 ---
 
-<Layout title={title} metaDescription={metaDescription}>
-  <link slot="pageHead" rel="preload" href={preloadImg} as="image" />
+<Layout>
+  <Fragment slot="pageHead">
+    <slot name="pageHead" />
+    <!-- <link rel="preload" href={preloadImg} as="image" /> -->
+  </Fragment>
   <SiteHeader slot="header" />
   <main slot="main" class="content-wrapper">
     <slot name="hero" />
-    <!-- <section class="hero">
-      <div class="content-wrapper">
-        <slot name="title" />
-      </div>
-      <div class="background"></div>
-      <img
-        class="img"
-        src="https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
-        alt=""
-      />
-    </section> -->
     <div class="content" id="content">
       <slot name="content" />
     </div>

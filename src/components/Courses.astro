@@ -1,6 +1,7 @@
 ---
 import Accordion from "./Svelte/Accordion.svelte";
 import { slugify } from "../utils/format";
+import { urlFor } from "../utils/sanity";
 
 const { courses } = Astro.props;
 ---
@@ -27,6 +28,24 @@ const { courses } = Astro.props;
           </Fragment>
           <article slot="panel">
             <div class="course-intro">{course.description}</div>
+            <div class="img-wrapper">
+              <img
+                class="img"
+                src={urlFor(course.image)
+                  .width(600)
+                  .height(600)
+                  .fit("crop")
+                  .crop("center")
+                  .auto("format")
+                  .url()}
+                alt={course.image.alt || ""}
+                width={600}
+                height={600}
+                style={`background-image: url(${course.image.asset.metadata.lqip})`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <div class="topics-wrapper">
               <div class="topics-header">
                 <p style="font-weight: 400;">Weekly Course Topics</p>
@@ -301,6 +320,17 @@ const { courses } = Astro.props;
     object-fit: fill;
   } */
 
+  .courses .img-wrapper {
+    display: none;
+  }
+
+  .courses .img {
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .courses .topic {
     /* width: clamp(980px, 98ch, 95%); */
     width: 84ch;
@@ -382,6 +412,11 @@ const { courses } = Astro.props;
       padding-inline: 1rem;
     }
 
+    .courses .img-wrapper {
+      display: block;
+      margin-block: var(--space-xl);
+    }
+
     .courses .topics-wrapper {
       flex-direction: column;
     }
@@ -459,18 +494,3 @@ const { courses } = Astro.props;
     }
   }
 </style>
-
-<script>
-  // const text = document.querySelector("#test .text-test") as HTMLElement;
-  // const number = document.querySelector("#test .bg-test") as HTMLElement;
-  // const textHeight = text.offsetHeight;
-  // console.log(textHeight);
-  // number.style.width = `${textHeight}px`;
-  // number.style.height = `${textHeight}px`;
-
-  // import fitty from "fitty";
-  // fitty(".number span");
-
-  // const numberContainer = document.querySelector(".number");
-  // console.log(numberContainer);
-</script>

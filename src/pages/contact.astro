@@ -2,15 +2,31 @@
 import InnerPage from "../layouts/InnerPage.astro";
 import InnerHero from "../components/InnerHero.astro";
 import { getCurrentPage } from "../data/pages";
+import { SEO } from "astro-seo";
 import { urlFor } from "../utils/sanity";
 
 const currentPage = getCurrentPage("6d566278-d441-4734-b1e6-3895519c2a3a");
-const { title, image, slug, seo } = currentPage;
+const { title, image, seo } = currentPage;
 
 // const bgImage = urlFor(image).width(1000).auto("format").url();
 ---
 
-<InnerPage title={seo.title} metaDescription={seo.description}>
+<InnerPage>
+  <SEO
+    slot="pageHead"
+    title={seo.title}
+    description={seo.description}
+    openGraph={{
+      basic: {
+        title: seo.openGraph.title,
+        type: "website",
+        image: urlFor(seo.openGraph.image).width(1200).auto("format").url(),
+      },
+      optional: {
+        description: seo.openGraph.description,
+      },
+    }}
+  />
   <InnerHero slot="hero" title={title} image={image} />
   <div slot="content" class="grid">
     <div class="contact">
@@ -78,44 +94,27 @@ const { title, image, slug, seo } = currentPage;
 
 <style>
   .grid {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     padding-block: var(--space-xl);
+    justify-items: center;
   }
 
-  /* .flex {
-    display: flex;
-    gap: 2rem;
-    padding-block: 3rem;
+  .grid::after {
+    content: "";
+    position: absolute;
+    height: calc(100% - var(--space-xl) - var(--space-xl));
+    width: 1px;
+    background: var(--color-brand-secondary-light);
+    top: 50%;
+    transform: translateY(-50%);
   }
-
-  .contact {
-    width: 45%;
-  }
-
-  .form {
-    width: 50%;
-  } */
-
-  /* .contact {
-    text-align: right;
-  } */
 
   .relative {
     position: relative;
   }
-
-  /* .angle {
-    position: relative;
-    right: -50px;
-    height: 260px;
-    width: 155px;
-    float: right;
-    background: var(--color-brand-secondary-light);
-    clip-path: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
-    shape-outside: polygon(70% 0, 100% 0, 30% 100%, 0% 100%);
-  } */
 
   .heading {
     color: var(--color-brand-secondary-light);
@@ -131,8 +130,7 @@ const { title, image, slug, seo } = currentPage;
   }
 
   .form {
-    min-width: 450px;
-    justify-self: end;
+    min-width: 460px;
   }
 
   .form-items {
@@ -191,6 +189,7 @@ const { title, image, slug, seo } = currentPage;
     letter-spacing: 0.1rem;
     transition: all 0.2s ease;
     background: #dba226;
+    border-radius: 0px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -207,6 +206,10 @@ const { title, image, slug, seo } = currentPage;
       grid-template-columns: 1.5fr 1fr;
     }
 
+    .grid::after {
+      display: none;
+    }
+
     .form {
       min-width: unset;
       width: 100%;
@@ -217,6 +220,7 @@ const { title, image, slug, seo } = currentPage;
     .grid {
       grid-template-columns: 1fr;
       gap: 3rem;
+      justify-items: start;
     }
 
     .contact,
@@ -228,8 +232,10 @@ const { title, image, slug, seo } = currentPage;
       max-width: none !important;
       margin-inline: 0px !important;
     }
+  }
 
-    .contact .heading,
+  @media (max-width: 640px) {
+    .heading,
     .contact .text {
       font-size: var(--step-1);
     }

@@ -54,7 +54,7 @@ import SocialLinks from "./SocialLinks.astro";
               autocomplete="tel"
             />
           </div>
-          <div>
+          <div style="place-self: flex-end">
             <input type="submit" />
           </div>
         </div>
@@ -69,7 +69,11 @@ import SocialLinks from "./SocialLinks.astro";
       </p>
     </div>
     <div>
-      <a href="#" class="external-link cluster">
+      <a
+        href="https://extension.whittier.edu/apply/"
+        target="_blank"
+        class="external-link cluster"
+      >
         <span>Apply Now</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -147,8 +151,6 @@ import SocialLinks from "./SocialLinks.astro";
   .logo-wrapper {
     width: fit-content;
     display: block;
-    position: relative;
-    left: -8px;
   }
 
   a {
@@ -220,6 +222,7 @@ import SocialLinks from "./SocialLinks.astro";
     letter-spacing: 0.1rem;
     transition: all 0.2s ease;
     background: #dba226;
+    border-radius: 0px;
     border: none;
     outline: none;
     cursor: pointer;

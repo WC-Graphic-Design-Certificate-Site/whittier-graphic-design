@@ -13,8 +13,14 @@ export const pageData = await getSanityData(`*[_type == 'page'] {
     "seo": {
         "title": seoTitle,
         "description": seoDescription,
-        "image": seoImage.asset->,
-        "slug": seoSlug.current
+        openGraph{
+          title,
+          description,
+          "image": image{
+            ...,
+            asset->
+          }
+        }
     }
 }`);
 

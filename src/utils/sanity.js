@@ -1,7 +1,7 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-const projectId = import.meta.env.SANITY_ID;
+// const projectId = import.meta.env.SANITY_ID;
 
 export const sanityClient = createClient({
   projectId: "msfqnlph",
@@ -25,19 +25,23 @@ export const getSanityData = async (GROQquery) => {
   return data;
 };
 
-export async function getCourses() {
-  const query = `*[_type == "course"] | order(order asc) {
-    title,
-    subtitle,
-    description,
-    topics[]->{
-        title,
-        "tools": description.tools,
-        "projects": description.projects,
-        "in-class": description.inClass[]->name,
-        "resources": description.resources[]->name
-    }
-    }`;
-  const courses = await sanityClient.fetch(query);
-  return courses;
-}
+// export async function getCourses() {
+//   const query = `*[_type == "course"] | order(order asc) {
+//     title,
+//     subtitle,
+//     description,
+//     "image": image{
+//       ...,
+//       image.asset->
+//     }
+//     topics[]->{
+//         title,
+//         "tools": description.tools,
+//         "projects": description.projects,
+//         "in-class": description.inClass[]->name,
+//         "resources": description.resources[]->name
+//     }
+//     }`;
+//   const courses = await sanityClient.fetch(query);
+//   return courses;
+// }

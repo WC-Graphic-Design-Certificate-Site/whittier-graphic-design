@@ -3,12 +3,29 @@ import InnerPage from "../layouts/InnerPage.astro";
 import InnerHero from "../components/InnerHero.astro";
 import { getCurrentPage } from "../data/pages";
 import { PortableText } from "astro-portabletext";
+import { SEO } from "astro-seo";
+import { urlFor } from "../utils/sanity";
 
 const currentPage = getCurrentPage("4c6c6578-74a4-4dc2-84ec-129128ada6e0");
-const { title, image, content, slug, seo } = currentPage;
+const { title, image, content, seo } = currentPage;
 ---
 
-<InnerPage title={seo.title} metaDescription={seo.description}>
+<InnerPage>
+  <SEO
+    slot="pageHead"
+    title={seo.title}
+    description={seo.description}
+    openGraph={{
+      basic: {
+        title: seo.openGraph.title,
+        type: "website",
+        image: urlFor(seo.openGraph.image).width(1200).auto("format").url(),
+      },
+      optional: {
+        description: seo.openGraph.description,
+      },
+    }}
+  />
   <InnerHero slot="hero" title={title} image={image} />
   <div slot="content" class="wrapper">
     <div class="side-header">

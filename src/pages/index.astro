@@ -6,6 +6,7 @@ import Letters from "../components/Letters.astro";
 import Button from "../components/Button.astro";
 import HomeProjectGrid from "../components/Svelte/HomeProjectGrid.svelte";
 import { getCurrentPage } from "../data/pages";
+import { SEO } from "astro-seo";
 import { urlFor } from "../utils/sanity";
 // import "../styles/heroBackgroundSvg.css";
 
@@ -18,13 +19,28 @@ const homeProjects = projectGalleries.find(
 
 const currentPage = getCurrentPage("c507649d-5e4d-4ce9-9d3b-3066bac1636c");
 
-const { image, slug, seo } = currentPage;
+const { seo } = currentPage;
 // const bgImage = urlFor(image).width(1600).auto("format").url();
 // const heroGradient = `background: url(${bgImage}) center / cover no-repeat, var(--full-gradient);`;
 const heroGradient = `background: var(--full-gradient);`;
 ---
 
-<Layout title={seo.title} metaDescription={seo.description}>
+<Layout>
+  <SEO
+    slot="pageHead"
+    title={seo.title}
+    description={seo.description}
+    openGraph={{
+      basic: {
+        title: seo.openGraph.title,
+        type: "website",
+        image: urlFor(seo.openGraph.image).width(1200).auto("format").url(),
+      },
+      optional: {
+        description: seo.openGraph.description,
+      },
+    }}
+  />
   <!-- <link slot="pageHead" rel="preload" href={bgImage} as="image" /> -->
   <SiteHeader layout="home" slot="header" />
   <main slot="main" class="main">
@@ -81,7 +97,7 @@ const heroGradient = `background: var(--full-gradient);`;
       </article>
       <section id="student-work" class="">
         <h2 class="sr-only">Project List</h2>
-        <HomeProjectGrid client:idle projects={homeProjects} />
+        <HomeProjectGrid client:load projects={homeProjects} />
       </section>
     </div>
   </main>

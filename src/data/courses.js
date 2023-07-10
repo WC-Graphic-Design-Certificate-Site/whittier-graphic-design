@@ -6,6 +6,11 @@ export const courses =
   mobileTitle,
   subtitle,
   description,
+  "image": image{
+    ...,
+    asset->
+  },
+  "imageAlt": image.alt,
   "showLastWeek": week8,
   topics[]-> {
     title,
