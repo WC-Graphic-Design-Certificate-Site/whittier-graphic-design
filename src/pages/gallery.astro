@@ -52,42 +52,12 @@ const { title, seo } = currentPage;
       <h2 class="subtitle-mobile">Samples from undergraduate program</h2>
     </div>
     <div id="content"><ProjectGrid projects={studentProjects} /></div>
-
-    <!-- <div class="project-grid">
-      {
-        projects.map((project) => (
-          <article class="relative grid-item">
-            <div class="grid-text flow">
-              <h3>{project.name}</h3>
-              <div class="spacer" />
-              <p>{project.description}</p>
-            </div>
-            <img
-              src={urlFor(project.image).width(1200).format("webp").url()}
-              alt={project.name}
-              width={1200}
-              height={getImageHeight(
-                1200,
-                project.image.metadata.dimensions.aspectRatio
-              )}
-              data-aspectRatio={project.image.metadata.dimensions.aspectRatio}
-            />
-          </article>
-        ))
-      }
-    </div> -->
     <BackToTop />
   </main>
   <div class="content-wrapper" slot="footer">
     <SiteFooter />
   </div>
 </Layout>
-<!-- <InnerPage>
-  <InnerHero slot="hero" title="Gallery" />
-  <div slot="content" class="">
-    <ProjectGrid projects={projects} />
-  </div>
-</InnerPage> -->
 
 <style>
   .content-wrapper {
@@ -101,6 +71,8 @@ const { title, seo } = currentPage;
   }
 
   .title {
+    position: relative;
+    left: -4px;
     z-index: 5;
     font-family: var(--font-emphasis);
     font-size: var(--step-10);
@@ -138,6 +110,10 @@ const { title, seo } = currentPage;
   }
 
   @media (max-width: 1024px) {
+    .header {
+      top: -15px;
+    }
+
     .title {
       font-size: var(--step-8);
     }
@@ -149,6 +125,10 @@ const { title, seo } = currentPage;
   }
 
   @media (max-width: 768px) {
+    .title {
+      left: -2px;
+    }
+
     .content-wrapper {
       padding-inline: 0;
     }
@@ -172,7 +152,7 @@ const { title, seo } = currentPage;
 
   @media (max-width: 480px) {
     .header {
-      top: -12px;
+      top: -9px;
     }
 
     .title {

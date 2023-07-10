@@ -43,6 +43,7 @@ const { title, image } = Astro.props;
     letter-spacing: 1rem;
     text-transform: uppercase;
     top: -25px;
+    left: -6px;
   }
 
   .background {
@@ -71,6 +72,13 @@ const { title, image } = Astro.props;
   @media (max-width: 1024px) {
     .title {
       font-size: var(--step-8);
+      top: -15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      left: -4px;
     }
   }
 
