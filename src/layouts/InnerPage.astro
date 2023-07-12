@@ -9,7 +9,6 @@ const { title, metaDescription, preloadImg } = Astro.props;
 <Layout>
   <Fragment slot="pageHead">
     <slot name="pageHead" />
-    <!-- <link rel="preload" href={preloadImg} as="image" /> -->
   </Fragment>
   <SiteHeader slot="header" />
   <main slot="main" class="content-wrapper">
