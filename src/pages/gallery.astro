@@ -52,6 +52,10 @@ const { title, seo } = currentPage;
       <h2 class="subtitle-mobile">Samples from undergraduate program</h2>
     </div>
     <div id="content"><ProjectGrid projects={studentProjects} /></div>
+    <div class="disclaimer">
+      All of the above student work samples are from the Whittier College
+      undergraduate program.
+    </div>
     <BackToTop />
   </main>
   <div class="content-wrapper" slot="footer">
@@ -105,6 +109,16 @@ const { title, seo } = currentPage;
     margin-inline: auto;
   }
 
+  .disclaimer {
+    position: relative;
+    top: -1.7rem;
+    color: var(--color-brand-secondary-light);
+    font-family: var(--font-secondary);
+    font-size: var(--step-0);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+  }
+
   #content {
     margin-block-end: var(--space-xl);
   }
@@ -132,6 +146,10 @@ const { title, seo } = currentPage;
     .content-wrapper {
       padding-inline: 0;
     }
+
+    .disclaimer {
+      margin-inline: 1rem;
+    }
   }
 
   @media (max-width: 640px) {
@@ -147,6 +165,10 @@ const { title, seo } = currentPage;
     .subtitle-mobile {
       display: block;
       margin-top: 0px;
+    }
+
+    .disclaimer {
+      top: -1.5rem;
     }
   }
 
