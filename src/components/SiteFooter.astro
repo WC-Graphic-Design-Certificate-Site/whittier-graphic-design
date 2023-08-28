@@ -3,6 +3,7 @@ import Logo from "./Logo.astro";
 import Button from "./Button.astro";
 import SocialLinks from "./SocialLinks.astro";
 // import "../styles/footerBackgroundSvg.css";
+const { route } = Astro.props;
 ---
 
 <footer class="footer-gradient">
@@ -10,56 +11,16 @@ import SocialLinks from "./SocialLinks.astro";
     <div class="flex">
       <a href="/" class="logo-wrapper"><Logo width="large" /></a>
     </div>
-    <div class="form-wrapper">
-      <form
-        class="form"
-        name="contact-footer"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="trap-field"
-        action="/contact-success"
-      >
-        <div class="form-title">Want to know more?</div>
-        <div class="flow">
-          <div class="sr-only">
-            <label
-              >Don't fill this out if you're human: <input
-                name="trap-field"
-                tabindex="-1"
-              /></label
-            >
-          </div>
-          <div class="form-item" style="margin-top: 0rem;">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div class="form-item">
-            <label for="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              autocomplete="email"
-            />
-          </div>
-          <div class="form-item">
-            <label for="phone">Phone</label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              required
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              autocomplete="tel"
-            />
-          </div>
-          <div style="place-self: flex-end">
-            <input type="submit" />
-          </div>
+    {
+      route !== "/contact" ? (
+        <div id="form" class="footer-form">
+          <div class="form-title">Want to know more?</div>
+          <div id="form_c9b48a2a-571f-4d6a-bd11-d73f3549b563">Loading...</div>
         </div>
-      </form>
-    </div>
+      ) : (
+        <div class="spacer" />
+      )
+    }
     <div class="flex flow cluster">
       <SocialLinks />
       <p>
@@ -132,6 +93,10 @@ import SocialLinks from "./SocialLinks.astro";
     transition: all 0.2s ease;
   }
 
+  .spacer {
+    height: 200px;
+  }
+
   /* .content-wrapper {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -171,9 +136,9 @@ import SocialLinks from "./SocialLinks.astro";
 
   .form-title {
     font-family: var(--font-primary);
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1.15;
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem;
   }
 
   .form-item {
@@ -278,6 +243,10 @@ import SocialLinks from "./SocialLinks.astro";
       font-size: 14px;
       padding: 1px;
     }
+
+    .spacer {
+      height: 0;
+    }
   }
 
   @media (max-width: 640px) {
@@ -291,7 +260,7 @@ import SocialLinks from "./SocialLinks.astro";
   }
 </style>
 
-<script>
+<!-- <script>
   const footer_phone_input = document.getElementById(
     "phone"
   ) as HTMLInputElement;
@@ -310,4 +279,14 @@ import SocialLinks from "./SocialLinks.astro";
       );
     }
   });
+</script> -->
+
+<script is:inline>
+  /*<![CDATA[*/ var script = document.createElement("script");
+  script.async = 1;
+  script.src =
+    "https://extension.whittier.edu/register/?id=c9b48a2a-571f-4d6a-bd11-d73f3549b563&output=embed&div=form_c9b48a2a-571f-4d6a-bd11-d73f3549b563" +
+    (location.search.length > 1 ? "&" + location.search.substring(1) : "");
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(script, s); /*]]>*/
 </script>

@@ -547,3 +547,114 @@ select {
     padding: 3rem;
   }
 }
+
+/* Styling for external form script */
+#form {
+  padding-inline: 0;
+}
+
+#form [data-datatype="email"],
+#form [data-type="text"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#form [data-type="text"]:nth-of-type(4),
+#form [data-type="text"]:nth-of-type(6) {
+  width: calc(50% - 12px) !important;
+}
+
+#form label {
+  position: relative;
+  align-self: flex-start;
+  font-family: var(--font-secondary);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.25rem;
+  color: var(--color-brand-secondary-dark);
+}
+
+#form input,
+#form select {
+  font-size: 15px;
+  line-height: normal;
+  background: #ccbcd3be;
+  padding: 9px 15px;
+  display: block;
+  margin: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--color-brand-secondary-dark);
+  width: 100%;
+  height: auto;
+}
+
+#form option {
+  font-size: 15px !important;
+  line-height: 22.5px !important;
+}
+
+#form input:focus-within,
+#form select:focus-within {
+  outline: none;
+  border-bottom: 2px solid var(--color-brand-secondary);
+}
+
+#form button {
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all 0.2s ease;
+  background: #dba226;
+  border-radius: 0px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 9px;
+  color: var(--color-brand-secondary-dark);
+  margin-top: 0.5rem;
+}
+
+#form button:hover {
+  opacity: 0.8;
+}
+
+#form.footer-form {
+  max-width: 430px;
+  place-self: flex-end;
+}
+
+#form.footer-form label {
+  color: white;
+  opacity: 0.85;
+}
+
+#form.footer-form input,
+#form.footer-form select {
+  background: white;
+}
+
+#form.footer-form input:focus-within,
+#form.footer-form select:focus-within {
+  outline: none;
+  border-bottom: 2px solid #dba226;
+}
+
+@media (max-width: 768px) {
+  #form {
+    padding-inline: var(--gutter);
+  }
+
+  #form [data-type="text"]:nth-of-type(1),
+  #form [data-type="text"]:nth-of-type(3) {
+    width: 100% !important;
+  }
+
+  #form button {
+    margin-top: 1rem;
+  }
+}

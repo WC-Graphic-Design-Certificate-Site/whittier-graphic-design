@@ -3,7 +3,7 @@ import Layout from "./Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
-const { title, metaDescription, preloadImg } = Astro.props;
+const { title, metaDescription, preloadImg, route } = Astro.props;
 ---
 
 <Layout>
@@ -18,7 +18,7 @@ const { title, metaDescription, preloadImg } = Astro.props;
     </div>
   </main>
   <div class="content-wrapper" slot="footer">
-    <SiteFooter />
+    <SiteFooter route={route} />
   </div>
 </Layout>
 
