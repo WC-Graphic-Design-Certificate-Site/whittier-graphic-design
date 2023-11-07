@@ -12,7 +12,7 @@ const { title, metaDescription } = Astro.props;
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-761719594"
     ></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -88,8 +88,8 @@ const { title, metaDescription } = Astro.props;
         font-display: swap;
       }
     </style>
-    <!-- Meta Pixel Code -->
-    <script>
+    <!-- Meta Pixel  -->
+    <script is:inline>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
