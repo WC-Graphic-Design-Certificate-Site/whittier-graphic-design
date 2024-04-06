@@ -4,7 +4,7 @@ import "../styles/global.css";
 const { title, metaDescription } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -51,7 +51,7 @@ const { title, metaDescription } = Astro.props;
       type="font/woff2"
       crossorigin=""
     />
-    <style>
+    <style is:inline>
       @font-face {
         font-family: "Gobold";
         src: url("/fonts/Gobold-Regular.woff2") format("woff2");

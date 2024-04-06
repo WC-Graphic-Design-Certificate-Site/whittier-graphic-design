@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { urlFor } from "../utils/sanity";
 
 const { projects } = Astro.props;
@@ -13,15 +14,16 @@ const images = projects.set[0].entries;
       return (
         <div class="relative grid-item" style={`--aspect: ${imgAspectRatio}`}>
           <div class="grid-text">{item.name}</div>
-          <img
+          <Image
             class="img"
             src={urlFor(item.image).width(900).auto("format").url()}
             alt={item.image.alt || ""}
             width={900}
-            style={`background-image: url(${item.image.asset.metadata.lqip})`}
             height={Math.floor(900 / imgAspectRatio)}
+            style={`background-image: url(${item.image.asset.metadata.lqip})`}
             data-aspectRatio={imgAspectRatio}
             loading="lazy"
+            format="webp"
             decoding="async"
           />
         </div>

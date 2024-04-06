@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Accordion from "./Svelte/Accordion.svelte";
 import { slugify } from "../utils/format";
 import { urlFor } from "../utils/sanity";
@@ -29,20 +30,21 @@ const { courses } = Astro.props;
           <article slot="panel">
             <div class="course-intro">{course.description}</div>
             <div class="img-wrapper">
-              <img
+              <Image
                 class="img"
                 src={urlFor(course.image)
-                  .width(600)
-                  .height(600)
+                  .width(900)
+                  .height(900)
                   .fit("crop")
                   .crop("center")
                   .auto("format")
                   .url()}
                 alt={course.image.alt || ""}
-                width={600}
-                height={600}
+                width={900}
+                height={900}
                 style={`background-image: url(${course.image.asset.metadata.lqip})`}
                 loading="lazy"
+                format="webp"
                 decoding="async"
               />
             </div>

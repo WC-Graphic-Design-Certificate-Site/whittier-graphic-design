@@ -13,9 +13,53 @@ const { route } = Astro.props;
     </div>
     {
       route !== "/contact" ? (
-        <div id="form" class="footer-form">
-          <div class="form-title">Want to know more?</div>
-          <div id="form_c9b48a2a-571f-4d6a-bd11-d73f3549b563">Loading...</div>
+        <div id="form" class="footer-form form-wrapper">
+          <form
+            class="form"
+            name="contact-footer"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="trap-field"
+            action="/contact-success"
+          >
+            <div class="form-title">Want to know more?</div>
+            <div class="flow">
+              <div class="sr-only">
+                <label>
+                  Don't fill this out if you're human:{" "}
+                  <input name="trap-field" tabindex="-1" />
+                </label>
+              </div>
+              <div class="form-item" style="margin-top: 0rem;">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+              <div class="form-item">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+              <div class="form-item">
+                <label for="phone">Phone</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  autocomplete="tel"
+                />
+              </div>
+              <div style="place-self: flex-end">
+                <input type="submit" />
+              </div>
+            </div>
+          </form>
         </div>
       ) : (
         <div class="spacer" />

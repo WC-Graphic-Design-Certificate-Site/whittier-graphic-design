@@ -549,7 +549,7 @@ select {
 }
 
 /* Styling for external form script */
-#form {
+/* #form {
   padding-inline: 0;
 }
 
@@ -657,4 +657,4 @@ select {
   #form button {
     margin-top: 1rem;
   }
-}
+} */

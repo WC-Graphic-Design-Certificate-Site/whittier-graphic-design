@@ -35,7 +35,8 @@ const { title, image, seo } = currentPage;
         <div class="text">
           <p>Whittier College Admissions Office</p>
           <p>
-            <a href="mailto:certificates@whittier.edu">certificates@whittier.edu</a
+            <a href="mailto:certificates@whittier.edu"
+              >certificates@whittier.edu</a
             >
           </p>
           <p>(562) 907-4238 (Office)</p>
@@ -44,7 +45,54 @@ const { title, image, seo } = currentPage;
     </div>
     <div id="form">
       <h2 class="form-title heading">Want to know more?</h2>
-      <div id="form_c9b48a2a-571f-4d6a-bd11-d73f3549b563">Loading...</div>
+      <form
+        class="form"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="trap-field"
+        action="/contact-success"
+      >
+        <div class="flow form-items">
+          <div class="sr-only">
+            <label
+              >Don't fill this out if you're human: <input
+                tabindex="-1"
+                name="trap-field"
+              /></label
+            >
+          </div>
+          <div class="form-item" style="margin-top: 0rem;">
+            <label for="contactName">Name</label>
+            <input id="contactName" name="name" type="text" required />
+          </div>
+          <div class="form-item">
+            <label for="contactEmail">Email</label>
+            <input
+              id="contactEmail"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="form-item">
+            <label for="contactPhone">Phone</label>
+            <input
+              id="contactPhone"
+              name="phone"
+              type="tel"
+              required
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              autocomplete="tel"
+            />
+          </div>
+          <div>
+            <input type="submit" />
+          </div>
+        </div>
+      </form>
+      <!-- <div id="form_c9b48a2a-571f-4d6a-bd11-d73f3549b563">Loading...</div> -->
     </div>
   </div>
 </InnerPage>
@@ -104,7 +152,7 @@ const { title, image, seo } = currentPage;
 
   .form-item {
     position: relative;
-    background: #ccbcd3;
+    background: #e8e0eb; /* #ccbcd3 */
     padding: 8px 12px 6px;
     display: flex;
     flex-direction: column;
@@ -135,7 +183,7 @@ const { title, image, seo } = currentPage;
     padding: 2px;
     margin: 0;
     border: none;
-    background: #ccbcd3;
+    background: #e8e0eb; /* #ccbcd3 */
     color: var(--color-brand-secondary-dark);
   }
 
@@ -203,7 +251,7 @@ const { title, image, seo } = currentPage;
   }
 </style>
 
-<!-- <script>
+<script>
   const phone_input = document.getElementById(
     "contactPhone"
   ) as HTMLInputElement;
@@ -222,7 +270,7 @@ const { title, image, seo } = currentPage;
       );
     }
   });
-</script> -->
+</script>
 
 <script is:inline>
   /*<![CDATA[*/ var script = document.createElement("script");
